@@ -1,0 +1,9 @@
+.tools/
+
+# Local OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Runtime logs
+*.log.tmp
