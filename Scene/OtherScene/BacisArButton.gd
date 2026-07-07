@@ -88,6 +88,8 @@ func GeTroleNmae(cd_num):
 			return "沙僧"
 		5:
 			return "白龙"
+		6:
+			return "玉兔"
 	return "空存档"
 
 

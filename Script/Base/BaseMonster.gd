@@ -100,6 +100,7 @@ var MyBlood
 var CannotAttract: bool
 var IsLpz: bool
 var IsLLRD: bool
+var _buff_dirty: bool = true
 @onready var bullet: Node = $Bullet
 @onready var hurt_box: CollisionShape2D = $BaseDamageBox/HurtBox/HurtBox
 @onready var damage_text: Node2D = $damage_text
@@ -186,7 +187,9 @@ func _physics_process(delta: float) -> void:
 			Difficult()
 		iniSpeed = speed
 		is_set_ = true
-	CheckAddBuff()
+	if _buff_dirty:
+		CheckAddBuff()
+		_buff_dirty = false
 	if MainSet.set_data["NoShowMonsterBody"] == false:
 		monster_dir.visible = false
 	if monster_dir.scale.x == 1:
@@ -1021,6 +1024,9 @@ func add_WSEffect(Object_):
 		WS_Effect.add_child(Object_.duplicate())
 		WS_Effect.set("position",get("position"))
 		get_parent().add_child(WS_Effect)
+func mark_buff_dirty():
+	_buff_dirty = true
+
 #func on_HpChange(value):
 #
 func CheckAddBuff():#在这里加上各种布尔值类的buff

@@ -14,30 +14,25 @@ extends Node2D
 @onready var prop: Label = $Bg/Bg/Prop
 
 var Num: int
-var RoleNameList = ["孙悟空","唐三藏","猪八戒","沙悟净","小白龙"]
-var ProperiesList = ["火","水","土","木","金"]
-var ColorList = ["ff0000","02ffff","c16b00","00ff00","ffff00"]
+var RoleNameList = ["孙悟空","唐三藏","猪八戒","沙悟净","小白龙","玉兔儿"]
+var ProperiesList = ["火","水","土","木","金","月"]
+var ColorList = ["ff0000","02ffff","c16b00","00ff00","ffff00","ffffff"]
 var RoleInfo = [
 	"齐天大圣孙悟空，机敏聪慧，胆识过人。善用棍法，灵活多变，上手简单。",
 	"金蝉转世唐三藏，佛法无边，普渡众生。武器九环禅杖，爆发，回血极高，攻击冰冻目标。",
 	"天蓬元帅猪八戒，力大无穷，坚韧不拔。武器九齿钉耙，生存能力强，上手简单。",
 	"卷帘大将沙悟净，为人谨慎，朴实无华。使用铲攻，善用猛毒，上限极高。",
 	"玉龙三太子小白龙，智勇双全，刚正不阿。手持长枪，机制多样，操作灵活。",
+	"广寒仙子玉兔儿，灵巧迅捷，月华护身。善借月华，出招迅捷。",
 ]
-var ShengCun = [0,4,3,4,4,3]
-var GongJi = [0,3,5,2,4,3]
-var MinJie = [0,5,3,4,3,4]
-var CaoZuo = [0,3,4,3,4,5]
+var ShengCun = [0,4,3,4,4,3,3]
+var GongJi = [0,3,5,2,4,3,4]
+var MinJie = [0,5,3,4,3,4,5]
+var CaoZuo = [0,3,4,3,4,5,4]
 var CurrentChoose: int = 1
-var PlayerList = ["swk","tsz"]
+var PlayerList = ["swk","tsz","zbj","swj","xbl","yte"]
 func _ready() -> void:
 
-	if MainSet.set_data["LevelHYS"]:
-		PlayerList.push_back("zbj")
-	if MainSet.set_data["LevelTT"]:
-		PlayerList.push_back("swj")
-	if MainSet.set_data["XiaoBaiLong"]:
-		PlayerList.push_back("xbl")
 	for i in PlayerList:
 		Global.AddRoleButton(RoleList,i,self)
 	SetRole()
@@ -50,7 +45,10 @@ func SetRole():
 	if CurrentChoose == 0:
 		special_effect_player.play("Role_1")
 	else:
-		special_effect_player.play("Role_" + str(CurrentChoose))
+		var animation_id = CurrentChoose
+		if CurrentChoose == 6:
+			animation_id = 5
+		special_effect_player.play("Role_" + str(animation_id))
 		
 func AddStar(Num):
 	for i in shengcun.get_children():

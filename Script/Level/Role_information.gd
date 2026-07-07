@@ -49,6 +49,8 @@ func _ready() -> void:
 			role_head.texture = load("res://Art/HeroPicture/RoleProperiesBox/shs.png")
 		5:
 			role_head.texture = load("res://Art/HeroPicture/RoleProperiesBox/blm.png")
+		6:
+			role_head.texture = load("res://Art/HeroPicture/RoleProperiesBox/blm.png")
 func _physics_process(_delta: float) -> void:
 	if PlayerData.player_data["实战法宝"] != "" and PlayerData.player_data["法宝"].size() > 0:
 		magic_weapon_skill_cd.visible = true

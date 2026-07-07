@@ -119,6 +119,7 @@ var Role1SkillMaxInter = {
 }
 var hit_name: String
 var is_call = false
+var _buff_dirty: bool = true
 func _ready() -> void:
 	RoleProp.SourcePlayer = self
 	#role_action_player.play("wait")
@@ -223,7 +224,9 @@ func _physics_process(delta: float) -> void:
 	if velocity.y <= 0:
 		OldIsCheck = false
 	ImproveSelfRecoveryWhenIdle()
-	CheckAddBuff()
+	if _buff_dirty:
+		CheckAddBuff()
+		_buff_dirty = false
 
 	if action.scale.x == - 1:
 		PlayerDir = true
@@ -1315,6 +1318,9 @@ func get_RealTarget(get_tt):
 	#print(get_tt.get_parent().get_parent())
 	return get_tt.get_parent().get_parent()
 
+
+func mark_buff_dirty():
+	_buff_dirty = true
 
 func CheckAddBuff():#在这里加上各种布尔值类的buff
 	var not_ice = true

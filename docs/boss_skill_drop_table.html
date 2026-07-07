@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Boss技能介绍与装备掉落表</title>
+<style>
+:root { color-scheme: light; --line:#d8d2c4; --ink:#1e1b16; --muted:#6d6658; --head:#efe7d4; --chip:#f7f1e3; }
+* { box-sizing: border-box; }
+body { margin: 24px; font-family: "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; color: var(--ink); background: #fbfaf6; }
+h1 { margin: 0 0 8px; font-size: 28px; }
+.meta { margin: 0 0 18px; color: var(--muted); font-size: 13px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; background: white; }
+th, td { border: 1px solid var(--line); vertical-align: top; padding: 10px; }
+th { position: sticky; top: 0; z-index: 1; background: var(--head); text-align: left; font-size: 14px; }
+.idx { width: 46px; text-align: center; color: var(--muted); }
+.avatar { width: 92px; text-align: center; }
+.avatar img { width: 72px; height: 72px; display: block; margin: 0 auto; border-radius: 12px; }
+.boss { width: 132px; }
+.boss-name { font-weight: 700; font-size: 16px; }
+.key { margin-top: 4px; color: var(--muted); font-family: Consolas, monospace; font-size: 12px; }
+.skills { width: 43%; line-height: 1.55; font-size: 13px; }
+.skill { margin: 0 0 4px; }
+.skill.section { margin-top: 4px; font-weight: 700; color: #814600; }
+.drops { line-height: 1.7; font-size: 13px; }
+.drop { display: inline-block; margin: 0 6px 6px 0; padding: 2px 7px; border: 1px solid #e0d5ba; border-radius: 4px; background: var(--chip); white-space: nowrap; }
+.none { color: var(--muted); }
+@media print { body { margin: 10mm; background: white; } th { position: static; } .drop { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<h1>Boss技能介绍与装备掉落表</h1>
+<p class="meta">来源：Script/Monster/SomeMonsterHelp.gd 与 AllEquipment.gd；生成时间：2026-07-07 13:43。头像为可保存的内嵌占位图。</p>
+<table>
+<thead><tr><th class="idx">序号</th><th class="avatar">图片</th><th class="boss">Boss</th><th class="skills">技能介绍</th><th>装备掉落</th></tr></thead>
+<tbody>
+
+<tr>
+  <td class="idx">1</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28340%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2828%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A4%A7%E7%8C%A9%3C/text%3E%0A%3C/svg%3E" alt="大猩猩" /></td>
+  <td class="boss"><div class="boss-name">大猩猩</div><div class="key">dxx</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.挥拳：挥出强力一拳，对玩家造成伤害。</div></td>
+  <td class="drops"><span class="drop">普通的行者棍(悟空-武器)</span><span class="drop">普通的行者服(悟空-防具)</span><span class="drop">普通松木杖(唐僧-武器)</span><span class="drop">普通的袈裟(唐僧-防具)</span><span class="drop">普通的钉耙(八戒-武器)</span><span class="drop">普通的长衫(八戒-防具)</span><span class="drop">普通的月牙铲(沙僧-武器)</span><span class="drop">普通的长袍(沙僧-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">2</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2844%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2892%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%8C%95%E7%8C%B4%3C/text%3E%0A%3C/svg%3E" alt="猕猴王" /></td>
+  <td class="boss"><div class="boss-name">猕猴王</div><div class="key">mhw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.通风旋刃：快速旋转通风灵棍，短暂蓄力后，扔出两次，对命中的玩家造成伤害并施加【减速】。</div>
+<div class="skill ">2.飓风狂袭：自身快速旋转，引发强烈龙卷风，对敌人造成多次伤害。</div></td>
+  <td class="drops"><span class="drop">地煞战衣(八戒-防具)</span><span class="drop">地煞龙枪(白龙-武器)</span><span class="drop">地煞虎袍(沙僧-防具)</span><span class="drop">地煞灵戒(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">3</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28138%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28186%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%A6%BA%E7%8B%A8%3C/text%3E%0A%3C/svg%3E" alt="禺狨王" /></td>
+  <td class="boss"><div class="boss-name">禺狨王</div><div class="key">yrw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.天罚：挥舞权杖，在前方引发雷击，造成伤害并麻痹敌人（施加【减速】）。</div>
+<div class="skill ">2.预言之雷：默念咒语，之后指向天空，在玩家头顶召唤预言之雷，造成多次打击（位置为禺狨王默念口诀瞬间，玩家位置）。</div></td>
+  <td class="drops"><span class="drop">地煞权杖(唐僧-武器)</span><span class="drop">地煞猿甲(悟空-防具)</span><span class="drop">角木铲(沙僧-武器)</span><span class="drop">觜火甲(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">4</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28255%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28303%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%9D%99%E8%9D%A0%3C/text%3E%0A%3C/svg%3E" alt="蝙蝠石像" /></td>
+  <td class="boss"><div class="boss-name">蝙蝠石像</div><div class="key">bfsx</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">护体石肤：蝙蝠石像的双抗大幅提升，只有找到方式才可以破除防御，护体石肤期间，蝙蝠石像会持续恢复一定量的生命。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">召唤：每过一段时间，召唤数量不定的蝙蝠参与战斗。</div></td>
+  <td class="drops"><span class="drop">尾火棍(悟空-武器)</span><span class="drop">壁水袍(唐僧-防具)</span><span class="drop">胃土耙(八戒-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">5</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28350%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2838%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%8B%AE%E9%A9%BC%3C/text%3E%0A%3C/svg%3E" alt="狮驼王" /></td>
+  <td class="boss"><div class="boss-name">狮驼王</div><div class="key">stw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">毒灵加护：玩家处于【中毒】状态时，狮驼王会持续恢复生命。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.傀儡毒雾：短暂施法后，在前方大范围内释放毒雾，玩家进入其中会受到伤害并被施加【中毒】，可被打断。</div>
+<div class="skill ">2.移山岩爆：短暂引导后，在身旁召唤巨石，引爆三次，被命中的玩家会受到伤害并被施加【眩晕】。</div></td>
+  <td class="drops"><span class="drop">家传宝剑(悟空-武器)</span><span class="drop">家传金耙(八戒-武器)</span><span class="drop">家传明铲(沙僧-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">6</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28340%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2828%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%B9%8F%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="鹏魔王" /></td>
+  <td class="boss"><div class="boss-name">鹏魔王</div><div class="key">pmw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">1.火灵加护：玩家处于【灼烧】状态时，鹏魔王会持续恢复生命。</div>
+<div class="skill ">2.飞行加护：鹏魔王每过一段时间会从【地面】和【空中】状态之间切换。</div>
+<div class="skill ">3.涅槃重生：鹏魔王生命低于20%会化为凤凰蛋，7秒内未击杀将会满血复活并提升自身实力。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">地面：</div>
+<div class="skill ">火焰飞弹：从上方向下飞出三颗火焰飞弹，造成伤害并施加【灼烧】。</div>
+<div class="skill ">飞行：</div>
+<div class="skill ">1.火焰飞弹：从上方向下飞出三颗火焰飞弹，造成伤害并施加【灼烧】。</div>
+<div class="skill ">2.化为火鸟从上至下俯冲四次，每次都会造成伤害并施加【灼烧】。</div></td>
+  <td class="drops"><span class="drop">家传袈裟(唐僧-防具)</span><span class="drop">家传手镯(通用-饰品)</span><span class="drop">家传雷甲(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">7</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2834%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2882%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%BE%9F%E4%B8%9E%3C/text%3E%0A%3C/svg%3E" alt="龟丞相" /></td>
+  <td class="boss"><div class="boss-name">龟丞相</div><div class="key">gcx</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.冰玄波：长袖一挥，释放冰玄波，造成伤害并施加【冰冻】。</div>
+<div class="skill ">2.水龙卷：快速旋转，引发水龙卷并向前移动，造成伤害，结束后会被施加【眩晕】一段时间。</div></td>
+  <td class="drops"><span class="drop">喜鹊之翼(通用-翅膀)</span></td>
+</tr>
+<tr>
+  <td class="idx">8</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28118%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28166%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%9B%9F%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="蛟魔王" /></td>
+  <td class="boss"><div class="boss-name">蛟魔王</div><div class="key">jmw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">绝对防御：玩家与蛟魔王面朝方向相同时，造成的伤害全额转化为对其的治疗效果。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.覆海啸：怒吼，释放覆海啸，造成伤害并施加【眩晕】。</div>
+<div class="skill ">2.堕天神针：指向天空，短暂延迟后从天空斜向下落下多根神针，造成伤害并施加【减速】。</div></td>
+  <td class="drops"><span class="drop">玄武甲(悟空-防具)</span><span class="drop">赑屃袍(沙僧-防具)</span><span class="drop">貔貅铠(八戒-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">9</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2891%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28139%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%B2%A8%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="鲨魔王" /></td>
+  <td class="boss"><div class="boss-name">鲨魔王</div><div class="key">smw</div></td>
+  <td class="skills"><div class="skill section">鲨魔王技能：</div>
+<div class="skill section">被动技能：</div>
+<div class="skill ">嗜血：鲨魔王低于70%生命后，会释放嗜血狂鲨参与战斗，并且部分攻击附带生命回复效果。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.水泡炸弹：在玩家位置召唤一颗水泡炸弹，短暂延迟后爆炸，造成大量伤害并施加【眩晕】。</div>
+<div class="skill ">2.嗜血鲨鱼波：在身旁释放嗜血鲨鱼波，造成伤害，然后从身旁两侧冲出鲨鱼，造成伤害并施加【流血】。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill section">嗜血狂鲨技能：</div>
+<div class="skill ">1.鲨鱼破：快速抖动身体，然后爆裂，造成伤害，之后在玩家脚下召唤鲨鱼龙卷。</div>
+<div class="skill ">2.嗜血突袭，快速向前冲刺，并多次撕咬。</div></td>
+  <td class="drops"><span class="drop">麒麟袍(唐僧-防具)</span><span class="drop">朱雀戒(通用-饰品)</span><span class="drop">饕餮甲(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">10</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28279%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28327%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%89%9B%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="牛魔王一" /></td>
+  <td class="boss"><div class="boss-name">牛魔王一</div><div class="key">nmw1</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.蛮牛冲撞：向两侧快速冲撞，并在沿途释放地狱火住。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">11</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28316%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%284%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%89%9B%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="牛魔王二" /></td>
+  <td class="boss"><div class="boss-name">牛魔王二</div><div class="key">nmw2</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.蛮牛冲撞：化为青牛形态，快速冲撞，造成伤害并施加【眩晕】。</div>
+<div class="skill ">2.熔岩机甲：化为熔岩机甲锤击地面，对小范围内的敌人造成伤害。</div>
+<div class="skill ">3.万魂煞：释放邪恶力量，造成伤害，若引导成功，则快速回复多次生命，并且每次都会提升自身所有技能的伤害。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">12</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28353%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2841%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%89%9B%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="牛魔王三" /></td>
+  <td class="boss"><div class="boss-name">牛魔王三</div><div class="key">nmw3</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.地狱魔爪：牛魔王的两只手会不断的追击玩家并砸向地面，造成伤害。</div>
+<div class="skill ">2.地狱火柱：牛魔王会不断地召唤地狱火柱，或随机，或规律，并施加【灼烧】。</div></td>
+  <td class="drops"><span class="drop">牛魔王时装·普通(通用-时装)</span></td>
+</tr>
+<tr>
+  <td class="idx">13</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2834%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2882%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%BE%99%E7%8E%8B%3C/text%3E%0A%3C/svg%3E" alt="龙王" /></td>
+  <td class="boss"><div class="boss-name">龙王</div><div class="key">lw</div></td>
+  <td class="skills"><div class="skill ">21级转为高级龙王，各项属性得到提升：</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.千年冰雪：短暂延迟后在自身位置召唤冰雪，对命中玩家造成伤害并施加【冰冻】，高级转为玩家位置（抬手瞬间）。</div>
+<div class="skill ">2.千年寒冰：短暂延迟后向两侧释放冰刺，造成伤害。高级还会施加【流血】。</div>
+<div class="skill ">3.护体神龙：短暂延迟后在玩家位置召唤冰龙，造成伤害并击飞玩家。</div></td>
+  <td class="drops"><span class="drop">青龙刀(悟空-武器)</span><span class="drop">混沌铲(沙僧-武器)</span><span class="drop">白虎杖(唐僧-武器)</span><span class="drop">诸怀耙(八戒-武器)</span><span class="drop">梼杌枪(白龙-武器)</span><span class="drop">如意金箍棒(悟空-武器)</span><span class="drop">九齿钉耙(八戒-武器)</span><span class="drop">九环禅杖(唐僧-武器)</span><span class="drop">七星守护(通用-饰品)</span><span class="drop">卷帘降魔铲(沙僧-武器)</span><span class="drop">擎天华宝枪(白龙-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">14</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28273%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28321%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%BA%A2%E5%AD%A9%3C/text%3E%0A%3C/svg%3E" alt="红孩儿" /></td>
+  <td class="boss"><div class="boss-name">红孩儿</div><div class="key">hhe</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.螺旋火尖枪：掷出火尖枪，对玩家造成伤害。</div>
+<div class="skill ">2.三昧真火：向前方释放三昧真火造成伤害并施加【灼烧】。</div>
+<div class="skill ">3.天光火石：短暂延迟后召唤天光火石砸向地面，造成伤害并施加【眩晕】。</div></td>
+  <td class="drops"><span class="drop">金刚甲(八戒-防具)</span><span class="drop">参水甲(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">15</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28350%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2838%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%AE%88%E5%A4%9C%3C/text%3E%0A%3C/svg%3E" alt="守夜人" /></td>
+  <td class="boss"><div class="boss-name">守夜人</div><div class="key">syr</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.割裂：挥舞利爪，造成伤害并施加【流血】。</div>
+<div class="skill ">2.炼狱：丢出火棍，造成伤害并施加【灼烧】。</div></td>
+  <td class="drops"><span class="drop">老者袍(唐僧-防具)</span><span class="drop">井木衣(沙僧-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">16</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2834%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2882%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%BB%91%E7%99%BD%3C/text%3E%0A%3C/svg%3E" alt="黑白无常" /></td>
+  <td class="boss"><div class="boss-name">黑白无常</div><div class="key">hbwc</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">回魂：黑白无常未被同时击杀，则会在一段时间后满血复活。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.痛苦：刺出痛苦雷电，造成伤害并施加【减速】。</div>
+<div class="skill ">2.噩梦：释放噩梦魔球，造成伤害并施加【中毒】。</div></td>
+  <td class="drops"><span class="drop">翼火甲(悟空-防具)</span><span class="drop">天煞骨链(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">17</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28118%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28166%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%82%80%E5%84%A1%3C/text%3E%0A%3C/svg%3E" alt="傀儡王" /></td>
+  <td class="boss"><div class="boss-name">傀儡王</div><div class="key">klw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.飞龙：从随机位置召唤飞龙，造成伤害并施加【缚地】。</div>
+<div class="skill ">2.妖风：从右侧至左刮起两道妖风，造成伤害并施加【沉默】。</div></td>
+  <td class="drops"><span class="drop">罗刹鬼衣(八戒-防具)</span><span class="drop">天煞骨袍(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">18</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28155%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28203%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%A7%A6%E5%B9%BF%3C/text%3E%0A%3C/svg%3E" alt="秦广王" /></td>
+  <td class="boss"><div class="boss-name">秦广王</div><div class="key">qgw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">玩家的主动回复效果会同样的成倍给秦广王回复生命。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.追踪毒弹：释放追踪毒弹，触碰到玩家或一段时间后会爆裂，原地留下毒雾，施加【中毒】。</div>
+<div class="skill ">2.傀儡娃娃：召唤数量不定的傀儡娃娃，靠近玩家会坠落并施加【中毒】，傀儡娃娃每过一段时间也会释放追踪毒弹。</div></td>
+  <td class="drops"><span class="drop">天煞月戟(悟空-武器)</span><span class="drop">古藤铲(沙僧-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">19</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2835%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2883%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%88%A4%E5%AE%98%3C/text%3E%0A%3C/svg%3E" alt="判官" /></td>
+  <td class="boss"><div class="boss-name">判官</div><div class="key">pg</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.神行：为自身添加【神行】一段时间内闪避和移动速度大幅提升。</div>
+<div class="skill ">2.符咒：燃烧符咒并释放，造成伤害并施加【灼烧】。</div>
+<div class="skill ">3.末日审判：每过一段时间会熄灭一盏灯并扣除玩家部分生命，最后秒杀。</div></td>
+  <td class="drops"><span class="drop">罗刹镰刀(八戒-武器)</span><span class="drop">天煞羽袍(唐僧-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">20</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28276%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28324%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%98%8E%E7%BD%97%3C/text%3E%0A%3C/svg%3E" alt="阎罗王" /></td>
+  <td class="boss"><div class="boss-name">阎罗王</div><div class="key">ylw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">阎罗王的攻击命中玩家后会减少所有技能的CD。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.鬼王剑气：多次斩击目标。</div>
+<div class="skill ">2.赐死剑气：隐身，然后瞬移至玩家位置，刺出强力一击，施加【眩晕】并恢复大量生命。</div>
+<div class="skill ">3.三道鬼门：生命降低到一定阶段会召唤鬼门，分别会：召唤怪物，回复场上怪物生命（满血则添加护盾），给玩家持续扣血并施加随机负面。</div></td>
+  <td class="drops"><span class="drop">罗刹魂袍(沙僧-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">21</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28118%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28166%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%AE%8B%E5%B8%9D%3C/text%3E%0A%3C/svg%3E" alt="宋帝王" /></td>
+  <td class="boss"><div class="boss-name">宋帝王</div><div class="key">sdw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">宋帝王的能力会随着被鬼鱼撕咬的次数增加而变强。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.致命黑烟：短暂延迟后在玩家位置召唤数道黑烟，造成伤害并施加【沉默】。</div>
+<div class="skill ">2.夺命飞羽：短暂延迟后向前方释放多道飞羽，造成伤害并施加【缚地】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">22</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28220%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28268%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A4%9C%E5%8F%89%3C/text%3E%0A%3C/svg%3E" alt="夜叉" /></td>
+  <td class="boss"><div class="boss-name">夜叉</div><div class="key">yc</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">夜叉生命低于70%会隐身，并且吸血能力和移动速度大幅提升。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">腐蚀之咬：撕咬玩家并吸血。</div></td>
+  <td class="drops"><span class="drop">血海魔甲(悟空-防具)</span><span class="drop">血海邪铲(沙僧-武器)</span><span class="drop">罗刹指环(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">23</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28257%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28305%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%AD%9F%E5%A9%86%3C/text%3E%0A%3C/svg%3E" alt="孟婆" /></td>
+  <td class="boss"><div class="boss-name">孟婆</div><div class="key">mp</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">生命低于一定阶段会进入梦境，持续回复生命并召唤Boss参与战斗。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.幻境法球：随机释放法球追踪玩家造成伤害添加【冰冻】或【灼烧】。</div>
+<div class="skill ">2.能量流失：施加【能量流失】，玩家移动的越快，损失生命和魔法越快。</div></td>
+  <td class="drops"><span class="drop">血海鬼袍(白龙-防具)</span><span class="drop">血海邪皇(唐僧-武器)</span><span class="drop">血海幽冥铠(八戒-防具)</span><span class="drop">血海妖壳(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">24</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2891%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28139%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%88%91%E5%A4%A9%3C/text%3E%0A%3C/svg%3E" alt="刑天" /></td>
+  <td class="boss"><div class="boss-name">刑天</div><div class="key">xt</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">魔怨狂乱：向前方挥出多次拳击。</div>
+<div class="skill ">1.八方俱灭：飞向空中，然后砸向地面，造成伤害并施加【眩晕】。</div>
+<div class="skill ">2.吞噬：将玩家吸引至自身附近。</div></td>
+  <td class="drops"><span class="drop">擎天柱(悟空-武器)</span><span class="drop">大圣战铠(悟空-防具)</span><span class="drop">锦镧袈裟(唐僧-防具)</span><span class="drop">轮回杖(唐僧-武器)</span><span class="drop">天蓬战衣(八戒-防具)</span><span class="drop">天蓬裂天耙(八戒-武器)</span><span class="drop">卷帘伏妖铲(沙僧-武器)</span><span class="drop">卷帘伏妖甲(沙僧-防具)</span><span class="drop">玉龙皇枪(白龙-武器)</span><span class="drop">玉龙金甲(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">25</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2891%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28139%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E6%88%98%E7%A5%9E%3C/text%3E%0A%3C/svg%3E" alt="战神刑天" /></td>
+  <td class="boss"><div class="boss-name">战神刑天</div><div class="key">zsxt</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.魔怨狂乱：向前方击砍数次，然后向前冲刺。</div>
+<div class="skill ">2.十方俱灭：将劈天斧和风神盾掷向空中，然后砸向地面，对大范围内的玩家造成伤害，同时施加【眩晕】。</div>
+<div class="skill ">3.吞噬：将玩家吸引至自身附近并施加【减速】。</div></td>
+  <td class="drops"><span class="drop">刑天之翼(通用-翅膀)</span></td>
+</tr>
+<tr>
+  <td class="idx">26</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2898%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28146%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%99%BD%E9%AA%A8%3C/text%3E%0A%3C/svg%3E" alt="白骨精" /></td>
+  <td class="boss"><div class="boss-name">白骨精</div><div class="key">bgj</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">重生：白骨精可以复活两次，每次都会提高能力并改变形态。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.夺命之吻：对面朝白骨精的玩家施加【封印】。</div>
+<div class="skill ">2.夺命连环刺：扎向地面，引发多道骨刺，造成伤害并施加【流血】，会随着复活次数而增加范围。</div></td>
+  <td class="drops"><span class="drop">白霜胸甲(悟空-防具)</span><span class="drop">白霜重甲(八戒-防具)</span><span class="drop">白霜妖杖(唐僧-武器)</span><span class="drop">白霜冰铲(沙僧-武器)</span><span class="drop">白霜寒枪(白龙-武器)</span><span class="drop">苍生挂饰(通用-饰品)</span><span class="drop">白霜之翼(通用-翅膀)</span></td>
+</tr>
+<tr>
+  <td class="idx">27</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28172%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28220%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E6%A5%9A%E6%B1%9F%3C/text%3E%0A%3C/svg%3E" alt="楚江王" /></td>
+  <td class="boss"><div class="boss-name">楚江王</div><div class="key">cjw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">水蛭再生：死亡时，根据场上存活的水蛭数量复活自身，自身攻击附带生命回复效果。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.万江流：两种形态：1：立即向前方激起水柱，2：短暂延迟后全屏召唤水柱。</div>
+<div class="skill ">2.召唤水蛭：楚江王召唤水蛭，水蛭会吸附玩家，造成伤害并为楚江王治疗。</div>
+<div class="skill ">3.霸王连斩：快速连砍两次，造成流血。</div></td>
+  <td class="drops"><span class="drop">地藏戒(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">28</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28326%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2814%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%BD%AC%E8%BD%AE%3C/text%3E%0A%3C/svg%3E" alt="转轮王一" /></td>
+  <td class="boss"><div class="boss-name">转轮王一</div><div class="key">zlw1</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">随着生命降低，技能效果和释放频率将得到提升。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.夺命飞轮：快速向玩家掷出多次飞轮，之后喷出能量柱，造成伤害。</div>
+<div class="skill ">2.魔轮：释放追踪魔轮，根据形态不同施加不同的负面状态。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">29</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%283%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2851%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%BD%AC%E8%BD%AE%3C/text%3E%0A%3C/svg%3E" alt="转轮王二" /></td>
+  <td class="boss"><div class="boss-name">转轮王二</div><div class="key">zlw2</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.转轮激光：释放全屏激光，造成伤害。</div>
+<div class="skill ">2.地狱轮海：短暂延迟后召唤轮海并向两侧释放巨型转轮，造成伤害并施加【眩晕】。</div>
+<div class="skill ">3.魔轮：掷出魔轮向玩家飞去并停留在原地，全部释放后将会收回。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">30</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2840%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2888%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%BD%AC%E8%BD%AE%3C/text%3E%0A%3C/svg%3E" alt="转轮王三" /></td>
+  <td class="boss"><div class="boss-name">转轮王三</div><div class="key">zlw3</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.转轮激光：释放激光，造成伤害（根据生命降低而逐渐增多）。</div>
+<div class="skill ">2.魔轮：掷出魔轮向地面飞去并停留在原地，全部释放后将会收回，释放数量与剩余生命相关，并且每次释放都会改变已释放魔轮的位置。</div></td>
+  <td class="drops"><span class="drop">转轮王时装·普通(通用-时装)</span><span class="drop">新月枪(白龙-武器)</span><span class="drop">殇月锤(八戒-武器)</span><span class="drop">凝月刀(悟空-武器)</span><span class="drop">明月杖(唐僧-武器)</span><span class="drop">朔月铲(沙僧-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">31</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28313%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%281%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%93%AE%E5%A4%A9%3C/text%3E%0A%3C/svg%3E" alt="哮天犬" /></td>
+  <td class="boss"><div class="boss-name">哮天犬</div><div class="key">xtq</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.回复自身和二郎神的生命，并提升能力。</div>
+<div class="skill ">2.短暂延迟后冲出三道狼影。</div>
+<div class="skill ">3.死亡后化身邪哮天犬，属性和能力大幅提升。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">32</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2854%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28102%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%8D%83%E9%87%8C%3C/text%3E%0A%3C/svg%3E" alt="千里眼" /></td>
+  <td class="boss"><div class="boss-name">千里眼</div><div class="key">qly</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">自身在场时，顺风耳双抗大幅提升。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">蓄力朝天射出飞箭，之后从上方斜向下坠下巨型飞箭，造成伤害并施加【减速】。</div></td>
+  <td class="drops"><span class="drop">枯叶杖(唐僧-武器)</span><span class="drop">枯叶铲(沙僧-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">33</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28246%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28294%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%A1%BA%E9%A3%8E%3C/text%3E%0A%3C/svg%3E" alt="顺风耳" /></td>
+  <td class="boss"><div class="boss-name">顺风耳</div><div class="key">sfe</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">将玩家吸引至自身附近，若引导成功，则还会给千里眼回复巨额生命并提升其所有技能伤害。</div></td>
+  <td class="drops"><span class="drop">萱花坠(通用-饰品)</span><span class="drop">枯叶衫(悟空-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">34</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28293%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28341%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%B7%A8%E7%81%B5%3C/text%3E%0A%3C/svg%3E" alt="巨灵神" /></td>
+  <td class="boss"><div class="boss-name">巨灵神</div><div class="key">jls</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">巨灵神可以复活两次，每次复活都会提升自身实力并增大体型。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.快速旋转冲向前方，造成伤害并施加【减速】。</div>
+<div class="skill ">2.高高跃起然后砸向地面，造成伤害并施加【眩晕】。</div></td>
+  <td class="drops"><span class="drop">萱花锤(八戒-武器)</span><span class="drop">萱花袍(沙僧-防具)</span><span class="drop">萱花甲(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">35</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2844%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2892%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%8C%95%E7%8C%B4%3C/text%3E%0A%3C/svg%3E" alt="猕猴王·通风" /></td>
+  <td class="boss"><div class="boss-name">猕猴王·通风</div><div class="key">mhwtf</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">快速旋转冲向前方，造成伤害并施加【眩晕】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">36</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2883%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28131%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A2%9E%E9%95%BF%3C/text%3E%0A%3C/svg%3E" alt="增长天王" /></td>
+  <td class="boss"><div class="boss-name">增长天王</div><div class="key">zztw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">增长天王的所有攻击都有概率施加【冰冻】。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.在身边召唤多把冰剑快速旋转，之后随机飞向一侧。</div>
+<div class="skill ">2.短暂延迟后在大范围内持续落下冰箭。</div>
+<div class="skill ">3.飞向空中，然后在身旁不断召唤冰剑飞向目标。</div></td>
+  <td class="drops"><span class="drop">青云冰刀(悟空-武器)</span><span class="drop">青云法袍(唐僧-防具)</span><span class="drop">青云霜枪(白龙-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">37</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28339%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2827%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%B9%BF%E7%9B%AE%3C/text%3E%0A%3C/svg%3E" alt="广目天王" /></td>
+  <td class="boss"><div class="boss-name">广目天王</div><div class="key">gmtw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.丢出长枪，然后瞬移至玩家位置并挑起目标。</div>
+<div class="skill ">2.飞向空中，然后从两侧引发火焰，造成伤害并施加【灼烧】。</div>
+<div class="skill ">3.在前方大范围内召唤火牛，造成伤害并施加【眩晕】。</div></td>
+  <td class="drops"><span class="drop">混元龙凯(八戒-防具)</span><span class="drop">青云手镯(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">38</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28238%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28286%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A4%9A%E9%97%BB%3C/text%3E%0A%3C/svg%3E" alt="多闻天王" /></td>
+  <td class="boss"><div class="boss-name">多闻天王</div><div class="key">dwtw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">多闻天王命中玩家一定次数后会获得大量护盾，护盾未击破则会转而回复自身生命。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.将玩家吸引至自身附近。</div>
+<div class="skill ">2.短暂延迟后召唤天雷，对横向范围内的目标造成伤害。</div>
+<div class="skill ">3.飞向空中，然后在身旁召唤雷电造成伤害并施加【中毒】。</div></td>
+  <td class="drops"><span class="drop">混元雷叉(沙僧-武器)</span><span class="drop">混元灵杖(唐僧-武器)</span></td>
+</tr>
+<tr>
+  <td class="idx">39</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28222%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28270%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E6%9C%B1%E5%AD%90%3C/text%3E%0A%3C/svg%3E" alt="朱子真" /></td>
+  <td class="boss"><div class="boss-name">朱子真</div><div class="key">zzz</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">朱子真每过一段时间获得一个护盾，护盾规定时间内未被击破将会爆炸，造成等额伤害并回复自身等额生命。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.践踏地面，引发地震波向两侧不断扩散，会施加【眩晕】。</div>
+<div class="skill ">2.将玩家吸引至自身附近并造成伤害。</div></td>
+  <td class="drops"><span class="drop">紫金开山斧(八戒-武器)</span><span class="drop">紫金轻甲(悟空-防具)</span><span class="drop">紫金诡袍(白龙-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">40</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2845%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2893%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%A2%81%E6%B4%AA%3C/text%3E%0A%3C/svg%3E" alt="袁洪" /></td>
+  <td class="boss"><div class="boss-name">袁洪</div><div class="key">yh</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">袁洪的落雷罚会随着玩家生命的降低而不断提升伤害。生命低于65%将会召唤分身。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">落雷罚，跃向空中，然后砸向地面，朝玩家方向释放多道雷霆附加【减速】。</div>
+<div class="skill ">缩成一团，然后向前冲刺，附加【眩晕】。</div></td>
+  <td class="drops"><span class="drop">嗜魔杖(唐僧-武器)</span><span class="drop">卷帘绿魔(沙僧-防具)</span></td>
+</tr>
+<tr>
+  <td class="idx">41</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28108%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28156%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E4%BA%8C%E9%83%8E%3C/text%3E%0A%3C/svg%3E" alt="二郎神" /></td>
+  <td class="boss"><div class="boss-name">二郎神</div><div class="key">els</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.原地消失，然后瞬移至玩家位置劈出一击，附加【眩晕】。</div>
+<div class="skill ">2.召唤三眼激光扫射前方，造成伤害。</div>
+<div class="skill ">3.召唤三眼封印，玩家面朝二郎神或者被击中都会被施加【三眼封印】（无法回复生命）。</div></td>
+  <td class="drops"><span class="drop">山河社稷图(通用-饰品)</span></td>
+</tr>
+<tr>
+  <td class="idx">42</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2827%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2875%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%9C%9F%E8%A1%8C%3C/text%3E%0A%3C/svg%3E" alt="土行孙" /></td>
+  <td class="boss"><div class="boss-name">土行孙</div><div class="key">txs</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.钻入地面，一段时间后破土而出，分别会造成伤害。</div>
+<div class="skill ">2.朝目标冲刺，会施加【眩晕】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">43</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2864%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28112%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%9B%B7%E9%9C%87%3C/text%3E%0A%3C/svg%3E" alt="雷震子" /></td>
+  <td class="boss"><div class="boss-name">雷震子</div><div class="key">lzz</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.召唤黑洞，每过一段时间将玩家吸引至附加，造成伤害并施加【减速】。</div>
+<div class="skill ">2.闪烁至玩家位置进行多次撕咬。</div>
+<div class="skill ">3.在玩家附近召唤多道雷电，施加【眩晕】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">44</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28304%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28352%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%93%AA%E5%90%92%3C/text%3E%0A%3C/svg%3E" alt="哪吒" /></td>
+  <td class="boss"><div class="boss-name">哪吒</div><div class="key">nz</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.朝玩家掷出乾坤圈，乾坤圈会不断在该路径移动，造成伤害并施加【减速】。</div>
+<div class="skill ">2.释放风火轮，施加【灼烧】。</div>
+<div class="skill ">3.召唤红莲护体，期间受到的所有伤害均会转为对其的治疗效果。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">45</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28359%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2847%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E6%89%98%E5%A1%94%3C/text%3E%0A%3C/svg%3E" alt="托塔天王" /></td>
+  <td class="boss"><div class="boss-name">托塔天王</div><div class="key">tttw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.丢出玲珑塔，一段时间后从玩家头顶坠落，造成伤害并施加【眩晕】（无法被清除）。</div>
+<div class="skill ">2.推出玲珑塔幻影，命中玩家将会进行多次斩击。</div>
+<div class="skill ">3.在身旁不断召唤旋风并施加【减速】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">46</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28302%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28350%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%93%B6%E8%A7%92%3C/text%3E%0A%3C/svg%3E" alt="银角大王" /></td>
+  <td class="boss"><div class="boss-name">银角大王</div><div class="key">yjdw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.银角大王唤出自身的邪恶力量，为自身回复多次生命，命中玩家还会施加【恐惧】。</div>
+<div class="skill ">2.短暂延迟后飞出多道莲花印，造成伤害并施加【缚地】。</div>
+<div class="skill ">3.召唤护体圈，被击中则会被施加【定身】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">47</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28107%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28155%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%87%91%E8%A7%92%3C/text%3E%0A%3C/svg%3E" alt="金角大王" /></td>
+  <td class="boss"><div class="boss-name">金角大王</div><div class="key">jjdw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.冲向空中，并从玩家头顶落下，造成巨额伤害。</div>
+<div class="skill ">2.瞬移至玩家附近，并劈砍三刀，共持续三次。</div>
+<div class="skill ">3.牵引面朝金角大王的目标至身边，被击中还会施加【眩晕】（高级负面）。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">48</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28293%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28341%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%9D%92%E7%89%9B%3C/text%3E%0A%3C/svg%3E" alt="青牛精" /></td>
+  <td class="boss"><div class="boss-name">青牛精</div><div class="key">qnj</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.朝玩家掷出飞斧，被击中则会被【减速】，然后停留在原地，青牛精触碰到飞斧会立刻重置本技能CD并回复5%最大生命。</div>
+<div class="skill ">2.不断地向玩家发起冲锋，被击中则会被施加【眩晕】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">49</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2880%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28128%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A4%AA%E7%99%BD%3C/text%3E%0A%3C/svg%3E" alt="太白金星" /></td>
+  <td class="boss"><div class="boss-name">太白金星</div><div class="key">tbjx</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">每过一小段时间，太白金星都会瞬移至玩家附近。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.指出一箭施加【定身】。</div>
+<div class="skill ">2.召唤天星从天空坠落。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">50</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28265%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28313%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A4%AA%E4%B8%8A%3C/text%3E%0A%3C/svg%3E" alt="太上老君" /></td>
+  <td class="boss"><div class="boss-name">太上老君</div><div class="key">tslj</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">天上老君不会释放普通攻击，并且被击中后会向前闪避，无法被连击。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.召唤多道炼丹炉从天而降，造成伤害并施加【灼烧】。</div>
+<div class="skill ">2.召唤金刚琢不断朝玩家飞去，若被释放的法器核心击中，则会被施加【眩晕】。</div>
+<div class="skill ">3.召唤护体圈，被击中则会被施加【定身】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">51</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%287%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2855%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%A9%AC%E5%A4%A9%3C/text%3E%0A%3C/svg%3E" alt="马天君" /></td>
+  <td class="boss"><div class="boss-name">马天君</div><div class="key">mtj</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.召唤旋风朝前方飞去，造成伤害并施加【沉默】。</div>
+<div class="skill ">2.召唤旋风从自身附近飞去，造成伤害并施加【沉默】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">52</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28329%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2817%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E6%8C%81%E5%9B%BD%3C/text%3E%0A%3C/svg%3E" alt="持国天王" /></td>
+  <td class="boss"><div class="boss-name">持国天王</div><div class="key">cgtw</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.召唤旋风持国傀儡，被持国傀儡击中则会被施加【眩晕】。</div>
+<div class="skill ">2.在玩家头顶召唤三颗火石，被击中则会被【眩晕】，之后在相对应的地面上产生尖刺。</div>
+<div class="skill ">3.持国天王弹奏出音波，被击中则会被施加【沉默】。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">53</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28293%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28341%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E9%A3%9E%E7%83%9F%3C/text%3E%0A%3C/svg%3E" alt="飞烟剑" /></td>
+  <td class="boss"><div class="boss-name">飞烟剑</div><div class="key">fyj</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.快速向前冲刺。</div>
+<div class="skill ">2.化作剑气，进行数次斩击。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">54</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28155%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28203%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E4%BA%94%E9%BE%99%3C/text%3E%0A%3C/svg%3E" alt="五龙轮" /></td>
+  <td class="boss"><div class="boss-name">五龙轮</div><div class="key">wll</div></td>
+  <td class="skills"><div class="skill section">主动技能：</div>
+<div class="skill ">1.释放火焰朝玩家方向飞去。</div>
+<div class="skill ">2.自身发光，治疗场上所有怪物单位，若生命已满，则转为添加等量护盾。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">55</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28111%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28159%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%84%B0%E4%B8%AD%3C/text%3E%0A%3C/svg%3E" alt="焰中仙" /></td>
+  <td class="boss"><div class="boss-name">焰中仙</div><div class="key">yzx</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">焰中仙会召唤【飞烟剑】【五龙轮】助战，任意法宝存在时，自身受伤减少50%，自身吸血提高至1000%。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.飞向空中，朝玩家位置释放多条火龙追击玩家，施加【减速】（高级负面）。</div>
+<div class="skill ">2.消失不见，之后从天而降多颗陨石飞向玩家被命中的玩家会被施加【灼烧】（高级负面），释放结束后瞬移至玩家位置。</div>
+<div class="skill ">3.召唤黑洞，将面朝焰中仙的玩家吸引至自身位置，并施加【眩晕】（高级负面）。</div>
+<div class="skill ">4.瞬移三次到玩家位置进行多次斩击。</div>
+<div class="skill ">5.在自身周围召唤火龙烈焰造成伤害施加【破甲】（高级负面）。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">56</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%28353%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2841%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E7%89%9B%E9%AD%94%3C/text%3E%0A%3C/svg%3E" alt="牛魔王四" /></td>
+  <td class="boss"><div class="boss-name">牛魔王四</div><div class="key">nmw4</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">1.万魂煞：每过10秒召唤黑魂环绕自身，对玩家造成伤害。</div>
+<div class="skill ">2.灵魂剥夺：牛魔王的攻击不会增加角色保护进度，对玩家造成伤害的同时，会剥夺一部分玩家灵魂，造成额外伤害的同时，灵魂会飞向牛魔王，并转为对其的治疗效果（根据牛魔王已损失生命逐渐提升）。</div>
+<div class="skill ">3.格挡：受到攻击时，10%概率格挡（瞬时进入无法被攻击状态）并反击。</div>
+<div class="skill ">4.魂煞追杀：若玩家与牛魔王之间的距离大于牛魔王攻击距离，牛魔王的普通攻击会释放恶魂追击玩家。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.朝天空怒吼，之后不断地从天而降陨石（体积随牛魔王生命降低而增大），对命中的玩家造成伤害并施加【穿甲】（高级负面）。</div>
+<div class="skill ">2.俯下身体，在自身周围召唤地狱烈焰，短暂延迟后喷发，造成伤害并施加【灼烧】（高级负面）。</div>
+<div class="skill ">3.巨斧砸击地面，将玩家吸引至自身位置，召唤蛮牛从两侧向中间冲撞，造成伤害并施加【眩晕】（高级负面）。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">57</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2840%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2888%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E8%BD%AC%E8%BD%AE%3C/text%3E%0A%3C/svg%3E" alt="转轮王四" /></td>
+  <td class="boss"><div class="boss-name">转轮王四</div><div class="key">zlw4</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">攻击不会增加保护进度</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.向玩家掷出飞轮，停留在原地，之后不断扩大，最后冲向玩家，命中boss会为其回复10%生命。</div>
+<div class="skill ">2.短暂引导后在自身附近大范围内召唤转轮激光，造成伤害并施加【穿甲】（高级负面）。</div>
+<div class="skill ">3.飞向空中，环绕自身召唤转轮，短暂延迟后飞向玩家，造成伤害并施加【眩晕】（高级负面）。</div>
+<div class="skill ">4.飞向空中，从自身位置向地面随机位置释放转轮10个，短暂延迟后悉数飞回至自身位置。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+<tr>
+  <td class="idx">58</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2898%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28146%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E4%BA%94%E8%A1%8C%3C/text%3E%0A%3C/svg%3E" alt="五行祖巫" /></td>
+  <td class="boss"><div class="boss-name">五行祖巫</div><div class="key">wxzw</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">五行祖巫全程免疫负面状态和击退效果，拥有500%的全能吸血效果</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.金灵之力：向两侧劈砍，然后快速旋转巨斧，造成多次伤害。</div>
+<div class="skill ">2.木灵之力：从双翼释放飞刺飞向玩家，造成伤害并施加【法力流失】，每秒扣除一定魔法（高级负面）。</div>
+<div class="skill ">3.水灵之力：在玩家位置召唤漩涡，短暂延迟后喷涌出水柱，共三次，造成伤害并概率施加【冰冻】（高级负面）。</div>
+<div class="skill ">4.火灵之力：召唤火焰陨石从天而降飞向玩家，造成伤害并施加【灼烧】（高级负面）。</div>
+<div class="skill ">5.土灵之力：在玩家位置伸出土灵鬼手，被抓住会受到伤害并施加【定身】（高级负面）。</div></td>
+  <td class="drops"><span class="drop">句芒之翼(通用-翅膀)</span></td>
+</tr>
+<tr>
+  <td class="idx">59</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2845%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%2893%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%90%8E%E7%BE%BF%3C/text%3E%0A%3C/svg%3E" alt="后羿" /></td>
+  <td class="boss"><div class="boss-name">后羿</div><div class="key">hy</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">每过2s恢复2%最大生命值。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.向斜45°天空射出飞箭，短暂延迟后从天而降向玩家位置落下多道箭雨并施加【减速】（高级负面）。</div>
+<div class="skill ">2.短暂引导后射出强力一箭，对触碰到的玩家造成真实伤害并施加【眩晕】（高级负面）。</div></td>
+  <td class="drops"><span class="drop">射日英雄(通用-头衔)</span></td>
+</tr>
+<tr>
+  <td class="idx">60</td>
+  <td class="avatar"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2272%22%20height%3D%2272%22%20viewBox%3D%220%200%2072%2072%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22hsl%2898%2C72%25%2C45%25%29%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22hsl%28146%2C72%25%2C28%25%29%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%3Crect%20width%3D%2272%22%20height%3D%2272%22%20rx%3D%2212%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Ccircle%20cx%3D%2236%22%20cy%3D%2229%22%20r%3D%2215%22%20fill%3D%22rgba%28255%2C255%2C255%2C.22%29%22/%3E%0A%3Cpath%20d%3D%22M16%2063c4-16%2014-24%2020-24s16%208%2020%2024%22%20fill%3D%22rgba%28255%2C255%2C255%2C.20%29%22/%3E%0A%3Ctext%20x%3D%2236%22%20y%3D%2243%22%20text-anchor%3D%22middle%22%20font-family%3D%22Microsoft%20YaHei%2C%20SimHei%2C%20sans-serif%22%20font-size%3D%2217%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3E%E5%A4%A9%E5%BA%AD%3C/text%3E%0A%3C/svg%3E" alt="天庭战神" /></td>
+  <td class="boss"><div class="boss-name">天庭战神</div><div class="key">ttzs</div></td>
+  <td class="skills"><div class="skill section">被动技能：</div>
+<div class="skill ">死亡后可以复活，并且提升自身伤害和部分属性，并提升掉宝率。</div>
+<div class="skill section">主动技能：</div>
+<div class="skill ">1.天庭战神开始积蓄力量，引导完毕后恢复一定量的生命并提高所有技能的伤害，若被打断则给玩家施加【灼烧】，灼烧伤害百分比随复活次数而不断提高（高级负面）。</div>
+<div class="skill ">2.蓄力飞向空中，然后从身边幻化出飞剑依次飞向玩家伤害并施加【穿甲】（高级负面）。</div>
+<div class="skill ">3.每过一段时间，天庭战神会在原地幻化留下一个残影并瞬移至玩家位置，玩家靠近残影时，残影会攻击玩家。</div></td>
+  <td class="drops"><span class="none">无</span></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

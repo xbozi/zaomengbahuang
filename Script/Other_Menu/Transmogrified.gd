@@ -76,6 +76,9 @@ func PushEqToList():
 		5:
 			List = RoleItemList["白龙"]
 			RoleItemList["头衔"].push_back("lwstz")
+		6:
+			List = RoleItemList["白龙"]
+			RoleItemList["头衔"].push_back("lwstz")
 	for i in RoleItemList["翅膀"]:
 		List.push_back(i)
 	for i in RoleItemList["头衔"]:
@@ -105,6 +108,10 @@ func GetCurrentRoleList():#根据角色得到对应的所有装备列表
 				OtherList.push_back(i)
 		5:
 			role.text = "白龙"
+			for i in RoleItemList["白龙"]:
+				OtherList.push_back(i)
+		6:
+			role.text = "玉兔儿"
 			for i in RoleItemList["白龙"]:
 				OtherList.push_back(i)
 	return OtherList
@@ -238,6 +245,9 @@ func _ready() -> void:
 			$BG/Player/Playerplay.play("wait4")
 			RoleItemList["头衔"].push_back("jldj")
 		5:
+			$BG/Player/Playerplay.play("wait5")
+			RoleItemList["头衔"].push_back("lwstz")
+		6:
 			$BG/Player/Playerplay.play("wait5")
 			RoleItemList["头衔"].push_back("lwstz")
 	infor.text = str(currentpage) + '/' + str(maxpage)

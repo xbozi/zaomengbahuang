@@ -20,6 +20,13 @@ var cd_jm
 var message_box
 var music_jm
 var GameSet_:GameSet
+var _last_main_menu_bg: int = -1
+var _last_skip_story
+var _main_menu_bg_textures = {
+	1: preload("res://Art/MainGame/Bg1.png"),
+	2: preload("res://Art/MainGame/Bg2.png"),
+	3: preload("res://Art/MainGame/Bg3.png"),
+}
 
 func _ready() -> void:
 	if MainSet.set_data.has("FileValue"):
@@ -43,25 +50,15 @@ func _ready() -> void:
 	if MainSet.set_data["FristGame"]:
 		Global.addGameNeedKnow(self,Vector2(0,0))
 		pass
+	_refresh_skip_story_button(true)
+	_refresh_main_menu_bg(true)
 #	print(Global.cd_path)
 #	if Global.cd_path != null:
 #		print(MainSet.set_data["name" + str(MemoryClass.get_cd_number())])
 func _physics_process(_delta: float) -> void:
 
-	if MainSet.set_data["剧情跳过"]:
-		tiaoguo.text = "显示剧情"
-	else:
-		tiaoguo.text = "跳过剧情"
-	match int(MainSet.set_data["MainMenuBG"]):
-		1:
-			name_2.text = "《八荒湮隳篇·力战七大魔王》"
-			BackGround.texture = load("res://Art/MainGame/Bg1.png")
-		2:
-			name_2.text = "《八荒湮隳篇·勇斗十殿阎罗》"
-			BackGround.texture = load("res://Art/MainGame/Bg2.png")
-		3:
-			name_2.text = "《八荒湮隳篇·智取十万天兵》"
-			BackGround.texture = load("res://Art/MainGame/Bg3.png")
+	_refresh_skip_story_button()
+	_refresh_main_menu_bg()
 	RoleProp.ws_value = 0
 	if Music_set.get_child_count() != 0:
 		music.disabled = true
@@ -76,6 +73,35 @@ func _physics_process(_delta: float) -> void:
 			MainMusic.ADDMusic()
 			GameSet_.MusicIsChange = false
 
+func _refresh_skip_story_button(force: bool = false) -> void:
+	if not MainSet.set_data.has("剧情跳过"):
+		return
+	var skip_story = MainSet.set_data["剧情跳过"]
+	if not force and skip_story == _last_skip_story:
+		return
+	_last_skip_story = skip_story
+	if skip_story:
+		tiaoguo.text = "显示剧情"
+	else:
+		tiaoguo.text = "跳过剧情"
+
+func _refresh_main_menu_bg(force: bool = false) -> void:
+	if not MainSet.set_data.has("MainMenuBG"):
+		return
+	var bg_id = int(MainSet.set_data["MainMenuBG"])
+	if not force and bg_id == _last_main_menu_bg:
+		return
+	_last_main_menu_bg = bg_id
+	match bg_id:
+		1:
+			name_2.text = "《八荒湮隳篇·力战七大魔王》"
+			BackGround.texture = _main_menu_bg_textures[1]
+		2:
+			name_2.text = "《八荒湮隳篇·勇斗十殿阎罗》"
+			BackGround.texture = _main_menu_bg_textures[2]
+		3:
+			name_2.text = "《八荒湮隳篇·智取十万天兵》"
+			BackGround.texture = _main_menu_bg_textures[3]
 func _on_begin_game_pressed() -> void:
 	if MainSet.set_data.has("FileValue"):
 		if float(MainSet.set_data["FileValue"]) > float(Global.FileNum):

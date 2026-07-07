@@ -212,6 +212,36 @@ var ZhenFaTuPo = preload("res://Scene/OtherScene/ZhenFaTuPo.tscn")
 var ZhenFaHelp = preload("res://Scene/OtherScene/ZhenFaHelp.tscn")
 var RoleButton = preload("res://Scene/OtherScene/role_button.tscn")
 var Star = preload("res://Scene/OtherScene/star.tscn")
+var _resource_cache = {}
+var _packed_scene_cache = {}
+var _last_sound_ticks = {}
+var _last_effect_ticks = {}
+const _HIT_SOUND_INTERVAL_MS = 45
+const _EFFECT_INTERVAL_MS = 25
+func get_cached_resource(path: String):
+	if not _resource_cache.has(path):
+		_resource_cache[path] = load(path)
+	return _resource_cache[path]
+
+func get_packed_scene(path: String) -> PackedScene:
+	if not _packed_scene_cache.has(path):
+		_packed_scene_cache[path] = load(path)
+	return _packed_scene_cache[path]
+
+func _instance_pooled_scene(scene_path: String,parent):
+	var target = PoolManager.get_instance(scene_path)
+	parent.add_child(target)
+	if target.get_meta("_from_pool",false) and target.has_method("reuse_from_pool"):
+		target.reuse_from_pool()
+	return target
+
+func _can_emit_interval(cache: Dictionary,key: String,interval_ms: int) -> bool:
+	var now = Time.get_ticks_msec()
+	if cache.has(key) and now - int(cache[key]) < interval_ms:
+		return false
+	cache[key] = now
+	return true
+
 func AddStar(parent,Type):
 	var target = instance_scene(Star,parent)
 	target.Type = Type
@@ -571,6 +601,8 @@ func AddBuff(parent,BuffInfo):
 					return
 	var target = instance_scene(BaseBuff_,parent)
 	target.BuffInfo = BuffInfo
+	if Target != null and Target.has_method("mark_buff_dirty"):
+		Target.mark_buff_dirty()
 	return target
 func addAfterLevelEnd(parent,position):
 	var target = instance_scene(AfterLevelEnd,parent)
@@ -615,7 +647,8 @@ func addDamageNumber(parent,value,Type,is_crit,tar):
 	target.need_number = value
 	return target
 func addDamageText(parent,position,value,Type,is_crit,tar):
-	var target = instance_scene(DamageText,parent)
+	var target = _instance_pooled_scene("res://Scene/hittest/DamageText.tscn",parent)
+	target.pool_scene_path = "res://Scene/hittest/DamageText.tscn"
 	target.target = tar
 	target.position = position
 	target.Type = Type
@@ -654,7 +687,11 @@ func Add_Mosaic_(parent,position):
 	return target
 	
 func addSound_(parent,target_):
-	var target = instance_scene(Sound_,parent)
+	var key = str(parent.get_instance_id()) + ":" + str(target_)
+	if not _can_emit_interval(_last_sound_ticks,key,_HIT_SOUND_INTERVAL_MS):
+		return null
+	var target = _instance_pooled_scene("res://Scene/AllSound/MonsterBeHit.tscn",parent)
+	target.pool_scene_path = "res://Scene/AllSound/MonsterBeHit.tscn"
 	target.target = target_
 	return target
 func addMagicHelp(parent,position):
@@ -802,7 +839,8 @@ func add_BuffIcon(parent,text_):
 	return target
 
 func add_SpecialEffect(parent,position_,name_,scale_,direction,speed_):
-	var target = instance_scene(SpecialAffect,parent)
+	var target = _instance_pooled_scene("res://Scene/Base/special_affect.tscn",parent)
+	target.pool_scene_path = "res://Scene/Base/special_affect.tscn"
 	target.z_index = 99
 	target.Effect_name = name_
 	target.scale_ = scale_
@@ -924,17 +962,20 @@ func add_Camera(parent,position,right):
 	target.max_right = right
 	return target
 func call_hero(who: String,parent,position: Vector2,_dir: bool):
-	var target:BaseHero
+	var scene_path = ""
 	if who == "role_1":
-		target = instance_scene(load("res://Scene/Hero/Role_1/Role1.tscn"),parent)
+		scene_path = "res://Scene/Hero/Role_1/Role1.tscn"
 	elif who == "role_2":
-		target = instance_scene(load("res://Scene/Hero/Role_2/Role_2.tscn"),parent)
+		scene_path = "res://Scene/Hero/Role_2/Role_2.tscn"
 	elif who == "role_3":
-		target = instance_scene(load("res://Scene/Hero/Role_3/Role_3.tscn"),parent)
+		scene_path = "res://Scene/Hero/Role_3/Role_3.tscn"
 	elif who == "role_4":
-		target = instance_scene(load("res://Scene/Hero/Role_4/Role_4.tscn"),parent)
+		scene_path = "res://Scene/Hero/Role_4/Role_4.tscn"
 	elif who == "role_5":
-		target = instance_scene(load("res://Scene/Hero/Role_5/Role_5.tscn"),parent)
+		scene_path = "res://Scene/Hero/Role_5/Role_5.tscn"
+	elif who == "role_6":
+		scene_path = "res://Scene/Hero/Role_5_1/Role_7.tscn"
+	var target:BaseHero = instance_scene(get_packed_scene(scene_path),parent)
 	target.position = position
 	get_player = target
 	return target
@@ -967,7 +1008,8 @@ func add_back_pack(parent,position):
 	target.z_index = 10
 	return target
 func Create_Monster(M_id: int,parent,position_: Vector2):
-	var target = instance_scene(load("res://Scene/Monster/Monster_" + str(M_id) + ".tscn"),parent)
+	var scene_path = "res://Scene/Monster/Monster_" + str(M_id) + ".tscn"
+	var target = instance_scene(get_packed_scene(scene_path),parent)
 	target.position = position_
 	return target
 func add_hit_text(parent,position_,value,lx,crit,miss):
@@ -987,7 +1029,11 @@ func add_monster_blood(parent,position_,value,text):
 	return target
 
 func add_mr_hurt(parent,position_):
-	var target = instance_scene(monster_be_hit,parent)
+	var key = str(parent.get_instance_id()) + ":mr_hurt"
+	if not _can_emit_interval(_last_effect_ticks,key,_EFFECT_INTERVAL_MS):
+		return null
+	var target = _instance_pooled_scene("res://Scene/MonsterDamage/monster_be_hit.tscn",parent)
+	target.pool_scene_path = "res://Scene/MonsterDamage/monster_be_hit.tscn"
 	target.position = position_
 	return target
 
@@ -1039,11 +1085,17 @@ func GetDisBetweem(Ob_1,Ob_2):
 	return pp_3
 func LoadRole1Body(name_):
 	var Information
-	Information = load("res://Art/HeroPicture/Role" + str(int(PlayerData.player_data["Myself"])) + "AllEquipment/Role_" + str(int(PlayerData.player_data["Myself"])) + "_Body_" + str(name_) + ".png")
+	var role_id = int(PlayerData.player_data["Myself"])
+	if role_id == 6:
+		role_id = 5
+	Information = load("res://Art/HeroPicture/Role" + str(role_id) + "AllEquipment/Role_" + str(role_id) + "_Body_" + str(name_) + ".png")
 	return Information
 func LoadRole1EQ(name_):
 	var Information
-	Information = load("res://Art/HeroPicture/Role" + str(int(PlayerData.player_data["Myself"])) + "AllEquipment/Role_" + str(int(PlayerData.player_data["Myself"])) + "_Eq_" + str(name_) + ".png")
+	var role_id = int(PlayerData.player_data["Myself"])
+	if role_id == 6:
+		role_id = 5
+	Information = load("res://Art/HeroPicture/Role" + str(role_id) + "AllEquipment/Role_" + str(role_id) + "_Eq_" + str(name_) + ".png")
 	return Information
 func get_wx(num):
 	var wx = {"金":false,"木":false,"水":false,"火":false,"土":false}

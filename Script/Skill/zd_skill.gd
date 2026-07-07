@@ -85,24 +85,29 @@ func _ready() -> void:
 	set_skill_Level()
 	set_skill_Infor()
 	set_Skill_LH()
-func GetSkillName(Num):
+func GetRoleID():
 	var RoleID = PlayerData.player_data["Myself"]
+	if int(RoleID) == 6:
+		return 5
+	return RoleID
+func GetSkillName(Num):
+	var RoleID = GetRoleID()
 	return str(Skill_Name["角色" + str(RoleID)][Num - 1])
 func GetNeedMp():
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(TargetSkill - 1),false)
 	var New = Hero.get_need_mp(GetName(TargetSkill - 1),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	return [Old,New]
 func set_skill_name():#设置每个技能的名字
 	for i in range(10):
 		var target = get_node("ScrollContainer/HBoxContainer/Sk_na/skill_" + str(i + 1))
-		var RoleID = PlayerData.player_data["Myself"]
+		var RoleID = GetRoleID()
 		target.text = str(Skill_Name["角色" + str(RoleID)][i])
 func set_skill_Icon():#设置每个技能的图标
 	for i in range(10):
 		var target = get_node("ScrollContainer/HBoxContainer/sk_pi/ski_" + str(i + 1))
-		var RoleID = PlayerData.player_data["Myself"]
+		var RoleID = GetRoleID()
 		var Skill_nbname = Skill_list["角色" + str(RoleID)][i]
 		target.set_button_icon(load("res://Art/Skill/SkillIcon/" + str(Skill_nbname) + ".png"))
 func set_skill_Level():#设置每个技能的等级
@@ -113,7 +118,7 @@ func set_skill_Level():#设置每个技能的等级
 func set_skill_Infor():#设置每个技能的描述
 	for i in range(10):
 		var target = get_node("ScrollContainer/HBoxContainer/sk_ms/s_" + str(i + 1))
-		var RoleID = PlayerData.player_data["Myself"]
+		var RoleID = GetRoleID()
 		target.text = str(Skill_Infor["角色" + str(RoleID)][i])
 
 func set_Skill_LH():#设置每个技能当前需要的灵魂
@@ -247,7 +252,7 @@ func _on_ski_1_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][0]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -257,7 +262,7 @@ func _on_ski_2_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][1]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -267,7 +272,7 @@ func _on_ski_3_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][2]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -277,7 +282,7 @@ func _on_ski_4_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][3]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -287,7 +292,7 @@ func _on_ski_5_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][4]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -297,7 +302,7 @@ func _on_ski_6_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][5]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -307,7 +312,7 @@ func _on_ski_7_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][6]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -317,7 +322,7 @@ func _on_ski_8_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][7]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -327,7 +332,7 @@ func _on_ski_9_pressed() -> void:
 	if level == 0:
 		Global.AddMessageShow(self,"先学习技能才能设置按键！！",1.5,Vector2(395,180))
 		return
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][8]
 	Global.addSkillKeySet(self,Vector2(350,140),Skill_nbname)
 
@@ -337,7 +342,7 @@ func _on_ski_10_pressed() -> void:
 
 
 func GetName(num):
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	var Skill_nbname = Skill_list["角色" + str(RoleID)][num]
 	
 	return Skill_nbname
@@ -347,7 +352,7 @@ func _on_ski_1_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(0),false)
 	var New =Hero.get_need_mp(GetName(0),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][0]),Old,New)
 func _on_ski_1_mouse_exited() -> void:
 	if SkillInfo != null:
@@ -358,7 +363,7 @@ func _on_ski_2_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(1),false)
 	var New =Hero.get_need_mp(GetName(1),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][1]),Old,New)
 
 
@@ -371,7 +376,7 @@ func _on_ski_3_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(2),false)
 	var New =Hero.get_need_mp(GetName(2),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][2]),Old,New)
 
 
@@ -384,7 +389,7 @@ func _on_ski_4_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(3),false)
 	var New =Hero.get_need_mp(GetName(3),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][3]),Old,New)
 
 
@@ -397,7 +402,7 @@ func _on_ski_5_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(4),false)
 	var New =Hero.get_need_mp(GetName(4),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][4]),Old,New)
 
 
@@ -410,7 +415,7 @@ func _on_ski_6_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(5),false)
 	var New =Hero.get_need_mp(GetName(5),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][5]),Old,New)
 
 
@@ -423,7 +428,7 @@ func _on_ski_7_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(6),false)
 	var New = Hero.get_need_mp(GetName(6),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][6]),Old,New)
 
 
@@ -436,7 +441,7 @@ func _on_ski_8_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(7),false)
 	var New =Hero.get_need_mp(GetName(7),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][7]),Old,New)
 
 
@@ -449,7 +454,7 @@ func _on_ski_9_mouse_entered() -> void:
 	var Hero = BaseHero.new()
 	var Old = Hero.get_need_mp(GetName(8),false)
 	var New =Hero.get_need_mp(GetName(8),true)
-	var RoleID = PlayerData.player_data["Myself"]
+	var RoleID = GetRoleID()
 	SkillInfo = Global.addRoleMagicNeed(self,get_local_mouse_position(),str(Skill_Name["角色" + str(RoleID)][8]),Old,New)
 
 

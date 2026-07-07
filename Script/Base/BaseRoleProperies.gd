@@ -469,6 +469,12 @@ func set_basic_prop():
 			baseroleprop.power = 10 + 4 * (baseroleprop.Level - 1) 
 			baseroleprop.Def = 8 + 1 * (baseroleprop.Level - 1)
 			baseroleprop.Mdef = 8 + 1 * (baseroleprop.Level - 1)
+		6:
+			baseroleprop.SHp = 80 + 40 * (baseroleprop.Level - 1) 
+			baseroleprop.SMp = 50 + 20 * (baseroleprop.Level - 1)
+			baseroleprop.power = 10 + 4 * (baseroleprop.Level - 1) 
+			baseroleprop.Def = 8 + 1 * (baseroleprop.Level - 1)
+			baseroleprop.Mdef = 8 + 1 * (baseroleprop.Level - 1)
 	if baseroleprop.Level < 20:
 		baseroleprop.max_exp = max_exp_list[baseroleprop.Level - 1]
 	else:

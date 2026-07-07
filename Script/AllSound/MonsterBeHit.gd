@@ -2,9 +2,21 @@ extends AudioStreamPlayer
 #音效控制
 var target
 var is_set = false
+var pool_scene_path: String = ""
+
+func reuse_from_pool():
+	is_set = false
+	set_physics_process(true)
+
+func reset_for_pool():
+	stop()
+	stream = null
+	target = null
+	is_set = false
+
 func _physics_process(_delta: float) -> void:
 	if not is_set:
-		stream = load(target)
+		stream = Global.get_cached_resource(target)
 		play()	
 		is_set = true
 	if MainSet.set_data["RoleOrMonsterHit"]:
@@ -15,4 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_finished() -> void:
-	queue_free()
+	if pool_scene_path != "":
+		PoolManager.recycle_instance(pool_scene_path,self)
+	else:
+		queue_free()

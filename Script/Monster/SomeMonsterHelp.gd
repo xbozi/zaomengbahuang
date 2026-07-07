@@ -402,6 +402,89 @@ var MonsterSkillInfoList: Dictionary = {
 		"3.每过一段时间，天庭战神会在原地幻化留下一个残影并瞬移至玩家位置，玩家靠近残影时，残影会攻击玩家。",
 	],
 }
+var MonsterFallInfoList: Dictionary = {
+	"dxx": ["ptxzg", "ptxzf", "ptsmz", "ptjs", "ptdp", "ptcs", "ptyyc", "ptcp"],
+	"mhw": ["dszy", "dslq", "dshp", "dslj"],
+	"yrw": ["dsqz", "dsyj", "jmc", "zhj"],
+	"bfsx": ["whg", "bsp", "wtp"],
+	"stw": ["jcbj", "jcjp", "jcmc"],
+	"pmw": ["jcjs", "jcsz", "jclj"],
+	"gcx": ["xqzy"],
+	"jmw": ["xwj", "bxp", "pxk"],
+	"smw": ["qlp", "zqj", "ttj"],
+	"nmw1": [],
+	"nmw2": [],
+	"nmw3": ["putongnmwsz"],
+	"lw": ["qld", "hdc", "bhz", "zhp", "twq", "ryjgb", "jcdp", "jhcz", "qxsh", "jlxmc", "qthbq"],
+	"hhe": ["jgj", "ssj"],
+	"syr": ["lzp", "jmy"],
+	"hbwc": ["yhj", "tsgl"],
+	"klw": ["lcgy", "tsgp"],
+	"qgw": ["tsyj", "gtc"],
+	"pg": ["lcld", "tsyp"],
+	"ylw": ["lchp"],
+	"sdw": [],
+	"yc": ["xhmj", "xhxc", "lczh"],
+	"mp": ["xhgp", "xhxh", "xhymk", "xhyk"],
+	"xt": ["qtz", "dszk", "jljs", "lhz", "tpzy", "tpltp", "jlfyc", "jlfyj", "ylhq", "yljj"],
+	"zsxt": ["xtzy"],
+	"bgj": ["bsxj", "bszj", "bsyz", "bsbc", "bshq", "csgs", "bszy"],
+	"cjw": ["dzj"],
+	"zlw1": [],
+	"zlw2": [],
+	"zlw3": ["putongzlwsz", "xyq", "syc", "nyd", "myz", "shyc"],
+	"xtq": [],
+	"qly": ["kyz", "kyc"],
+	"sfe": ["xhz", "kys"],
+	"jls": ["xhc", "xhp", "xhj"],
+	"mhwtf": [],
+	"zztw": ["qybd", "qyfp", "qysq"],
+	"gmtw": ["hylk", "qysz"],
+	"dwtw": ["hylc", "hylz"],
+	"zzz": ["zjksf", "zjqj", "zjgp"],
+	"yh": ["smz", "jllm"],
+	"els": ["shsjt"],
+	"txs": [],
+	"lzz": [],
+	"nz": [],
+	"tttw": [],
+	"yjdw": [],
+	"jjdw": [],
+	"qnj": [],
+	"tbjx": [],
+	"tslj": [],
+	"mtj": [],
+	"cgtw": [],
+	"fyj": [],
+	"wll": [],
+	"yzx": [],
+	"nmw4": [],
+	"zlw4": [],
+	"wxzw": ["jmzy"],
+	"hy": ["ptsryx"],
+	"ttzs": [],
+}
+
+func GetMonsterFallText(name_: String) -> String:
+	if not MonsterFallInfoList.has(name_):
+		return "无"
+	var fall_text := ""
+	for item_name in MonsterFallInfoList[name_]:
+		if not AE.AllEquipment_.has(item_name):
+			continue
+		var item_info = AE.AllEquipment_[item_name]
+		var item_text = str(item_info["名字"]) + "(" + str(item_info["所属"]) + "-" + str(item_info["类型"]) + ")"
+		if fall_text == "":
+			fall_text = item_text
+		else:
+			fall_text += "、" + item_text
+	if fall_text == "":
+		return "无"
+	return fall_text
+
+func AddMonsterFallInfo(name_: String) -> void:
+	Global.ADDFont_(monster_info,"掉落装备：","res://Font/Aa梦里掏花对月饮_mianfeiziti.com.ttf",25,"FFFFFF",1,"FFFFFF")
+	Global.ADDFont_(monster_info,GetMonsterFallText(name_),"res://Font/华康宋体W3.ttc",15,"FFFFFF",1,"FFFFFF")
 func RefreshInfo():
 	
 	if MonsterName != "":
@@ -414,6 +497,7 @@ func RefreshInfo():
 					Global.ADDFont_(monster_info,i,"res://Font/Aa梦里掏花对月饮_mianfeiziti.com.ttf",25,"FFFFFF",1,"FFFFFF")
 				else:
 					Global.ADDFont_(monster_info,i,"res://Font/华康宋体W3.ttc",15,"FFFFFF",1,"FFFFFF")
+			AddMonsterFallInfo(MonsterName)
 
 func _on_dxx_pressed() -> void:
 	MonsterName = "dxx"

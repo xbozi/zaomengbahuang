@@ -72,6 +72,11 @@ func _ready() -> void:
 				TotalItemList.push_back({"名字": "lwstz","灵魂":200000})
 			for i in BlList:
 				TotalItemList.push_back(i)
+		6:
+			if PlayerData.player_data["玩家等级"] >= 50:
+				TotalItemList.push_back({"名字": "lwstz","灵魂":200000})
+			for i in BlList:
+				TotalItemList.push_back(i)
 	TotalItemList.push_back({"名字": "xczg","灵魂":0})
 	TotalItemList.push_back({"名字": "sxyr","灵魂":0})
 	set_RoleName()
@@ -149,6 +154,8 @@ func set_RoleName():
 			role.text = "角色： 沙僧"
 		5:
 			role.text = "角色： 白龙"	
+		6:
+			role.text = "角色： 玉兔儿"
 func _on_last_pressed() -> void:
 	if current_page > 1:
 		current_page -= 1

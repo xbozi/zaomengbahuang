@@ -37,6 +37,13 @@ var NewPosition
 var IniSpeed
 var IsCheck: bool = false
 var LastValue: float
+func _notify_owner_buff_dirty():
+	if GetObj != null and GetObj.has_method("mark_buff_dirty"):
+		GetObj.mark_buff_dirty()
+
+func _exit_tree() -> void:
+	_notify_owner_buff_dirty()
+
 func _physics_process(_delta: float) -> void:
 	
 	if not IsSet:
@@ -46,6 +53,8 @@ func _physics_process(_delta: float) -> void:
 		GetAllBuff = get_parent()
 		if not GetObj is BaseMonster and not GetObj is BaseHero:
 			self.queue_free() 
+			return
+		_notify_owner_buff_dirty()
 		SetValue()
 		AddBuffEffectFirst()
 		StartBuff()
@@ -288,6 +297,7 @@ func AddBuffIcon():
 			Icon.TotalTimes = TotalTimes
 			Icon.LastHurt = LastValue
 func RemoveBuff():
+	_notify_owner_buff_dirty()
 	for i in BuffEffectList:
 		if i != null:
 			i.queue_free()

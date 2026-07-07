@@ -7,6 +7,25 @@ var Type: String
 var is_set: bool = false
 var is_crit: bool
 var target: BaseObject
+var pool_scene_path: String = ""
+
+func reuse_from_pool():
+	is_set = false
+	set_physics_process(true)
+
+func reset_for_pool():
+	is_set = false
+	target = null
+	Number = 0
+	Type = ""
+	is_crit = false
+	if show_player != null:
+		show_player.stop()
+	if number != null:
+		for child in number.get_children():
+			number.remove_child(child)
+			child.queue_free()
+
 func changeNumber():
 	var loc_2 = str(Number)
 	var loc_1 =  loc_2.split("")
@@ -35,4 +54,10 @@ func _physics_process(_delta: float) -> void:
 			else:
 				show_player.play("physics")
 				await show_player.animation_finished
+		_recycle_or_free()
 
+func _recycle_or_free():
+	if pool_scene_path != "":
+		PoolManager.recycle_instance(pool_scene_path,self)
+	else:
+		queue_free()

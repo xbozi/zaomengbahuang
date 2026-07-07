@@ -55,6 +55,8 @@ func _ready() -> void:
 			$background/Player.play("wait4")
 		5:
 			$background/Player.play("wait5")
+		6:
+			$background/Player.play("wait5")
 	Global.is_in_ldl = false
 	MemoryClass.main_dq()
 	if int(MemoryClass.get_cd_number()) <= 6:

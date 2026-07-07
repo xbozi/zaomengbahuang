@@ -5,7 +5,10 @@ var MyFather
 
 
 func _physics_process(delta: float) -> void:
-	self.set_button_icon(load("res://Art/MainGame/ChoosePlayer/" + str(MyName) + ".png"))
+	var icon_name = MyName
+	if MyName == "yte":
+		icon_name = "xbl"
+	self.set_button_icon(load("res://Art/MainGame/ChoosePlayer/" + str(icon_name) + ".png"))
 	match MyName:
 		"swk":
 			role_name.text = "孙悟空"
@@ -17,6 +20,8 @@ func _physics_process(delta: float) -> void:
 			role_name.text = "沙悟净"
 		"xbl":
 			role_name.text = "小白龙"
+		"yte":
+			role_name.text = "玉兔儿"
 	set_physics_process(false)
 
 
@@ -38,4 +43,7 @@ func _on_pressed() -> void:
 		"xbl":
 			MyFather.CurrentChoose = 5
 			MyFather.AddStar(5)
+		"yte":
+			MyFather.CurrentChoose = 6
+			MyFather.AddStar(6)
 	MyFather.SetRole()
