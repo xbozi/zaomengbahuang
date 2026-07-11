@@ -7,3 +7,6 @@ desktop.ini
 
 # Runtime logs
 *.log.tmp
+
+# Godot generated project data
+.godot/
