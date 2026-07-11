@@ -13,7 +13,7 @@ config_version=5
 config/name="造梦八荒"
 config/description="被师徒一行人打败的各大魔头又受到神秘力量的侵蚀重返三界，浩劫之际，天崩地裂，能否再次斩妖除魔，歼灭罪魁祸首……"
 run/main_scene="res://Scene/Main_menu/Main_Menu.tscn"
-config/use_hidden_project_data_directory=false
+config/use_hidden_project_data_directory=true
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
 boot_splash/image="res://Art/MainGame/Loading.png"
@@ -202,3 +202,4 @@ compatibility/legacy_just_pressed_behavior=true
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.web="forward_plus"
+textures/vram_compression/import_etc2_astc=true
