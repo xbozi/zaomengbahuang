@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://paeillvxktrs"
-path="res://.godot/imported/music_jpy.mp3-a8ebc0c4b8b678ff39deef2afd00efd8.mp3str"
+path="res://godot/imported/music_jpy.mp3-a8ebc0c4b8b678ff39deef2afd00efd8.mp3str"
 
 [deps]
 
 source_file="res://Music/level/music_jpy.mp3"
-dest_files=["res://.godot/imported/music_jpy.mp3-a8ebc0c4b8b678ff39deef2afd00efd8.mp3str"]
+dest_files=["res://godot/imported/music_jpy.mp3-a8ebc0c4b8b678ff39deef2afd00efd8.mp3str"]
 
 [params]
 

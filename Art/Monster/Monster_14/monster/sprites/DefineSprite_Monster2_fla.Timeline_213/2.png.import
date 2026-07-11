@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sghbv5b2dgje"
-path="res://.godot/imported/2.png-e0fe627df9eaf185841a354ed29e30ea.ctex"
+path="res://godot/imported/2.png-e0fe627df9eaf185841a354ed29e30ea.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Monster_14/monster/sprites/DefineSprite_Monster2_fla.Timeline_213/2.png"
-dest_files=["res://.godot/imported/2.png-e0fe627df9eaf185841a354ed29e30ea.ctex"]
+dest_files=["res://godot/imported/2.png-e0fe627df9eaf185841a354ed29e30ea.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ca8xitqpg5m0u"
-path="res://.godot/imported/14.png-165edaf672b2b7c29ab7d1b733a038d0.ctex"
+path="res://godot/imported/14.png-165edaf672b2b7c29ab7d1b733a038d0.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Monster12/Relife/14.png"
-dest_files=["res://.godot/imported/14.png-165edaf672b2b7c29ab7d1b733a038d0.ctex"]
+dest_files=["res://godot/imported/14.png-165edaf672b2b7c29ab7d1b733a038d0.ctex"]
 
 [params]
 

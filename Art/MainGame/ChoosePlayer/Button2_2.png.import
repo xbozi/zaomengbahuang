@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c25ld0y7sx8tw"
-path="res://.godot/imported/Button2_2.png-32d57bf0af0dda36c312c6912084b47b.ctex"
+path="res://godot/imported/Button2_2.png-32d57bf0af0dda36c312c6912084b47b.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/MainGame/ChoosePlayer/Button2_2.png"
-dest_files=["res://.godot/imported/Button2_2.png-32d57bf0af0dda36c312c6912084b47b.ctex"]
+dest_files=["res://godot/imported/Button2_2.png-32d57bf0af0dda36c312c6912084b47b.ctex"]
 
 [params]
 

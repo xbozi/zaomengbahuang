@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdrn3jyfx13r4"
-path="res://.godot/imported/SpecialEffect_3.png-377d86bac826aee6ce4e51188a8c9dc3.ctex"
+path="res://godot/imported/SpecialEffect_3.png-377d86bac826aee6ce4e51188a8c9dc3.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/MainGame/ChoosePlayer/SpecialEffect_3.png"
-dest_files=["res://.godot/imported/SpecialEffect_3.png-377d86bac826aee6ce4e51188a8c9dc3.ctex"]
+dest_files=["res://godot/imported/SpecialEffect_3.png-377d86bac826aee6ce4e51188a8c9dc3.ctex"]
 
 [params]
 

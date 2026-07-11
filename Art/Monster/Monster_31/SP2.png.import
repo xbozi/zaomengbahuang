@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d36w501qavu4h"
-path="res://.godot/imported/SP2.png-4787323432ba91e77ba806ff54889c13.ctex"
+path="res://godot/imported/SP2.png-4787323432ba91e77ba806ff54889c13.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Monster_31/SP2.png"
-dest_files=["res://.godot/imported/SP2.png-4787323432ba91e77ba806ff54889c13.ctex"]
+dest_files=["res://godot/imported/SP2.png-4787323432ba91e77ba806ff54889c13.ctex"]
 
 [params]
 

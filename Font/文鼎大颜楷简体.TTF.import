@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://clqjpbh0cnf63"
-path="res://.godot/imported/文鼎大颜楷简体.TTF-c6af301d7f39551c8f3d55f6f8baad8b.fontdata"
+path="res://godot/imported/文鼎大颜楷简体.TTF-c6af301d7f39551c8f3d55f6f8baad8b.fontdata"
 
 [deps]
 
 source_file="res://Font/文鼎大颜楷简体.TTF"
-dest_files=["res://.godot/imported/文鼎大颜楷简体.TTF-c6af301d7f39551c8f3d55f6f8baad8b.fontdata"]
+dest_files=["res://godot/imported/文鼎大颜楷简体.TTF-c6af301d7f39551c8f3d55f6f8baad8b.fontdata"]
 
 [params]
 

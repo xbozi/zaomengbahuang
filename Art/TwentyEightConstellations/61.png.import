@@ -2,33 +2,4 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwam3q01322s0"
-path="res://.godot/imported/61.png-727f66f94c84b8988ed7a1b743688d9a.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://Art/TwentyEightConstellations/61.png"
-dest_files=["res://.godot/imported/61.png-727f66f94c84b8988ed7a1b743688d9a.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+path="res://godot/imported/61.png-b17e214818ae98d25e8bbda6db9c1bd2.ctex"

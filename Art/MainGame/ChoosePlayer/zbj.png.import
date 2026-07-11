@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://du0lwx7qiqnby"
-path="res://.godot/imported/zbj.png-626133d4f63cd0ae68acd66f0c414d7a.ctex"
+path="res://godot/imported/zbj.png-626133d4f63cd0ae68acd66f0c414d7a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/MainGame/ChoosePlayer/zbj.png"
-dest_files=["res://.godot/imported/zbj.png-626133d4f63cd0ae68acd66f0c414d7a.ctex"]
+dest_files=["res://godot/imported/zbj.png-626133d4f63cd0ae68acd66f0c414d7a.ctex"]
 
 [params]
 

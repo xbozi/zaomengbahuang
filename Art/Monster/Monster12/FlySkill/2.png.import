@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmjxqxvgkacgw"
-path="res://.godot/imported/2.png-7cd6b13cda1d9afb8d270d1682854139.ctex"
+path="res://godot/imported/2.png-7cd6b13cda1d9afb8d270d1682854139.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Monster12/FlySkill/2.png"
-dest_files=["res://.godot/imported/2.png-7cd6b13cda1d9afb8d270d1682854139.ctex"]
+dest_files=["res://godot/imported/2.png-7cd6b13cda1d9afb8d270d1682854139.ctex"]
 
 [params]
 

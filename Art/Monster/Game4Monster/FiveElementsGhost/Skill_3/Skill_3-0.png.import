@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfapilsq2inua"
-path="res://.godot/imported/Skill_3-0.png-91ec43b541ad4ff9baa4a8b852f0c503.ctex"
+path="res://godot/imported/Skill_3-0.png-91ec43b541ad4ff9baa4a8b852f0c503.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Game4Monster/FiveElementsGhost/Skill_3/Skill_3-0.png"
-dest_files=["res://.godot/imported/Skill_3-0.png-91ec43b541ad4ff9baa4a8b852f0c503.ctex"]
+dest_files=["res://godot/imported/Skill_3-0.png-91ec43b541ad4ff9baa4a8b852f0c503.ctex"]
 
 [params]
 

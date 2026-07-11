@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://du8k5ot23lm5f"
-path="res://.godot/imported/lybj.mp3-924895894bc8fee8d6a46ef0374dee32.mp3str"
+path="res://godot/imported/lybj.mp3-924895894bc8fee8d6a46ef0374dee32.mp3str"
 
 [deps]
 
 source_file="res://Music/Hero/Role4/lybj.mp3"
-dest_files=["res://.godot/imported/lybj.mp3-924895894bc8fee8d6a46ef0374dee32.mp3str"]
+dest_files=["res://godot/imported/lybj.mp3-924895894bc8fee8d6a46ef0374dee32.mp3str"]
 
 [params]
 
