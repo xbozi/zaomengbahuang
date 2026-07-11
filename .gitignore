@@ -10,3 +10,5 @@ desktop.ini
 
 # Godot generated project data
 .godot/
+build/
+godot/
