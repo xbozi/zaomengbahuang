@@ -29,15 +29,9 @@ var GongJi = [0,3,5,2,4,3]
 var MinJie = [0,5,3,4,3,4]
 var CaoZuo = [0,3,4,3,4,5]
 var CurrentChoose: int = 1
-var PlayerList = ["swk","tsz"]
+var PlayerList = ["swk","tsz","zbj","swj","xbl"]
 func _ready() -> void:
 
-	if MainSet.set_data["LevelHYS"]:
-		PlayerList.push_back("zbj")
-	if MainSet.set_data["LevelTT"]:
-		PlayerList.push_back("swj")
-	if MainSet.set_data["XiaoBaiLong"]:
-		PlayerList.push_back("xbl")
 	for i in PlayerList:
 		Global.AddRoleButton(RoleList,i,self)
 	SetRole()
