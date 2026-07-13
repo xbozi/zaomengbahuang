@@ -33,6 +33,8 @@ var MaxPage: int = 3
 var skill_target
 var my_music
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	MainSet.set_data["LevelTT"] = true
 	MemoryClass.main_bc()
 	Global.LLBTLevel = 1
@@ -52,7 +54,7 @@ func _ready() -> void:
 		MainMusic.ADDMusic()
 	Global.CurrentLevel = ""
 	if not Global.IsFrist:
-		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,ScreenFit.base_point(470, 300))
 		Global.IsFrist = true
 	Global.PlayerBeHitCount = 0
 	Global.LastLevelPath = ""
@@ -208,22 +210,22 @@ func _on_level_30_pressed() -> void:
 	Global.AddLevelInfo(self,"玲珑宝塔",Vector2(0,0),"res://Scene/Level/Level_llbt.tscn")
 
 func _on_level_stz_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_level_dsg_pressed() -> void:
 	if PlayerData.player_data.兜率宫 == 0:
-		Global.AddMessageShow(get_parent(),"需通关玲珑宝塔！",1.5,Vector2(470,300))
+		Global.AddMessageShow(get_parent(),"需通关玲珑宝塔！",1.5,ScreenFit.base_point(470, 300))
 	else:
 		Global.AddLevelInfo(self,"兜率宫",Vector2(0,0),"兜率宫")
 
 func _on_level_hdzm_pressed() -> void:
 	if PlayerData.player_data.截教天镜 == false:
-		Global.AddMessageShow(get_parent(),"需通关兜率宫！",1.5,Vector2(470,300))
+		Global.AddMessageShow(get_parent(),"需通关兜率宫！",1.5,ScreenFit.base_point(470, 300))
 	else:
 		Global.AddHDZM(self,self)
 func _on_level_sssl_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_smdp_pressed() -> void:
@@ -231,7 +233,7 @@ func _on_smdp_pressed() -> void:
 
 
 func _on_lsh_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_kls_pressed() -> void:
@@ -239,19 +241,19 @@ func _on_kls_pressed() -> void:
 
 
 func _on_ghg_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_tzhy_pressed() -> void:
 	if PlayerData.player_data["玩家等级"] < 40:
-		Global.AddMessageShow(get_parent(),"需要角色等级大于等于40级！",1.5,Vector2(470,300))
+		Global.AddMessageShow(get_parent(),"需要角色等级大于等于40级！",1.5,ScreenFit.base_point(470, 300))
 		return
 	Global.change_secen("res://Scene/Level/Level_tzhy.tscn")
 
 
 func _on_memory_game_pressed() -> void:
 	MemoryClass.保存游戏(Global.cd_path)
-	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_shop_pressed() -> void:
@@ -270,7 +272,7 @@ func _on_learn_skill_pressed() -> void:
 
 
 func _on_actity_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_task_pressed() -> void:
@@ -362,3 +364,6 @@ func PlayAn(Level):
 
 func _on_level_lhhj_pressed() -> void:
 	Global.Addlhhj(self,Vector2(0,0))
+
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_canvas_cover(self)

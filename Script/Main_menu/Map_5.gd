@@ -1,6 +1,11 @@
 extends Node2D
 class_name Map5
 
+func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
+
+
 func _on_level_40_pressed() -> void:
 	pass # Replace with function body.
 
@@ -67,3 +72,6 @@ func _on_game_an_pressed() -> void:
 
 func _on_pellet_pressed() -> void:
 	pass # Replace with function body.
+
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_canvas_cover(self)

@@ -22,6 +22,8 @@ var music_jm
 var GameSet_:GameSet
 
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	if MainSet.set_data.has("FileValue"):
 		if float(MainSet.set_data["FileValue"]) < float(Global.FileNum):
 			MainSet.set_data["FileValue"] = Global.FileNum
@@ -62,6 +64,7 @@ func _physics_process(_delta: float) -> void:
 		3:
 			name_2.text = "《八荒湮隳篇·智取十万天兵》"
 			BackGround.texture = load("res://Art/MainGame/Bg3.png")
+	_apply_screen_fit()
 	RoleProp.ws_value = 0
 	if Music_set.get_child_count() != 0:
 		music.disabled = true
@@ -76,17 +79,20 @@ func _physics_process(_delta: float) -> void:
 			MainMusic.ADDMusic()
 			GameSet_.MusicIsChange = false
 
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_canvas_cover(self)
+
 func _on_begin_game_pressed() -> void:
 	if MainSet.set_data.has("FileValue"):
 		if float(MainSet.set_data["FileValue"]) > float(Global.FileNum):
-			Global.AddMessageShow(get_parent(),"当前游戏不是最新版本，请使用最新版本游戏！！！",1.5,Vector2(470,340))
+			Global.AddMessageShow(get_parent(),"当前游戏不是最新版本，请使用最新版本游戏！！！",1.5,ScreenFit.base_point(470, 340))
 			return
 			
 	if MemoryClass.CheckOutTime():
-		Global.AddMessageShow(get_parent(),"游戏已经过期！！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"游戏已经过期！！！",1.5,ScreenFit.base_point(470, 340))
 		return
 	Global.addBGM_(self,"res://Music/MainSceneMusic/2_SD_xz.mp3")
-	#Global.AddMessageShow(get_parent(),"欢迎进入游戏！！",1.5,Vector2(470,340))
+	#Global.AddMessageShow(get_parent(),"欢迎进入游戏！！",1.5,ScreenFit.base_point(470, 340))
 	if ar_infer.get_child_count() == 0:
 		cd_jm = Global.add_cd_jm(ar_infer,Vector2(0,0))
 
@@ -107,10 +113,10 @@ func _on_tiaoguo_pressed() -> void:
 	Global.addBGM_(self,"res://Music/MainSceneMusic/2_SD_xz.mp3")
 	if MainSet.set_data["剧情跳过"]:
 		MainSet.set_data["剧情跳过"] = false
-		Global.AddMessageShow(get_parent(),"将不会跳过结束剧情！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"将不会跳过结束剧情！！",1.5,ScreenFit.base_point(470, 340))
 	else:
 		MainSet.set_data["剧情跳过"] = true
-		Global.AddMessageShow(get_parent(),"将会跳过结束剧情！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"将会跳过结束剧情！！",1.5,ScreenFit.base_point(470, 340))
 	MemoryClass.main_bc()
 
 func _on_change_bg_pressed() -> void:
@@ -138,25 +144,25 @@ func CheckTime():
 		push_error("在HTTP请求中发生了一个错误。")
 	Times += 1
 	if Times >= 15:
-		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,ScreenFit.base_point(470, 340))
 func _on_body_received(request,body):
 	var time_str = body.get_string_from_utf8()
 	if time_str == "":
 		print("无法获取时间1！！")
 		CheckTime()
-		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,ScreenFit.base_point(470, 340))
 		return null
 	var utc_time = JSON.parse_string(time_str)
 	if utc_time == null:
 		print("无法获取时间2！！")
 		CheckTime()
-		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,ScreenFit.base_point(470, 340))
 		return null
 	var TImeUnix = int(utc_time["sysTime2"])
 	if TImeUnix == null or str(TImeUnix) == "":
 		print("无法获取时间3！！")
 		CheckTime()
-		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,Vector2(470,340))
+		Global.AddMessageShow(get_parent(),"获取时间信息失败，网络连接可能存在问题，部分功能将无法使用！！",1.5,ScreenFit.base_point(470, 340))
 		return null
 	return TImeUnix
 func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:

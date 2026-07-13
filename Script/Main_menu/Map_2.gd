@@ -18,6 +18,8 @@ var MaxPage: int = 2
 var skill_target
 var my_music
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	Global.LLBTLevel = 1
 	Global.LLBTBOSSMS = false
 	Global.LLBTCGMS = false
@@ -33,7 +35,7 @@ func _ready() -> void:
 		MemoryClass.main_bc()
 	Global.CurrentLevel = ""
 	if not Global.IsFrist:
-		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,ScreenFit.base_point(470, 300))
 		Global.IsFrist = true
 	Global.PlayerBeHitCount = 0
 	Global.LastLevelPath = ""
@@ -64,7 +66,7 @@ func _on_ld_l_pressed() -> void:
 
 func _on_memory_game_pressed() -> void:
 	MemoryClass.保存游戏(Global.cd_path)
-	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,ScreenFit.base_point(470, 300))
 func check_music():
 	if MainSet.set_data["music"] == 1:
 		if my_music != null:
@@ -192,7 +194,7 @@ func _on_level_nmg_pressed() -> void:
 	Global.AddLevelInfo(self,"火焰山",Vector2(0,0),"res://Scene/Level/Level_nmg.tscn")
 
 func _on_level_lxdy_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"螺旋地狱不开放！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"螺旋地狱不开放！！",1.5,ScreenFit.base_point(470, 300))
 
 func _on_shop_pressed() -> void:
 	Global.add_SHOP(self,Vector2(0,0))
@@ -272,9 +274,9 @@ func _on_changetott_pressed() -> void:
 		get_tree().change_scene_to_file("res://Scene/Main_menu/Map_3.tscn")
 	else:
 		if PlayerData.player_data.转轮殿 != 1:
-			Global.AddMessageShow(get_parent(),"需要通关转轮殿！！",1.5,Vector2(470,300))
+			Global.AddMessageShow(get_parent(),"需要通关转轮殿！！",1.5,ScreenFit.base_point(470, 300))
 		elif PlayerData.get_item_data("ttlp") == 0:
-			Global.AddMessageShow(get_parent(),"需要通天令牌！！",1.5,Vector2(470,300))
+			Global.AddMessageShow(get_parent(),"需要通天令牌！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_game_an_pressed() -> void:
@@ -283,3 +285,6 @@ func _on_game_an_pressed() -> void:
 
 func _on_level_lhhj_pressed() -> void:
 	Global.Addlhhj(self,Vector2(0,0))
+
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_canvas_cover(self)

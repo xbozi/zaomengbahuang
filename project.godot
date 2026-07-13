@@ -22,6 +22,7 @@ config/icon="res://Art/MainGame/bhpic.png"
 [autoload]
 
 Global="*res://Global.gd"
+ScreenFit="*res://Script/Utils/ScreenFit.gd"
 BaseHit="*res://BaseHit.gd"
 RoleProp="*res://Script/Base/BaseRoleProperies.gd"
 AddEffect="*res://Script/Base/BaseAddEffect.gd"
@@ -46,6 +47,7 @@ GetTime="*res://Scene/GetTime.tscn"
 window/size/viewport_width=940
 window/size/viewport_height=590
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 mouse_cursor/custom_image="res://Art/MainGame/sbgb.png"
 
 [editor]

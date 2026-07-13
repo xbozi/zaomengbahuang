@@ -106,12 +106,12 @@ func get_time():
 func _on_qued_pressed() -> void:
 	if PlayerData.player_data["Myself"] != 0:
 		if CurrentChoose != PlayerData.player_data["Myself"]:
-			Global.AddMessageShow(Global.Windows_,"角色ID不匹配！！",1.5,Vector2(485,295))
+			Global.AddMessageShow(Global.Windows_,"角色ID不匹配！！",1.5,ScreenFit.base_point(485, 295))
 			return
-		Global.AddMessageShow(Global.Windows_,"创建角色失败，该存档已有角色！！",1.5,Vector2(485,295))
+		Global.AddMessageShow(Global.Windows_,"创建角色失败，该存档已有角色！！",1.5,ScreenFit.base_point(485, 295))
 		return
 	if CurrentChoose == 0:
-		Global.AddMessageShow(Global.Windows_,"请先选择一位角色！！",1.5,Vector2(485,295))
+		Global.AddMessageShow(Global.Windows_,"请先选择一位角色！！",1.5,ScreenFit.base_point(485, 295))
 		return
 	if int(GetTargetCDNum()) <= 6:
 		MainSet.set_data["time" + str(Num)] = get_time()

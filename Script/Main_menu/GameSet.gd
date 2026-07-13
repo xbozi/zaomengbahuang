@@ -136,7 +136,7 @@ func _on_g_mzm_2_pressed() -> void:
 		MemoryClass.main_bc()
 		MusicIsChange = true
 	else:
-		Global.AddMessageShow(Global.Windows_,"到达二图解锁二图背景音乐",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"到达二图解锁二图背景音乐",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_g_mzm_3_pressed() -> void:
@@ -145,7 +145,7 @@ func _on_g_mzm_3_pressed() -> void:
 		MemoryClass.main_bc()
 		MusicIsChange = true
 	else:
-		Global.AddMessageShow(Global.Windows_,"到达三图解锁三图背景音乐",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"到达三图解锁三图背景音乐",1.5,ScreenFit.base_point(470, 300))
 
 func _on_gm_2_zm_1_pressed() -> void:
 	MainSet.set_data["MainMenuBG"] = 1
@@ -157,14 +157,14 @@ func _on_gm_2_zm_2_pressed() -> void:
 		MainSet.set_data["MainMenuBG"] = 2
 		MemoryClass.main_bc()
 	else:
-		Global.AddMessageShow(Global.Windows_,"到达二图解锁二图封面",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"到达二图解锁二图封面",1.5,ScreenFit.base_point(470, 300))
 
 func _on_gm_2_zm_3_pressed() -> void:
 	if MainSet.set_data["CurrentLevelPage"] >= 3:
 		MainSet.set_data["MainMenuBG"] = 3
 		MemoryClass.main_bc()
 	else:
-		Global.AddMessageShow(Global.Windows_,"到达三图解锁三图封面",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"到达三图解锁三图封面",1.5,ScreenFit.base_point(470, 300))
 
 
 
@@ -198,7 +198,7 @@ func _on_g_mzm_4_pressed() -> void:
 		MemoryClass.main_bc()
 		MusicIsChange = true
 	else:
-		Global.AddMessageShow(Global.Windows_,"还未开启四图音乐哦，快去游戏中寻找一下吧~",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"还未开启四图音乐哦，快去游戏中寻找一下吧~",1.5,ScreenFit.base_point(470, 300))
 #	MainSet.set_data["music"] = 4
 #	MemoryClass.main_bc()
 	

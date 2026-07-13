@@ -1,14 +1,15 @@
 extends Camera2D
-var max_right
-var max_left
-var max_top
-var max_bottom
+var max_right := 940.0
+var max_left := 0.0
+var max_top := 0.0
+var max_bottom := 590.0
 
 func _physics_process(_delta: float) -> void:
-	self.limit_right = max_right
+	var visible_size = ScreenFit.current_viewport_size()
+	self.limit_right = max(max_right, max_left + visible_size.x)
 	self.limit_left = max_left
 	self.limit_top = max_top
-	self.limit_bottom = max_bottom
+	self.limit_bottom = max(max_bottom, max_top + visible_size.y)
 	
 func disturb_offset(strength: float):
 	

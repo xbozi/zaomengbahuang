@@ -19,6 +19,8 @@ var skill_target
 var is_playing = false
 var MaxPage: int = 1
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	#print(MainSet.set_data["FileValue"])
 	#print(PlayerData.Initialized_Data)
 	#print(PlayerData.player_data)
@@ -37,7 +39,7 @@ func _ready() -> void:
 		MemoryClass.main_bc()
 	Global.CurrentLevel = ""
 	if not Global.IsFrist:
-		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,ScreenFit.base_point(470, 300))
 		Global.IsFrist = true
 	Global.PlayerBeHitCount = 0
 	Global.LastLevelPath = ""
@@ -105,7 +107,7 @@ func check_music():
 
 func _on_bc_game_pressed() -> void:
 	MemoryClass.保存游戏(Global.cd_path)
-	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,ScreenFit.base_point(470, 300))
 func _on_skill_learn_pressed() -> void:
 	if skill_target == null:
 		skill_target = Global.add_learn_skill(self,Vector2(0,0))
@@ -320,3 +322,6 @@ func _on_game_an_pressed() -> void:
 
 func _on_level_lhhj_pressed() -> void:
 	Global.Addlhhj(self,Vector2(0,0))
+
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_canvas_cover(self)

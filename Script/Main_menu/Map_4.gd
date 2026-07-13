@@ -18,9 +18,11 @@ var MaxPage: int = 4
 var skill_target
 var my_music
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	if not MainSet.set_data["LevelTT"]:
 		MainSet.set_data["LevelTT"] = true
-		Global.AddMessageShow(Global.Windows_,"恭喜通到达天庭，解锁角色“沙悟净”！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"恭喜通到达天庭，解锁角色“沙悟净”！！",1.5,ScreenFit.base_point(470, 300))
 		MemoryClass.main_bc()
 	Global.LLBTLevel = 1
 	Global.LLBTBOSSMS = false
@@ -39,7 +41,7 @@ func _ready() -> void:
 		MainMusic.ADDMusic()
 	Global.CurrentLevel = ""
 	if not Global.IsFrist:
-		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(Global.Windows_,"欢迎进入游戏！作者：早春樱花，作品完全免费！！",1.5,ScreenFit.base_point(470, 300))
 		Global.IsFrist = true
 	Global.PlayerBeHitCount = 0
 	Global.LastLevelPath = ""
@@ -64,63 +66,63 @@ func _on_level_31_pressed() -> void:
 
 
 func _on_level_32_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_33_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_34_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_35_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_36_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_37_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_38_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_39_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_byg_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
 func _on_level_esbxx_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 	if PlayerData.player_data["玩家等级"] < 60:
-		Global.AddMessageShow(get_parent(),"玩家等级达60级开启！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(get_parent(),"玩家等级达60级开启！！",1.5,ScreenFit.base_point(470, 300))
 		return
 	if PlayerData.player_data["尾妖林"] == 0:
-		Global.AddMessageShow(get_parent(),"需通关龙脊山！！",1.5,Vector2(470,300))
+		Global.AddMessageShow(get_parent(),"需通关龙脊山！！",1.5,ScreenFit.base_point(470, 300))
 		return
 #	Global.Add_28Ui(self,Vector2(0,0))
 
 func _on_level_znyy_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 	return
 
 
@@ -128,7 +130,7 @@ func _on_hdzm_pressed() -> void:
 	Global.AddHDZM(self,self)
 func _on_memory_class_pressed() -> void:
 	MemoryClass.保存游戏(Global.cd_path)
-	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"保存成功！本作品完全免费，谨防受骗上当！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_shop_pressed() -> void:
@@ -147,7 +149,7 @@ func _on_skill_pressed() -> void:
 
 
 func _on_activity_pressed() -> void:
-	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,Vector2(470,300))
+	Global.AddMessageShow(get_parent(),"敬请期待！！！！",1.5,ScreenFit.base_point(470, 300))
 
 
 func _on_task_pressed() -> void:
@@ -279,3 +281,6 @@ func PlayAn(Level):
 
 func _on_level_lhhj_pressed() -> void:
 	Global.Addlhhj(self,Vector2(0,0))
+
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_canvas_cover(self)

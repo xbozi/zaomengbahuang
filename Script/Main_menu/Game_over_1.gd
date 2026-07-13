@@ -87,7 +87,7 @@ func _on_beisu_pressed() -> void:
 	if int($beisu/beisu_l.text) > 0:
 		Over_Player.speed_scale = int($beisu/beisu_l.text)
 	else:
-		Global.add_moment_text(self,Vector2(470,300),"请正确输入速度！！",2)
+		Global.add_moment_text(self,ScreenFit.base_point(470, 300),"请正确输入速度！！",2)
 
 
 func _on_bg_1_pressed() -> void:
