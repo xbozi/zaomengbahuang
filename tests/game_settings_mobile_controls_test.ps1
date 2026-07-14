@@ -58,6 +58,17 @@ Require-Tokens -Source $gameSet -Label "GameSet.gd" -Tokens @(
     "mobile_controls_open_or_close.disabled = true"
 )
 
+$toggleFunctionPattern = '(?ms)^func\s+_on_mobile_controls_open_or_close_pressed\(\)\s*->\s*void[^\r\n]*\r?\n(?<Body>.*?)(?=^func\s+|\z)'
+$toggleFunctionMatch = [regex]::Match($gameSet, $toggleFunctionPattern)
+if (-not $toggleFunctionMatch.Success) {
+    throw "GameSet.gd must define _on_mobile_controls_open_or_close_pressed()."
+}
+
+Require-Tokens -Source $toggleFunctionMatch.Groups["Body"].Value -Label "_on_mobile_controls_open_or_close_pressed()" -Tokens @(
+    'MainSet.set_data["MobileControlsShow"] = not MainSet.set_data["MobileControlsShow"]',
+    "MemoryClass.main_bc()"
+)
+
 $automaticOpen = -join @([char]0x81EA, [char]0x52A8, [char]0x5F00, [char]0x542F)
 $automaticOpenToken = 'mobile_controls_open_or_close.text = "' + $automaticOpen + '"'
 if (-not $gameSet.Contains($automaticOpenToken)) {
@@ -92,7 +103,8 @@ if (-not $gameSetScene.Contains('text = "' + $mobileControlsText + '"')) {
     throw "GameSet.tscn must label the mobile controls setting with the expected Chinese text."
 }
 
-if (-not $gameSetScene.Contains('method = "_on_mobile_controls_open_or_close_pressed"')) {
+$mobileControlsPressedConnection = '[connection signal="pressed" from="Bg/BGColor/VBoxContainer2/MobileControls/MobileControlsOpenOrClose" to="." method="_on_mobile_controls_open_or_close_pressed"]'
+if (-not $gameSetScene.Contains($mobileControlsPressedConnection)) {
     throw "GameSet.tscn must connect the mobile controls toggle signal."
 }
 

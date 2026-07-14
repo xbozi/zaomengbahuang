@@ -59,7 +59,7 @@ $mobileControls = Read-Utf8File -Path $paths.MobileControls -RejectBom
 $mobileJoystick = Read-Utf8File -Path $paths.MobileJoystick -RejectBom
 $mobileActionButton = Read-Utf8File -Path $paths.MobileActionButton -RejectBom
 $mobileScene = Read-Utf8File -Path $paths.MobileScene -RejectBom
-$baseThroughLevel = Read-Utf8File -Path $paths.BaseThroughLevel
+$baseThroughLevel = Read-Utf8File -Path $paths.BaseThroughLevel -RejectBom
 
 Require-Tokens -Source $mobileActionButton -Label "MobileActionButton.gd" -Tokens @(
     "extends TouchScreenButton",

@@ -15,11 +15,11 @@ func _run() -> void:
 		_finish()
 		return
 
-	var mobile_controls := (resource as PackedScene).instantiate()
-	get_root().add_child(mobile_controls)
+	var controls := (resource as PackedScene).instantiate()
+	get_root().add_child(controls)
 	await process_frame
 
-	_check(mobile_controls is CanvasLayer, "Root must be a CanvasLayer")
+	_check(controls is CanvasLayer, "Root must be a CanvasLayer")
 
 	var expected_actions := {
 		"Attack": "normalhit",
@@ -36,32 +36,32 @@ func _run() -> void:
 
 	for button_name in expected_actions:
 		var button_path := "Root/Buttons/%s" % button_name
-		var button := get_root().get_node_or_null(button_path) as TouchScreenButton
+		var button := controls.get_node_or_null(button_path) as TouchScreenButton
 		if not _check(button != null, "%s must be a TouchScreenButton" % button_path):
 			continue
 		_check(button.action == expected_actions[button_name], "%s must map to %s" % [button_path, expected_actions[button_name]])
 
-	var joystick := get_root().get_node_or_null("Root/Joystick") as Control
+	var joystick := controls.get_node_or_null("Root/Joystick") as Control
 	if _check(joystick != null, "Root/Joystick must be a Control"):
-		var start_position: Vector2 = joystick.size / 2.0
+		var start_position: Vector2 = joystick.get_global_rect().get_center()
 		var first_touch := InputEventScreenTouch.new()
 		first_touch.index = 7
 		first_touch.position = start_position
 		first_touch.pressed = true
-		joystick._gui_input(first_touch)
+		joystick._input(first_touch)
 
 		var second_touch := InputEventScreenTouch.new()
 		second_touch.index = 9
 		second_touch.position = start_position
 		second_touch.pressed = true
-		joystick._gui_input(second_touch)
+		joystick._input(second_touch)
 		_check(joystick.get("joystick_touch_index") == 7, "Joystick must retain touch owner 7 when touch 9 begins")
 
 		var drag := InputEventScreenDrag.new()
 		drag.index = 7
 		drag.position = start_position + Vector2(80.0, 0.0)
 		drag.relative = Vector2(80.0, 0.0)
-		joystick._gui_input(drag)
+		joystick._input(drag)
 		_check(Input.is_action_pressed("move_right"), "Dragging owner touch right must press move_right")
 		_check(not Input.is_action_pressed("move_left"), "Dragging owner touch right must not press move_left")
 
@@ -69,7 +69,7 @@ func _run() -> void:
 		release.index = 7
 		release.position = drag.position
 		release.pressed = false
-		joystick._gui_input(release)
+		joystick._input(release)
 		_check(not Input.is_action_pressed("move_right"), "Releasing owner touch must release move_right")
 		_check(joystick.get("joystick_touch_index") == -1, "Releasing owner touch must reset joystick owner to -1")
 
