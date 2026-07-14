@@ -46,6 +46,28 @@ function Require-Tokens {
     }
 }
 
+function Get-GdscriptFunctionBody {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Source,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Name,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Label
+    )
+
+    $escapedName = [regex]::Escape($Name)
+    $pattern = '(?ms)^func\s+' + $escapedName + '\s*\([^\r\n]*\)[^\r\n]*\r?\n(?<Body>.*?)(?=^func\s+|\z)'
+    $match = [regex]::Match($Source, $pattern)
+    if (-not $match.Success) {
+        throw "$Label is missing required function: $Name"
+    }
+
+    return $match.Groups["Body"].Value
+}
+
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $paths = @{
     MobileControls = Join-Path $projectRoot "Script\MobileControls\MobileControls.gd"
@@ -124,14 +146,19 @@ foreach ($entry in $expectedMappings.GetEnumerator()) {
     }
 }
 
-Require-Tokens -Source $baseThroughLevel -Label "BaseThroughLevel.gd" -Tokens @(
-    "func add_mobile_controls",
+$readyBody = Get-GdscriptFunctionBody -Source $baseThroughLevel -Name "_ready" -Label "BaseThroughLevel.gd"
+Require-Tokens -Source $readyBody -Label "BaseThroughLevel.gd _ready()" -Tokens @(
+    "add_mobile_controls()"
+)
+
+$addMobileControlsBody = Get-GdscriptFunctionBody -Source $baseThroughLevel -Name "add_mobile_controls" -Label "BaseThroughLevel.gd"
+Require-Tokens -Source $addMobileControlsBody -Label "BaseThroughLevel.gd add_mobile_controls()" -Tokens @(
     'has_node("MobileControls")',
     "add_child(mobile_controls)"
 )
 
-if ($baseThroughLevel.Contains("canvas_layer.add_child(mobile_controls)")) {
-    throw "BaseThroughLevel.gd must add mobile controls to the level, not its existing canvas_layer."
+if ($addMobileControlsBody.Contains("canvas_layer.add_child(mobile_controls)")) {
+    throw "BaseThroughLevel.gd add_mobile_controls() must add mobile controls to the level, not its existing canvas_layer."
 }
 
 Write-Host "Mobile controls structure and mappings are valid."

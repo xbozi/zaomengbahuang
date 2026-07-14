@@ -73,6 +73,8 @@ func _run() -> void:
 		_check(not Input.is_action_pressed("move_right"), "Releasing owner touch must release move_right")
 		_check(joystick.get("joystick_touch_index") == -1, "Releasing owner touch must reset joystick owner to -1")
 
+	controls.queue_free()
+	await process_frame
 	_finish()
 
 

@@ -39,6 +39,28 @@ function Require-Tokens {
     }
 }
 
+function Get-GdscriptFunctionBody {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Source,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Name,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Label
+    )
+
+    $escapedName = [regex]::Escape($Name)
+    $pattern = '(?ms)^func\s+' + $escapedName + '\s*\([^\r\n]*\)[^\r\n]*\r?\n(?<Body>.*?)(?=^func\s+|\z)'
+    $match = [regex]::Match($Source, $pattern)
+    if (-not $match.Success) {
+        throw "$Label is missing required function: $Name"
+    }
+
+    return $match.Groups["Body"].Value
+}
+
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $mainSet = Read-Utf8File (Join-Path $projectRoot "Script\MemoryClass\main_set.gd")
 $gameSet = Read-Utf8File (Join-Path $projectRoot "Script\Main_menu\GameSet.gd")
@@ -49,37 +71,48 @@ if (-not $mainSet.Contains('"MobileControlsShow": false')) {
     throw 'main_set.gd must default "MobileControlsShow" to false.'
 }
 
-Require-Tokens -Source $gameSet -Label "GameSet.gd" -Tokens @(
-    "mobile_controls_open_or_close",
-    "MobileControlsShow",
-    "_on_mobile_controls_open_or_close_pressed",
-    "MemoryClass.main_bc()",
-    'OS.has_feature("android")',
-    "mobile_controls_open_or_close.disabled = true"
-)
-
-$toggleFunctionPattern = '(?ms)^func\s+_on_mobile_controls_open_or_close_pressed\(\)\s*->\s*void[^\r\n]*\r?\n(?<Body>.*?)(?=^func\s+|\z)'
-$toggleFunctionMatch = [regex]::Match($gameSet, $toggleFunctionPattern)
-if (-not $toggleFunctionMatch.Success) {
-    throw "GameSet.gd must define _on_mobile_controls_open_or_close_pressed()."
-}
-
-Require-Tokens -Source $toggleFunctionMatch.Groups["Body"].Value -Label "_on_mobile_controls_open_or_close_pressed()" -Tokens @(
-    'MainSet.set_data["MobileControlsShow"] = not MainSet.set_data["MobileControlsShow"]',
+$toggleBody = Get-GdscriptFunctionBody -Source $gameSet -Name "_on_mobile_controls_open_or_close_pressed" -Label "GameSet.gd"
+$toggleAssignment = 'MainSet.set_data["MobileControlsShow"] = not MainSet.set_data["MobileControlsShow"]'
+Require-Tokens -Source $toggleBody -Label "_on_mobile_controls_open_or_close_pressed()" -Tokens @(
+    $toggleAssignment,
     "MemoryClass.main_bc()"
 )
 
+$toggleGuardPattern = '(?m)^[ \t]*if\s+OS\.has_feature\("android"\)\s*:\s*\r?\n[ \t]+return\b'
+$toggleGuardMatch = [regex]::Match($toggleBody, $toggleGuardPattern)
+if (-not $toggleGuardMatch.Success) {
+    throw "GameSet.gd _on_mobile_controls_open_or_close_pressed() must return when running on Android."
+}
+if ($toggleGuardMatch.Index -gt $toggleBody.IndexOf($toggleAssignment)) {
+    throw "GameSet.gd Android guard must return before the mobile controls setting is changed."
+}
+
+$physicsBody = Get-GdscriptFunctionBody -Source $gameSet -Name "_physics_process" -Label "GameSet.gd"
+$androidBranchPattern = '(?ms)^(?<Indent>[ \t]*)if\s+OS\.has_feature\("android"\)\s*:\s*\r?\n(?<Android>.*?)^\k<Indent>else\s*:\s*\r?\n(?<NonAndroid>.*?)(?=^\k<Indent>\S|\z)'
+$androidBranchMatch = [regex]::Match($physicsBody, $androidBranchPattern)
+if (-not $androidBranchMatch.Success) {
+    throw "GameSet.gd _physics_process() must have Android and non-Android mobile controls branches."
+}
+
 $automaticOpen = -join @([char]0x81EA, [char]0x52A8, [char]0x5F00, [char]0x542F)
 $automaticOpenToken = 'mobile_controls_open_or_close.text = "' + $automaticOpen + '"'
-if (-not $gameSet.Contains($automaticOpenToken)) {
-    throw "GameSet.gd is missing required token: $automaticOpenToken"
-}
+Require-Tokens -Source $androidBranchMatch.Groups["Android"].Value -Label "GameSet.gd _physics_process() Android branch" -Tokens @(
+    $automaticOpenToken,
+    "mobile_controls_open_or_close.disabled = true"
+)
 
-$androidGuardPattern = '(?m)^\s*if\s+OS\.has_feature\("android"\)\s*:\s*\r?\n\s+return\b'
-if ($gameSet -notmatch $androidGuardPattern) {
-    throw "GameSet.gd must guard the mobile controls toggle on Android and return."
-}
+$enabledText = -join @([char]0x5F00, [char]0x542F, [char]0x4E2D)
+$disabledText = -join @([char]0x5173, [char]0x95ED, [char]0x4E2D)
+$nonAndroidBranch = $androidBranchMatch.Groups["NonAndroid"].Value
+Require-Tokens -Source $nonAndroidBranch -Label "GameSet.gd _physics_process() non-Android branch" -Tokens @(
+    "mobile_controls_open_or_close.disabled = false",
+    'MainSet.set_data["MobileControlsShow"]'
+)
 
+$statusTextPattern = '(?ms)^[ \t]*if\s+MainSet\.set_data\["MobileControlsShow"\]\s*:\s*\r?\n[ \t]+mobile_controls_open_or_close\.text\s*=\s*"' + [regex]::Escape($enabledText) + '".*?^[ \t]*else\s*:\s*\r?\n[ \t]+mobile_controls_open_or_close\.text\s*=\s*"' + [regex]::Escape($disabledText) + '"'
+if ($nonAndroidBranch -notmatch $statusTextPattern) {
+    throw "GameSet.gd _physics_process() non-Android branch must show enabled and disabled mobile controls status text."
+}
 $mobileControlsLabelPattern = '(?m)^\[node\s+name="MobileControls"[^\r\n]*\btype="Label"[^\r\n]*\]'
 if ($gameSetScene -notmatch $mobileControlsLabelPattern) {
     throw "GameSet.tscn must contain the MobileControls Label."
@@ -108,8 +141,9 @@ if (-not $gameSetScene.Contains($mobileControlsPressedConnection)) {
     throw "GameSet.tscn must connect the mobile controls toggle signal."
 }
 
-if (-not $baseThroughLevel.Contains('MainSet.set_data["MobileControlsShow"]')) {
-    throw 'BaseThroughLevel.gd must read MainSet.set_data["MobileControlsShow"].'
+$addMobileControlsBody = Get-GdscriptFunctionBody -Source $baseThroughLevel -Name "add_mobile_controls" -Label "BaseThroughLevel.gd"
+if (-not $addMobileControlsBody.Contains('MainSet.set_data["MobileControlsShow"]')) {
+    throw 'BaseThroughLevel.gd add_mobile_controls() must read MainSet.set_data["MobileControlsShow"].'
 }
 
 Write-Host "Game settings mobile controls toggle is wired."
