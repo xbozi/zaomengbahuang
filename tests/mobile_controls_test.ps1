@@ -1,0 +1,137 @@
+$ErrorActionPreference = "Stop"
+
+function Read-Utf8File {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+
+        [switch]$RejectBom
+    )
+
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        throw "Required file is missing: $Path"
+    }
+
+    $bytes = [System.IO.File]::ReadAllBytes($Path)
+    if ($RejectBom -and $bytes.Length -ge 3 -and
+        $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
+        throw "UTF-8 BOM is not allowed: $Path"
+    }
+
+    $utf8 = [System.Text.UTF8Encoding]::new($false, $true)
+    try {
+        return $utf8.GetString($bytes)
+    }
+    catch {
+        throw "File is not valid UTF-8: $Path"
+    }
+}
+
+function Require-Tokens {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Source,
+
+        [Parameter(Mandatory = $true)]
+        [string[]]$Tokens,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Label
+    )
+
+    foreach ($token in $Tokens) {
+        if (-not $Source.Contains($token)) {
+            throw "$Label is missing required token: $token"
+        }
+    }
+}
+
+$projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$paths = @{
+    MobileControls = Join-Path $projectRoot "Script\MobileControls\MobileControls.gd"
+    MobileJoystick = Join-Path $projectRoot "Script\MobileControls\MobileJoystick.gd"
+    MobileActionButton = Join-Path $projectRoot "Script\MobileControls\MobileActionButton.gd"
+    MobileScene = Join-Path $projectRoot "Scene\MobileControls\MobileControls.tscn"
+    BaseThroughLevel = Join-Path $projectRoot "Script\Base\BaseThroughLevel.gd"
+}
+
+$mobileControls = Read-Utf8File -Path $paths.MobileControls -RejectBom
+$mobileJoystick = Read-Utf8File -Path $paths.MobileJoystick -RejectBom
+$mobileActionButton = Read-Utf8File -Path $paths.MobileActionButton -RejectBom
+$mobileScene = Read-Utf8File -Path $paths.MobileScene -RejectBom
+$baseThroughLevel = Read-Utf8File -Path $paths.BaseThroughLevel
+
+Require-Tokens -Source $mobileActionButton -Label "MobileActionButton.gd" -Tokens @(
+    "extends TouchScreenButton",
+    "CircleShape2D.new()",
+    "draw_circle",
+    "ThemeDB.fallback_font"
+)
+
+Require-Tokens -Source $mobileJoystick -Label "MobileJoystick.gd" -Tokens @(
+    "extends Control",
+    "InputEventScreenTouch",
+    "InputEventScreenDrag",
+    "joystick_touch_index",
+    "Input.action_press",
+    "Input.action_release",
+    "release_all_actions",
+    '"move_left"',
+    '"move_right"',
+    '"down"',
+    '"Exit"'
+)
+
+Require-Tokens -Source $mobileControls -Label "MobileControls.gd" -Tokens @(
+    "extends CanvasLayer",
+    'OS.has_feature("android")',
+    "force_show_mobile_controls",
+    'MainSet.set_data["MobileControlsShow"]',
+    "get_viewport().size_changed",
+    "BUTTON_LAYOUT"
+)
+
+if ($mobileScene -match '(?m)^\[node[^\r\n]*\btype="Button"') {
+    throw "MobileControls.tscn must not contain ordinary Button nodes."
+}
+
+$wushuang = -join @([char]0x65E0, [char]0x53CC)
+$zhenfa = -join @([char]0x9635, [char]0x6CD5)
+$expectedMappings = [ordered]@{
+    Attack = "normalhit"
+    Jump = "jump"
+    Skill1 = "slz"
+    Skill2 = "lys"
+    Skill3 = "lyfb"
+    Skill4 = "hmz"
+    Skill5 = "hytj"
+    Magic = "MagicWeapon"
+    Wushuang = $wushuang
+    Zhenfa = $zhenfa
+}
+
+foreach ($entry in $expectedMappings.GetEnumerator()) {
+    $nodeName = [regex]::Escape($entry.Key)
+    $nodePattern = '(?ms)^\[node\s+name="' + $nodeName + '"[^\r\n]*\btype="TouchScreenButton"[^\r\n]*\]\r?\n(.*?)(?=^\[node\s|\z)'
+    $nodeMatch = [regex]::Match($mobileScene, $nodePattern)
+    if (-not $nodeMatch.Success) {
+        throw "MobileControls.tscn is missing TouchScreenButton node: $($entry.Key)"
+    }
+
+    $expectedAction = 'action = "' + $entry.Value + '"'
+    if (-not $nodeMatch.Groups[1].Value.Contains($expectedAction)) {
+        throw "MobileControls.tscn maps $($entry.Key) incorrectly; expected $expectedAction"
+    }
+}
+
+Require-Tokens -Source $baseThroughLevel -Label "BaseThroughLevel.gd" -Tokens @(
+    "func add_mobile_controls",
+    'has_node("MobileControls")',
+    "add_child(mobile_controls)"
+)
+
+if ($baseThroughLevel.Contains("canvas_layer.add_child(mobile_controls)")) {
+    throw "BaseThroughLevel.gd must add mobile controls to the level, not its existing canvas_layer."
+}
+
+Write-Host "Mobile controls structure and mappings are valid."
