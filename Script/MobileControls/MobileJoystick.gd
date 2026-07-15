@@ -1,10 +1,10 @@
 extends Control
 class_name MobileJoystick
 
-@export var joystick_radius: float = 72.0
-@export var knob_radius: float = 29.0
-@export var horizontal_deadzone: float = 0.25
-@export var vertical_deadzone: float = 0.55
+@export_range(1.0, 256.0, 1.0) var joystick_radius: float = 72.0
+@export_range(1.0, 256.0, 1.0) var knob_radius: float = 29.0
+@export_range(0.0, 1.0, 0.01) var horizontal_deadzone: float = 0.25
+@export_range(0.0, 1.0, 0.01) var vertical_deadzone: float = 0.55
 
 var joystick_touch_index: int = -1
 var joystick_center: Vector2 = Vector2.ZERO
@@ -49,10 +49,10 @@ func update_joystick(offset: Vector2) -> void:
 
 func update_horizontal_actions(value: float) -> void:
 	if value < -horizontal_deadzone:
-		press_action("move_left", absf(value))
+		press_action("move_left", absf(value), true)
 		release_action("move_right")
 	elif value > horizontal_deadzone:
-		press_action("move_right", value)
+		press_action("move_right", value, true)
 		release_action("move_left")
 	else:
 		release_action("move_left")
@@ -71,7 +71,9 @@ func update_vertical_actions(value: float) -> void:
 		release_action("Exit")
 
 
-func press_action(action: StringName, strength: float = 1.0) -> void:
+func press_action(action: StringName, strength: float = 1.0, update_strength: bool = false) -> void:
+	if pressed_actions.has(action) and not update_strength:
+		return
 	Input.action_press(action, strength)
 	pressed_actions[action] = strength
 
@@ -110,7 +112,7 @@ func _on_visibility_changed() -> void:
 
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
 		reset_joystick()
 
 
