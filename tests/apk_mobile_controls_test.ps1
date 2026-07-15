@@ -42,6 +42,7 @@ try {
 		"assets/Script/MobileControls/MobileJoystick.gd" = @(
 			"extends Control",
 			"joystick_touch_index",
+			"make_canvas_position_local",
 			"press_action_once"
 		)
 		"assets/Script/MobileControls/MobileActionButton.gd" = @(
