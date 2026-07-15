@@ -18,6 +18,7 @@ func _run() -> void:
 	var controls := (resource as PackedScene).instantiate()
 	get_root().add_child(controls)
 	await process_frame
+	controls.visible = true
 
 	_check(controls is CanvasLayer, "Root must be a CanvasLayer")
 

@@ -75,6 +75,7 @@ $paths = @{
     MobileActionButton = Join-Path $projectRoot "Script\MobileControls\MobileActionButton.gd"
     MobileScene = Join-Path $projectRoot "Scene\MobileControls\MobileControls.tscn"
     BaseThroughLevel = Join-Path $projectRoot "Script\Base\BaseThroughLevel.gd"
+    Level20 = Join-Path $projectRoot "Script\Level\Level_20.gd"
 }
 
 $mobileControls = Read-Utf8File -Path $paths.MobileControls -RejectBom
@@ -82,6 +83,7 @@ $mobileJoystick = Read-Utf8File -Path $paths.MobileJoystick -RejectBom
 $mobileActionButton = Read-Utf8File -Path $paths.MobileActionButton -RejectBom
 $mobileScene = Read-Utf8File -Path $paths.MobileScene -RejectBom
 $baseThroughLevel = Read-Utf8File -Path $paths.BaseThroughLevel -RejectBom
+$level20 = Read-Utf8File -Path $paths.Level20 -RejectBom
 
 Require-Tokens -Source $mobileActionButton -Label "MobileActionButton.gd" -Tokens @(
     "extends TouchScreenButton",
@@ -110,7 +112,9 @@ Require-Tokens -Source $mobileControls -Label "MobileControls.gd" -Tokens @(
     "force_show_mobile_controls",
     'MainSet.set_data["MobileControlsShow"]',
     "get_viewport().size_changed",
-    "BUTTON_LAYOUT"
+    "BUTTON_LAYOUT",
+    "DisplayServer.get_display_safe_area()",
+    "DisplayServer.screen_get_size()"
 )
 
 if ($mobileScene -match '(?m)^\[node[^\r\n]*\btype="Button"') {
@@ -159,6 +163,12 @@ Require-Tokens -Source $addMobileControlsBody -Label "BaseThroughLevel.gd add_mo
 
 if ($addMobileControlsBody.Contains("canvas_layer.add_child(mobile_controls)")) {
     throw "BaseThroughLevel.gd add_mobile_controls() must add mobile controls to the level, not its existing canvas_layer."
+}
+
+$level20ReadyBody = Get-GdscriptFunctionBody -Source $level20 -Name "_ready" -Label "Level_20.gd"
+if (-not $level20ReadyBody.Contains("add_mobile_controls()") -and
+    -not $level20ReadyBody.Contains("super._ready()")) {
+    throw "Level_20.gd _ready() must mount mobile controls directly or call super._ready()."
 }
 
 Write-Host "Mobile controls structure and mappings are valid."
