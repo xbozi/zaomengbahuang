@@ -15,12 +15,13 @@ func _run() -> void:
 		_finish()
 		return
 
-	var controls := (resource as PackedScene).instantiate()
+	var controls := (resource as PackedScene).instantiate() as CanvasLayer
+	if not _check(controls != null, "Root must be a CanvasLayer"):
+		_finish()
+		return
 	get_root().add_child(controls)
 	await process_frame
 	controls.visible = true
-
-	_check(controls is CanvasLayer, "Root must be a CanvasLayer")
 
 	var expected_actions := {
 		"Attack": "normalhit",
