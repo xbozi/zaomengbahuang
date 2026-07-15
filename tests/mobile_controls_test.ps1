@@ -96,6 +96,7 @@ Require-Tokens -Source $mobileJoystick -Label "MobileJoystick.gd" -Tokens @(
     "extends Control",
     "InputEventScreenTouch",
     "InputEventScreenDrag",
+    "make_canvas_position_local",
     "joystick_touch_index",
     "Input.action_press",
     "Input.action_release",
@@ -105,6 +106,10 @@ Require-Tokens -Source $mobileJoystick -Label "MobileJoystick.gd" -Tokens @(
     '"down"',
     '"Exit"'
 )
+
+if ($mobileJoystick.Contains("to_local(")) {
+    throw "MobileJoystick.gd extends Control and must not call the Node2D-only to_local() API."
+}
 
 Require-Tokens -Source $mobileControls -Label "MobileControls.gd" -Tokens @(
     "extends CanvasLayer",

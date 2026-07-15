@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 		if touch_event.pressed:
 			if joystick_touch_index == -1 and get_global_rect().has_point(touch_event.position):
 				joystick_touch_index = touch_event.index
-				joystick_center = to_local(touch_event.position)
+				joystick_center = make_canvas_position_local(touch_event.position)
 				update_joystick(Vector2.ZERO)
 				get_viewport().set_input_as_handled()
 		elif touch_event.index == joystick_touch_index:
@@ -35,7 +35,7 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventScreenDrag:
 		var drag_event := event as InputEventScreenDrag
 		if drag_event.index == joystick_touch_index:
-			update_joystick(to_local(drag_event.position) - joystick_center)
+			update_joystick(make_canvas_position_local(drag_event.position) - joystick_center)
 			get_viewport().set_input_as_handled()
 
 
