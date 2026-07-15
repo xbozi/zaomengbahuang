@@ -47,4 +47,5 @@ var set_data:Dictionary = {
 	"NotShowRoleBody":false,
 	"NotShowRoleEQ":false,
 	"CdNum":6,
+	"MobileControlsShow": false,
 }
