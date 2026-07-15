@@ -50,14 +50,37 @@ func should_show() -> bool:
 	return OS.has_feature("android") or force_show or debug_show
 
 
+func get_logical_safe_rect() -> Rect2:
+	var viewport_rect: Rect2 = get_viewport().get_visible_rect()
+	if not OS.has_feature("android"):
+		return viewport_rect
+
+	var screen_size: Vector2i = DisplayServer.screen_get_size()
+	var safe_area: Rect2i = DisplayServer.get_display_safe_area()
+	if screen_size.x <= 0 or screen_size.y <= 0 or safe_area.size.x <= 0 or safe_area.size.y <= 0:
+		return viewport_rect
+
+	var logical_scale: Vector2 = Vector2(
+		viewport_rect.size.x / float(screen_size.x),
+		viewport_rect.size.y / float(screen_size.y)
+	)
+	var safe_position: Vector2 = Vector2(float(safe_area.position.x), float(safe_area.position.y))
+	var safe_size: Vector2 = Vector2(float(safe_area.size.x), float(safe_area.size.y))
+	return Rect2(
+		viewport_rect.position + safe_position * logical_scale,
+		safe_size * logical_scale
+	)
+
+
 func fit_viewport() -> void:
-	var viewport_size := get_viewport().get_visible_rect().size
-	root.position = Vector2.ZERO
-	root.size = viewport_size
+	var safe_rect: Rect2 = get_logical_safe_rect()
+	root.position = safe_rect.position
+	root.size = safe_rect.size
 	for button_name in BUTTON_LAYOUT:
 		var button := buttons.get_node_or_null(button_name) as TouchScreenButton
 		if button != null:
-			button.position = viewport_size * BUTTON_LAYOUT[button_name]
+			var normalized_position: Vector2 = BUTTON_LAYOUT[button_name]
+			button.position = root.size * normalized_position
 
 
 func validate_actions() -> void:
