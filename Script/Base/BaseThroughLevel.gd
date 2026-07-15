@@ -1,5 +1,6 @@
 extends Node2D
 class_name BaseLevel
+const MOBILE_CONTROLS_PATH := "res://Scene/MobileControls/MobileControls.tscn"
 var is_two_scene
 
 #单独一个场景，到时间自动召唤即可，推关的话，
@@ -56,6 +57,7 @@ func _ready() -> void:
 		RoleProp.ws_value = 0
 	create_control.wait_time = MainSet.set_data["CreateMonsterSpeed"]
 	MainMusic.RemoveMusic()
+	add_mobile_controls()
 	if not Global.Is_Show:
 		$CanvasLayer/zmPLAYER.play("gdzm")
 		Global.Is_Show = true
@@ -83,6 +85,23 @@ func _ready() -> void:
 		my_camera.limit_smoothed = true
 		my_camera.position_smoothing_enabled = true
 	PlayerData.ADDIniBuff()
+func add_mobile_controls() -> void:
+	var debug_show: bool = MainSet.set_data.has("MobileControlsShow") and bool(MainSet.set_data["MobileControlsShow"])
+	var force_show := bool(ProjectSettings.get_setting("application/run/force_show_mobile_controls", false))
+	if not OS.has_feature("android") and not debug_show and not force_show:
+		return
+	if has_node("MobileControls"):
+		return
+	var mobile_controls_scene := ResourceLoader.load(MOBILE_CONTROLS_PATH)
+	if not mobile_controls_scene is PackedScene:
+		push_warning("BaseLevel: failed to load mobile controls PackedScene.")
+		return
+	var mobile_controls := (mobile_controls_scene as PackedScene).instantiate()
+	if mobile_controls == null:
+		push_warning("BaseLevel: failed to instantiate mobile controls.")
+		return
+	mobile_controls.name = "MobileControls"
+	add_child(mobile_controls)
 func _physics_process(_delta: float) -> void:
 	#print(current_stage)
 	change_mysee()

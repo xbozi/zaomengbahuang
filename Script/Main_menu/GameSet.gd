@@ -14,6 +14,7 @@ class_name GameSet
 @onready var open_close: Button = $Bg/BGColor/VBoxContainer2/LevelInfo/openClose
 @onready var show_close_2: Button = $Bg/BGColor/VBoxContainer/RoleEQ/ShowClose2
 @onready var show_close: Button = $Bg/BGColor/VBoxContainer2/RoleBody/ShowClose
+@onready var mobile_controls_open_or_close: Button = $Bg/BGColor/VBoxContainer2/MobileControls/MobileControlsOpenOrClose
 
 var is_set = false
 var MusicIsChange = false
@@ -68,6 +69,17 @@ func _physics_process(_delta: float) -> void:
 		open_close.text = "开启中"
 	else:
 		open_close.text = "关闭中"
+	if not MainSet.set_data.has("MobileControlsShow"):
+		MainSet.set_data["MobileControlsShow"] = false
+	if OS.has_feature("android"):
+		mobile_controls_open_or_close.text = "自动开启"
+		mobile_controls_open_or_close.disabled = true
+	else:
+		mobile_controls_open_or_close.disabled = false
+		if MainSet.set_data["MobileControlsShow"]:
+			mobile_controls_open_or_close.text = "开启中"
+		else:
+			mobile_controls_open_or_close.text = "关闭中"
 	if not is_set:
 		h_slider.value = MainSet.set_data["MusicFB"]
 		gm_2_slider.value = MainSet.set_data["MusicFB_2"]
@@ -234,4 +246,12 @@ func _on_show_close_pressed() -> void:
 		MainSet.set_data["NotShowRoleBody"] = false
 	else:
 		MainSet.set_data["NotShowRoleBody"] = true
+	MemoryClass.main_bc()
+
+func _on_mobile_controls_open_or_close_pressed() -> void:
+	if OS.has_feature("android"):
+		return
+	if not MainSet.set_data.has("MobileControlsShow"):
+		MainSet.set_data["MobileControlsShow"] = false
+	MainSet.set_data["MobileControlsShow"] = not MainSet.set_data["MobileControlsShow"]
 	MemoryClass.main_bc()

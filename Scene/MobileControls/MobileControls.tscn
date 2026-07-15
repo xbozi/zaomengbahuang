@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Script/MobileControls/MobileControls.gd" id="1_controller"]
+[ext_resource type="Script" path="res://Script/MobileControls/MobileJoystick.gd" id="2_joystick"]
+[ext_resource type="Script" path="res://Script/MobileControls/MobileActionButton.gd" id="3_button"]
+
+[node name="MobileControls" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_controller")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Joystick" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 0
+anchor_top = 0.52
+anchor_right = 0.42
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("2_joystick")
+
+[node name="Buttons" type="Node2D" parent="Root"]
+
+[node name="Attack" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(827, 484)
+action = "normalhit"
+script = ExtResource("3_button")
+label_text = "普攻"
+radius = 52.0
+font_size = 20
+
+[node name="Jump" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(893, 372)
+action = "jump"
+script = ExtResource("3_button")
+label_text = "跳跃"
+radius = 40.0
+
+[node name="Skill1" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(677, 507)
+action = "slz"
+script = ExtResource("3_button")
+label_text = "技1"
+
+[node name="Skill2" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(611, 425)
+action = "lys"
+script = ExtResource("3_button")
+label_text = "技2"
+
+[node name="Skill3" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(658, 330)
+action = "lyfb"
+script = ExtResource("3_button")
+label_text = "技3"
+
+[node name="Skill4" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(743, 271)
+action = "hmz"
+script = ExtResource("3_button")
+label_text = "技4"
+
+[node name="Skill5" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(827, 248)
+action = "hytj"
+script = ExtResource("3_button")
+label_text = "技5"
+
+[node name="Magic" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(743, 83)
+action = "MagicWeapon"
+script = ExtResource("3_button")
+label_text = "法宝"
+radius = 27.0
+font_size = 15
+
+[node name="Wushuang" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(818, 83)
+action = "无双"
+script = ExtResource("3_button")
+label_text = "无双"
+radius = 27.0
+font_size = 15
+
+[node name="Zhenfa" type="TouchScreenButton" parent="Root/Buttons"]
+position = Vector2(893, 83)
+action = "阵法"
+script = ExtResource("3_button")
+label_text = "阵法"
+radius = 27.0
+font_size = 15

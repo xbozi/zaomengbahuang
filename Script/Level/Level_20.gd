@@ -10,6 +10,7 @@ var _4 = preload("res://Scene/Monster/Monster_44.tscn")
 var _5 = preload("res://Scene/Monster/Monster_49.tscn")
 var CanPass  = false
 func _ready() -> void:
+	add_mobile_controls()
 	Global.CurrentLevel = ""
 	var RoleId = PlayerData.player_data["Myself"]
 	Role_ = Global.call_hero("role_" + str(RoleId),hero,Vector2(4100,340),false)
