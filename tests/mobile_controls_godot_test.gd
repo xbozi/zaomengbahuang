@@ -35,7 +35,7 @@ func _run() -> void:
 	}
 
 	for button_name in expected_actions:
-		var button_path := "Root/Buttons/%s" % button_name
+		var button_path: String = "Root/Buttons/" + str(button_name)
 		var button := controls.get_node_or_null(button_path) as TouchScreenButton
 		if not _check(button != null, "%s must be a TouchScreenButton" % button_path):
 			continue
