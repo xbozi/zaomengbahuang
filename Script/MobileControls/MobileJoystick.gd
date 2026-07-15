@@ -49,10 +49,10 @@ func update_joystick(offset: Vector2) -> void:
 
 func update_horizontal_actions(value: float) -> void:
 	if value < -horizontal_deadzone:
-		press_action("move_left", absf(value), true)
+		press_action("move_left", absf(value))
 		release_action("move_right")
 	elif value > horizontal_deadzone:
-		press_action("move_right", value, true)
+		press_action("move_right", value)
 		release_action("move_left")
 	else:
 		release_action("move_left")
@@ -61,33 +61,37 @@ func update_horizontal_actions(value: float) -> void:
 
 func update_vertical_actions(value: float) -> void:
 	if value > vertical_deadzone:
-		press_action("down")
+		press_action_once("down")
 		release_action("Exit")
 	elif value < -vertical_deadzone:
-		press_action("Exit")
+		press_action_once("Exit")
 		release_action("down")
 	else:
 		release_action("down")
 		release_action("Exit")
 
 
-func press_action(action: StringName, strength: float = 1.0, update_strength: bool = false) -> void:
-	if pressed_actions.has(action) and not update_strength:
-		return
-	Input.action_press(action, strength)
-	pressed_actions[action] = strength
+func press_action(action_name: String, strength: float = 1.0) -> void:
+	pressed_actions[action_name] = true
+	Input.action_press(action_name, strength)
 
 
-func release_action(action: StringName) -> void:
-	if not pressed_actions.has(action):
+func press_action_once(action_name: String) -> void:
+	if pressed_actions.has(action_name):
 		return
-	Input.action_release(action)
-	pressed_actions.erase(action)
+	press_action(action_name)
+
+
+func release_action(action_name: String) -> void:
+	if not pressed_actions.has(action_name):
+		return
+	Input.action_release(action_name)
+	pressed_actions.erase(action_name)
 
 
 func release_all_actions() -> void:
-	for action in pressed_actions.keys():
-		Input.action_release(action)
+	for action_name in pressed_actions.keys():
+		Input.action_release(action_name)
 	pressed_actions.clear()
 
 
