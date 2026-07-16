@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3h3ca2iubv6d"
-path="res://godot/imported/sky.jpg-d333d700d1ab5ec28664b6ef1ee2d2ae.ctex"
+path="res://.godot/imported/sky.jpg-d333d700d1ab5ec28664b6ef1ee2d2ae.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Level/Game3Level/Level_Hide/sky.jpg"
-dest_files=["res://godot/imported/sky.jpg-d333d700d1ab5ec28664b6ef1ee2d2ae.ctex"]
+dest_files=["res://.godot/imported/sky.jpg-d333d700d1ab5ec28664b6ef1ee2d2ae.ctex"]
 
 [params]
 

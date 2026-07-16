@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgctubnc85vs7"
-path="res://godot/imported/tsz.png-86ac5f524c06930036d111778f555585.ctex"
+path="res://.godot/imported/tsz.png-86ac5f524c06930036d111778f555585.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/MainGame/ChoosePlayer/tsz.png"
-dest_files=["res://godot/imported/tsz.png-86ac5f524c06930036d111778f555585.ctex"]
+dest_files=["res://.godot/imported/tsz.png-86ac5f524c06930036d111778f555585.ctex"]
 
 [params]
 

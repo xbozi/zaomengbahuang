@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://elo1dpjjjw3s"
-path="res://godot/imported/swk.png-d47fbcb9ed99f1ab05881069bbb453e3.ctex"
+path="res://.godot/imported/swk.png-d47fbcb9ed99f1ab05881069bbb453e3.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/game_pic/swk.png"
-dest_files=["res://godot/imported/swk.png-d47fbcb9ed99f1ab05881069bbb453e3.ctex"]
+dest_files=["res://.godot/imported/swk.png-d47fbcb9ed99f1ab05881069bbb453e3.ctex"]
 
 [params]
 

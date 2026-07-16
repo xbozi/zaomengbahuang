@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tgoo66tucsim"
-path="res://godot/imported/Close_2.png-5e3742a232c44785b517ac23d0b9253c.ctex"
+path="res://.godot/imported/Close_2.png-5e3742a232c44785b517ac23d0b9253c.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/TwentyEightConstellations/Close_2.png"
-dest_files=["res://godot/imported/Close_2.png-5e3742a232c44785b517ac23d0b9253c.ctex"]
+dest_files=["res://.godot/imported/Close_2.png-5e3742a232c44785b517ac23d0b9253c.ctex"]
 
 [params]
 

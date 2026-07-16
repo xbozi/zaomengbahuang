@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yjnsadhrytp5"
-path="res://godot/imported/xx_2.png-caeaf19cdc5dd1c5a1d1cf7c1303ce63.ctex"
+path="res://.godot/imported/xx_2.png-caeaf19cdc5dd1c5a1d1cf7c1303ce63.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/MainGame/ChoosePlayer/xx_2.png"
-dest_files=["res://godot/imported/xx_2.png-caeaf19cdc5dd1c5a1d1cf7c1303ce63.ctex"]
+dest_files=["res://.godot/imported/xx_2.png-caeaf19cdc5dd1c5a1d1cf7c1303ce63.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4ef53gva58hg"
-path="res://godot/imported/2.png-43bca1028c8f238d515ffdd5c826cf99.ctex"
+path="res://.godot/imported/2.png-43bca1028c8f238d515ffdd5c826cf99.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Monster12/Wings/2.png"
-dest_files=["res://godot/imported/2.png-43bca1028c8f238d515ffdd5c826cf99.ctex"]
+dest_files=["res://.godot/imported/2.png-43bca1028c8f238d515ffdd5c826cf99.ctex"]
 
 [params]
 

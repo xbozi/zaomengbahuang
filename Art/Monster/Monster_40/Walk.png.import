@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cb17xjeudk3pi"
-path="res://godot/imported/Walk.png-fdd1589f433a3abd7c3bbcd9b7e26d56.ctex"
+path="res://.godot/imported/Walk.png-fdd1589f433a3abd7c3bbcd9b7e26d56.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://Art/Monster/Monster_40/Walk.png"
-dest_files=["res://godot/imported/Walk.png-fdd1589f433a3abd7c3bbcd9b7e26d56.ctex"]
+dest_files=["res://.godot/imported/Walk.png-fdd1589f433a3abd7c3bbcd9b7e26d56.ctex"]
 
 [params]
 
