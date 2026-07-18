@@ -66,10 +66,35 @@ $mainSet = Read-Utf8File (Join-Path $projectRoot "Script\MemoryClass\main_set.gd
 $gameSet = Read-Utf8File (Join-Path $projectRoot "Script\Main_menu\GameSet.gd")
 $gameSetScene = Read-Utf8File (Join-Path $projectRoot "Scene\Main_menu\GameSet.tscn")
 $baseThroughLevel = Read-Utf8File (Join-Path $projectRoot "Script\Base\BaseThroughLevel.gd")
+$mobileSettings = Read-Utf8File (Join-Path $projectRoot "Script\MobileControls\MobileControlsSettings.gd")
+$mobileSettingsScene = Read-Utf8File (Join-Path $projectRoot "Scene\MobileControls\MobileControlsSettings.tscn")
 
 if (-not $mainSet.Contains('"MobileControlsShow": false')) {
     throw 'main_set.gd must default "MobileControlsShow" to false.'
 }
+
+Require-Tokens -Source $gameSet -Label "GameSet.gd" -Tokens @(
+    "MOBILE_CONTROLS_SETTINGS_PATH",
+    "MobileControlsSettings.tscn",
+    "func _on_mobile_controls_settings_pressed"
+)
+
+Require-Tokens -Source $mobileSettings -Label "MobileControlsSettings.gd" -Tokens @(
+    "extends CanvasLayer",
+    "MobileControlsLayout",
+    "MobileControlsOpacity",
+    "InputEventScreenDrag",
+    "clamp_preview_button_position",
+    "MemoryClass.main_bc()",
+    "reset_to_default_layout"
+)
+
+Require-Tokens -Source $mobileSettingsScene -Label "MobileControlsSettings.tscn" -Tokens @(
+    '[node name="MobileControlsSettings" type="CanvasLayer"]',
+    '[node name="OpacitySlider" type="HSlider"',
+    '[node name="ResetButton" type="Button"',
+    '[node name="SaveButton" type="Button"'
+)
 
 $toggleBody = Get-GdscriptFunctionBody -Source $gameSet -Name "_on_mobile_controls_open_or_close_pressed" -Label "GameSet.gd"
 $toggleAssignment = 'MainSet.set_data["MobileControlsShow"] = not MainSet.set_data["MobileControlsShow"]'
@@ -123,6 +148,11 @@ if ($gameSetScene -notmatch $mobileControlsButtonPattern) {
     throw "GameSet.tscn must contain the MobileControlsOpenOrClose Button."
 }
 
+$mobileControlsSettingsButtonPattern = '(?m)^\[node\s+name="MobileControlsSettingsOpen"[^\r\n]*\btype="Button"[^\r\n]*\]'
+if ($gameSetScene -notmatch $mobileControlsSettingsButtonPattern) {
+    throw "GameSet.tscn must contain the MobileControlsSettingsOpen Button."
+}
+
 $mobileControlsText = -join @(
     [char]0x624B,
     [char]0x673A,
@@ -139,6 +169,11 @@ if (-not $gameSetScene.Contains('text = "' + $mobileControlsText + '"')) {
 $mobileControlsPressedConnection = '[connection signal="pressed" from="Bg/BGColor/VBoxContainer2/MobileControls/MobileControlsOpenOrClose" to="." method="_on_mobile_controls_open_or_close_pressed"]'
 if (-not $gameSetScene.Contains($mobileControlsPressedConnection)) {
     throw "GameSet.tscn must connect the mobile controls toggle signal."
+}
+
+$mobileControlsSettingsConnection = '[connection signal="pressed" from="Bg/BGColor/VBoxContainer2/MobileControls/MobileControlsSettingsOpen" to="." method="_on_mobile_controls_settings_pressed"]'
+if (-not $gameSetScene.Contains($mobileControlsSettingsConnection)) {
+    throw "GameSet.tscn must connect the mobile controls settings signal."
 }
 
 $addMobileControlsBody = Get-GdscriptFunctionBody -Source $baseThroughLevel -Name "add_mobile_controls" -Label "BaseThroughLevel.gd"

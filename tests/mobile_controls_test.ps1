@@ -76,6 +76,7 @@ $paths = @{
     MobileScene = Join-Path $projectRoot "Scene\MobileControls\MobileControls.tscn"
     BaseThroughLevel = Join-Path $projectRoot "Script\Base\BaseThroughLevel.gd"
     Level20 = Join-Path $projectRoot "Script\Level\Level_20.gd"
+    MainSet = Join-Path $projectRoot "Script\MemoryClass\main_set.gd"
 }
 
 $mobileControls = Read-Utf8File -Path $paths.MobileControls -RejectBom
@@ -84,12 +85,15 @@ $mobileActionButton = Read-Utf8File -Path $paths.MobileActionButton -RejectBom
 $mobileScene = Read-Utf8File -Path $paths.MobileScene -RejectBom
 $baseThroughLevel = Read-Utf8File -Path $paths.BaseThroughLevel -RejectBom
 $level20 = Read-Utf8File -Path $paths.Level20 -RejectBom
+$mainSet = Read-Utf8File -Path $paths.MainSet -RejectBom
 
 Require-Tokens -Source $mobileActionButton -Label "MobileActionButton.gd" -Tokens @(
     "extends TouchScreenButton",
     "CircleShape2D.new()",
     "draw_circle",
-    "ThemeDB.fallback_font"
+    "ThemeDB.fallback_font",
+    "control_opacity",
+    "func set_control_opacity"
 )
 
 Require-Tokens -Source $mobileJoystick -Label "MobileJoystick.gd" -Tokens @(
@@ -101,6 +105,8 @@ Require-Tokens -Source $mobileJoystick -Label "MobileJoystick.gd" -Tokens @(
     "Input.action_press",
     "Input.action_release",
     "release_all_actions",
+    "control_opacity",
+    "func set_control_opacity",
     '"move_left"',
     '"move_right"',
     '"down"',
@@ -118,8 +124,28 @@ Require-Tokens -Source $mobileControls -Label "MobileControls.gd" -Tokens @(
     'MainSet.set_data["MobileControlsShow"]',
     "get_viewport().size_changed",
     "BUTTON_LAYOUT",
+    "JOYSTICK_LAYOUT",
+    "LAYOUT_SETTING",
+    "OPACITY_SETTING",
+    "SAFE_PADDING_SETTING",
+    "ensure_mobile_control_settings",
+    "get_saved_layout",
+    "get_saved_opacity",
+    "get_safe_padding",
+    "get_joystick_edge_margin",
+    "clamp_control_position",
+    "apply_opacity",
     "DisplayServer.get_display_safe_area()",
     "DisplayServer.screen_get_size()"
+)
+
+Require-Tokens -Source $mainSet -Label "main_set.gd" -Tokens @(
+    '"MobileControlsLayout"',
+    '"MobileControlsOpacity"',
+    '"MobileControlsSafePadding"',
+    '"Joystick"',
+    '"Attack"',
+    '"Zhenfa"'
 )
 
 if ($mobileScene -match '(?m)^\[node[^\r\n]*\btype="Button"') {

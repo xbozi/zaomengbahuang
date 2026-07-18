@@ -1,5 +1,6 @@
 extends Node2D
 class_name GameSet
+const MOBILE_CONTROLS_SETTINGS_PATH := "res://Scene/MobileControls/MobileControlsSettings.tscn"
 @onready var gm_open_or_close: Button = $Bg/BGColor/VBoxContainer/GameMusicTitle/GMOpenOrClose
 @onready var gm_2_open_or_close: Button = $Bg/BGColor/VBoxContainer/GameMusicTitle2/GM2OpenOrClose
 @onready var h_slider: HSlider = $Bg/BGColor/VBoxContainer/GameMusicFB/HSlider
@@ -255,3 +256,17 @@ func _on_mobile_controls_open_or_close_pressed() -> void:
 		MainSet.set_data["MobileControlsShow"] = false
 	MainSet.set_data["MobileControlsShow"] = not MainSet.set_data["MobileControlsShow"]
 	MemoryClass.main_bc()
+
+func _on_mobile_controls_settings_pressed() -> void:
+	if has_node("MobileControlsSettings"):
+		return
+	var settings_scene := ResourceLoader.load(MOBILE_CONTROLS_SETTINGS_PATH)
+	if not (settings_scene is PackedScene):
+		push_warning("GameSet: failed to load MobileControlsSettings.tscn.")
+		return
+	var settings := (settings_scene as PackedScene).instantiate()
+	if settings == null:
+		push_warning("GameSet: failed to instantiate mobile controls settings.")
+		return
+	settings.name = "MobileControlsSettings"
+	add_child(settings)

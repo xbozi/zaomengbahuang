@@ -5,6 +5,7 @@ class_name MobileJoystick
 @export_range(1.0, 256.0, 1.0) var knob_radius: float = 29.0
 @export_range(0.0, 1.0, 0.01) var horizontal_deadzone: float = 0.25
 @export_range(0.0, 1.0, 0.01) var vertical_deadzone: float = 0.55
+@export_range(0.25, 1.0, 0.01) var control_opacity: float = 1.0
 
 var joystick_touch_index: int = -1
 var joystick_center: Vector2 = Vector2.ZERO
@@ -103,11 +104,22 @@ func reset_joystick() -> void:
 	queue_redraw()
 
 
+func set_control_opacity(value: float) -> void:
+	control_opacity = clampf(value, 0.25, 1.0)
+	queue_redraw()
+
+
+func color_with_opacity(color: Color) -> Color:
+	var result := color
+	result.a *= control_opacity
+	return result
+
+
 func _draw() -> void:
 	var center := joystick_center if joystick_touch_index != -1 else size * 0.5
-	draw_circle(center, joystick_radius, Color(0.10, 0.14, 0.20, 0.40))
-	draw_arc(center, joystick_radius - 1.0, 0.0, TAU, 64, Color(0.90, 0.94, 1.0, 0.62), 2.0, true)
-	draw_circle(center + knob_offset, knob_radius, Color(0.90, 0.94, 1.0, 0.70))
+	draw_circle(center, joystick_radius, color_with_opacity(Color(0.10, 0.14, 0.20, 0.40)))
+	draw_arc(center, joystick_radius - 1.0, 0.0, TAU, 64, color_with_opacity(Color(0.90, 0.94, 1.0, 0.62)), 2.0, true)
+	draw_circle(center + knob_offset, knob_radius, color_with_opacity(Color(0.90, 0.94, 1.0, 0.70)))
 
 
 func _on_visibility_changed() -> void:
