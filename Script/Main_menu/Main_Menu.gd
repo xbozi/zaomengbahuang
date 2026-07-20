@@ -80,7 +80,7 @@ func _physics_process(_delta: float) -> void:
 			GameSet_.MusicIsChange = false
 
 func _apply_screen_fit() -> void:
-	ScreenFit.apply_canvas_mobile_safe_fit(self)
+	ScreenFit.apply_canvas_cover_90(self)
 
 func _on_begin_game_pressed() -> void:
 	if MainSet.set_data.has("FileValue"):

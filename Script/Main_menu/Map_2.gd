@@ -287,4 +287,4 @@ func _on_level_lhhj_pressed() -> void:
 	Global.Addlhhj(self,Vector2(0,0))
 
 func _apply_screen_fit() -> void:
-	ScreenFit.apply_canvas_mobile_safe_fit(self)
+	ScreenFit.apply_canvas_cover_90(self)

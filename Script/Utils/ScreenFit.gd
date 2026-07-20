@@ -1,6 +1,7 @@
 extends Node
 
 const BASE_SIZE := Vector2(940, 590)
+const COVER_90_RATIO := 0.9
 const DEFAULT_SAFE_PADDING := 28.0
 
 func current_viewport_size() -> Vector2:
@@ -27,6 +28,14 @@ func cover_scale(viewport_size: Vector2 = Vector2.ZERO, base_size: Vector2 = BAS
 func cover_offset(viewport_size: Vector2 = Vector2.ZERO, base_size: Vector2 = BASE_SIZE) -> Vector2:
 	var size := viewport_size_or_current(viewport_size)
 	var scale_value := cover_scale(size, base_size)
+	return (size - base_size * scale_value) * 0.5
+
+func cover_90_scale(viewport_size: Vector2 = Vector2.ZERO, base_size: Vector2 = BASE_SIZE) -> float:
+	return cover_scale(viewport_size, base_size) * COVER_90_RATIO
+
+func cover_90_offset(viewport_size: Vector2 = Vector2.ZERO, base_size: Vector2 = BASE_SIZE) -> Vector2:
+	var size := viewport_size_or_current(viewport_size)
+	var scale_value := cover_90_scale(size, base_size)
 	return (size - base_size * scale_value) * 0.5
 
 func fit_scale(viewport_size: Vector2 = Vector2.ZERO, base_size: Vector2 = BASE_SIZE) -> float:
@@ -71,6 +80,14 @@ func apply_canvas_cover(root: Node2D, base_size: Vector2 = BASE_SIZE) -> void:
 	var scale_value := cover_scale(size, base_size)
 	root.scale = Vector2(scale_value, scale_value)
 	root.position = cover_offset(size, base_size)
+
+func apply_canvas_cover_90(root: Node2D, base_size: Vector2 = BASE_SIZE) -> void:
+	if root == null:
+		return
+	var size := current_viewport_size()
+	var scale_value := cover_90_scale(size, base_size)
+	root.scale = Vector2(scale_value, scale_value)
+	root.position = cover_90_offset(size, base_size)
 
 func apply_canvas_mobile_safe_fit(root: Node2D, base_size: Vector2 = BASE_SIZE, padding: float = DEFAULT_SAFE_PADDING) -> void:
 	if root == null:

@@ -15,6 +15,13 @@ func _init() -> void:
 	assert_near(offset.x, 0.0, 0.01, "cover offset keeps width filled")
 	assert_near(offset.y, -52.12766, 0.01, "cover offset centers cropped height")
 
+	var cover_90_scale_value = fit.cover_90_scale(Vector2(1600, 900))
+	assert_near(cover_90_scale_value, 1.53191, 0.01, "cover 90 scale fills then shrinks scene")
+
+	var cover_90_offset = fit.cover_90_offset(Vector2(1600, 900))
+	assert_near(cover_90_offset.x, 80.0, 0.01, "cover 90 offset centers shrunken width")
+	assert_near(cover_90_offset.y, -1.91489, 0.01, "cover 90 offset keeps cover behavior after shrinking")
+
 	var center = fit.base_center()
 	assert_near(center.x, 470.0, 0.01, "base center x")
 	assert_near(center.y, 295.0, 0.01, "base center y")

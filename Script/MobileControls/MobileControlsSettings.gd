@@ -140,13 +140,20 @@ func _on_preview_button_gui_input(event: InputEvent, control_name: String) -> vo
 		var touch_event := event as InputEventScreenTouch
 		dragging_name = control_name if touch_event.pressed else ""
 		if touch_event.pressed:
-			move_control_to_local_position(control_name, make_preview_position_local(touch_event.position))
+			move_control_to_local_position(control_name, make_preview_gui_position_local(preview_buttons.get(control_name) as Control, touch_event.position))
 	elif event is InputEventScreenDrag and dragging_name == control_name:
 		var drag_event := event as InputEventScreenDrag
-		move_control_to_local_position(control_name, make_preview_position_local(drag_event.position))
+		move_control_to_local_position(control_name, make_preview_gui_position_local(preview_buttons.get(control_name) as Control, drag_event.position))
 
 
 func make_preview_position_local(canvas_position: Vector2) -> Vector2:
+	return preview_area.get_global_transform_with_canvas().affine_inverse() * canvas_position
+
+
+func make_preview_gui_position_local(source_control: Control, local_position: Vector2) -> Vector2:
+	if source_control == null:
+		return local_position
+	var canvas_position := source_control.get_global_transform_with_canvas() * local_position
 	return preview_area.get_global_transform_with_canvas().affine_inverse() * canvas_position
 
 

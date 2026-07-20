@@ -1,8 +1,19 @@
 extends Node2D
+const MOBILE_ROLE_MENU_TOP_OFFSET := 128.0
+const MOBILE_ROLE_MENU_TOGGLE_TOP_OFFSET := 88.0
+const MOBILE_ROLE_MENU_BUTTON_GAP := 8.0
+const MOBILE_ROLE_MENU_TOGGLE_SIZE := Vector2(68.0, 32.0)
 @onready var role_head: Sprite2D = $roleLayer/role_head
 
 @onready var role_level: Label = $roleLayer/role_hp_mp_exp/role_level
 @onready var gogo: AnimatedSprite2D = $roleLayer/Gogo
+@onready var role_layer: CanvasLayer = $roleLayer
+@onready var role_menu: Sprite2D = $roleLayer/role_menu
+@onready var role_menu_backpack: TextureButton = $roleLayer/role_menu/backpack
+@onready var role_menu_set: TextureButton = $roleLayer/role_menu/set
+@onready var role_menu_skill: TextureButton = $roleLayer/role_menu/skill
+@onready var role_menu_magic_weapon: TextureButton = $roleLayer/role_menu/magic_weapon
+@onready var role_menu_pet: TextureButton = $roleLayer/role_menu/pet
 @onready var ws_effect: TextureProgressBar = $roleLayer/role_menu/ws_wk/ws_effect
 @onready var max_ws: AnimatedSprite2D = $roleLayer/role_menu/max_ws
 @onready var SkillBox: HBoxContainer = $roleLayer/role_menu/SkillBox
@@ -35,7 +46,112 @@ var buff_is_stun
 var buff_is_Fire
 var buff_is_Bleed
 var Player: BaseHero
+var role_menu_default_position := Vector2.ZERO
+var role_menu_default_texture: Texture2D
+var role_menu_button_default_offsets: Dictionary = {}
+var mobile_role_menu_toggle: Button
+var mobile_role_menu_collapsed := false
+
+func get_role_menu_buttons() -> Array:
+	return [role_menu_backpack, role_menu_set, role_menu_skill, role_menu_magic_weapon, role_menu_pet]
+
+func capture_role_menu_defaults() -> void:
+	role_menu_default_position = role_menu.position
+	role_menu_default_texture = role_menu.texture
+	role_menu_button_default_offsets.clear()
+	for button in get_role_menu_buttons():
+		role_menu_button_default_offsets[button.name] = button.position
+
+func apply_role_menu_layout() -> void:
+	if OS.has_feature("android"):
+		ensure_mobile_role_menu_toggle()
+		apply_mobile_role_menu_backdrop()
+		layout_mobile_role_menu_top_center()
+		apply_mobile_role_menu_visibility()
+	else:
+		restore_role_menu_backdrop()
+		restore_role_menu_default_layout()
+		if mobile_role_menu_toggle != null:
+			mobile_role_menu_toggle.visible = false
+
+func apply_mobile_role_menu_backdrop() -> void:
+	role_menu.texture = null
+
+func restore_role_menu_backdrop() -> void:
+	role_menu.texture = role_menu_default_texture
+
+func ensure_mobile_role_menu_toggle() -> void:
+	if mobile_role_menu_toggle != null and is_instance_valid(mobile_role_menu_toggle):
+		return
+	mobile_role_menu_toggle = Button.new()
+	mobile_role_menu_toggle.name = "MobileRoleMenuToggle"
+	mobile_role_menu_toggle.custom_minimum_size = MOBILE_ROLE_MENU_TOGGLE_SIZE
+	mobile_role_menu_toggle.size = MOBILE_ROLE_MENU_TOGGLE_SIZE
+	mobile_role_menu_toggle.focus_mode = Control.FOCUS_NONE
+	mobile_role_menu_toggle.process_mode = Node.PROCESS_MODE_ALWAYS
+	mobile_role_menu_toggle.pressed.connect(_on_mobile_role_menu_toggle_pressed)
+	role_layer.add_child(mobile_role_menu_toggle)
+
+func _on_mobile_role_menu_toggle_pressed() -> void:
+	mobile_role_menu_collapsed = not mobile_role_menu_collapsed
+	apply_mobile_role_menu_visibility()
+	apply_role_menu_layout()
+
+func apply_mobile_role_menu_visibility() -> void:
+	for button in get_role_menu_buttons():
+		button.visible = not mobile_role_menu_collapsed
+	if mobile_role_menu_toggle != null:
+		mobile_role_menu_toggle.visible = true
+		mobile_role_menu_toggle.text = "菜单" if mobile_role_menu_collapsed else "收起"
+
+func layout_mobile_role_menu_toggle(safe_rect: Rect2) -> void:
+	if mobile_role_menu_toggle == null:
+		return
+	mobile_role_menu_toggle.size = MOBILE_ROLE_MENU_TOGGLE_SIZE
+	mobile_role_menu_toggle.position = Vector2(
+		safe_rect.position.x + (safe_rect.size.x - MOBILE_ROLE_MENU_TOGGLE_SIZE.x) * 0.5,
+		safe_rect.position.y + MOBILE_ROLE_MENU_TOGGLE_TOP_OFFSET - MOBILE_ROLE_MENU_TOGGLE_SIZE.y * 0.5
+	)
+
+func restore_role_menu_default_layout() -> void:
+	role_menu.position = role_menu_default_position
+	for button in get_role_menu_buttons():
+		button.visible = true
+		if role_menu_button_default_offsets.has(button.name):
+			button.position = role_menu_button_default_offsets[button.name]
+
+func layout_mobile_role_menu_top_center() -> void:
+	var safe_rect := ScreenFit.safe_fit_rect()
+	layout_mobile_role_menu_toggle(safe_rect)
+	var buttons := get_role_menu_buttons()
+	if buttons.is_empty():
+		return
+	var button_width_sum := 0.0
+	for button in buttons:
+		button_width_sum += get_role_menu_button_size(button).x
+	var total_width := button_width_sum + MOBILE_ROLE_MENU_BUTTON_GAP * float(buttons.size() - 1)
+	var cursor_x := safe_rect.position.x + (safe_rect.size.x - total_width) * 0.5
+	var center_y := safe_rect.position.y + MOBILE_ROLE_MENU_TOP_OFFSET
+	for button in buttons:
+		var button_size := get_role_menu_button_size(button)
+		var desired_position := Vector2(cursor_x, center_y - button_size.y * 0.5)
+		button.position = desired_position - role_menu.position
+		cursor_x += button_size.x + MOBILE_ROLE_MENU_BUTTON_GAP
+
+func get_role_menu_button_size(button: TextureButton) -> Vector2:
+	var button_size := button.size
+	if button_size.x <= 0.0:
+		button_size.x = 47.0
+	if button_size.y <= 0.0:
+		button_size.y = 40.0
+	return button_size
+
 func _ready() -> void:
+	capture_role_menu_defaults()
+	apply_role_menu_layout()
+	var resize_callback := Callable(self, "apply_role_menu_layout")
+	if not get_viewport().size_changed.is_connected(resize_callback):
+		get_viewport().size_changed.connect(resize_callback)
 	Global.MgCdPic = magic_weapon_skill_cd
 	Global.zhen_fa = zhen_fa
 	match int(PlayerData.player_data["Myself"]):

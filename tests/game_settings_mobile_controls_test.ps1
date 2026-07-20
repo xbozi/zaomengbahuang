@@ -85,9 +85,20 @@ Require-Tokens -Source $mobileSettings -Label "MobileControlsSettings.gd" -Token
     "MobileControlsOpacity",
     "InputEventScreenDrag",
     "clamp_preview_button_position",
+    "func make_preview_gui_position_local(source_control: Control, local_position: Vector2) -> Vector2:",
+    "source_control.get_global_transform_with_canvas() * local_position",
+    "preview_area.get_global_transform_with_canvas().affine_inverse() * canvas_position",
     "MemoryClass.main_bc()",
     "reset_to_default_layout"
 )
+
+if ($mobileSettings.Contains("make_preview_position_local(touch_event.position)")) {
+    throw "MobileControlsSettings.gd must not treat InputEventScreenTouch.position from gui_input as a canvas position."
+}
+
+if ($mobileSettings.Contains("make_preview_position_local(drag_event.position)")) {
+    throw "MobileControlsSettings.gd must not treat InputEventScreenDrag.position from gui_input as a canvas position."
+}
 
 Require-Tokens -Source $mobileSettingsScene -Label "MobileControlsSettings.tscn" -Tokens @(
     '[node name="MobileControlsSettings" type="CanvasLayer"]',
