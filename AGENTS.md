@@ -100,3 +100,4 @@ powershell -ExecutionPolicy Bypass -File .\tests\apk_mobile_minimal_runtime_test
 
 ## 重要
 - 在codex操作时 不要运行类似的操作；会弹框报错；卡住程序 ![img.png](img.png)
+- 不运行 Godot exe
