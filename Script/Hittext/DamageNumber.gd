@@ -11,38 +11,39 @@ var target:BaseObject
 func _physics_process(_delta: float) -> void:
 	changepic(Type, need_number,is_crit)
 	set_physics_process(false)
+
+func get_number_texture(texture_path: String) -> Texture2D:
+	return Global.get_cached_resource(texture_path)
 	
 func changepic(Type_: String, num: int,_crit: bool):
 	if num == null:
 		self.set_texture(null)
 		return
 	if Type_ == "cure":
-		self.set_texture(load("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
+		self.set_texture(get_number_texture("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
 		return
 	if Type_ == "CureMp":
-		self.set_texture(load("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
+		self.set_texture(get_number_texture("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
 		return
 	if Type_ == "ReduceMp":
-		self.set_texture(load("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
+		self.set_texture(get_number_texture("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
 		return
 	if target != null:
 		if target is BaseHero:
 			if Type_ != "real":
-				self.set_texture(load("res://Art/AllNumber/monster/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
+				self.set_texture(get_number_texture("res://Art/AllNumber/monster/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
 			else:
-				self.set_texture(load("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
+				self.set_texture(get_number_texture("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
 
 		elif target is BaseMonster:
 			if is_crit:
 				var tt = Type_ + "crit"
 				#print(tt)
-				self.set_texture(load("res://Art/AllNumber/" + str(tt) + '/' + str(Type) + '_' + str(int(num)) +".png"))
+				self.set_texture(get_number_texture("res://Art/AllNumber/" + str(tt) + '/' + str(Type) + '_' + str(int(num)) +".png"))
 			else:
 				if Type == "physics":
 					#res://Art/AllNumber/magic/physics_0.png
-					self.set_texture(load("res://Art/AllNumber/magic/" + str(Type_) + '_' + str(int(num)) +".png"))
-					#self.set_texture(load("res://Art/AllNumber/" + str(Type) + '/' + str(Type) + '_' + str(int(num)) +".png"))
+					self.set_texture(get_number_texture("res://Art/AllNumber/magic/" + str(Type_) + '_' + str(int(num)) +".png"))
 				else:
-					self.set_texture(load("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
-#				self.set_texture(load("res://Art/AllNumber/" + str(Type) + '/' + str(Type) + '_' + str(int(num)) +".png"))
+					self.set_texture(get_number_texture("res://Art/AllNumber/" + str(Type_) + '/' + str(Type_) + '_' + str(int(num)) +".png"))
 

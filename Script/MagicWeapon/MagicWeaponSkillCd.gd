@@ -8,14 +8,29 @@ class_name mgcd
 var SkillName: String
 var MaxTime:float
 var Iszhenfa: bool
+var cached_skill_name := ""
+var cached_is_zhenfa := false
+
+func update_skill_icon_if_needed() -> void:
+	if SkillName == null or SkillName == "":
+		cached_skill_name = ""
+		return
+	if cached_skill_name == SkillName and cached_is_zhenfa == Iszhenfa:
+		return
+	cached_skill_name = SkillName
+	cached_is_zhenfa = Iszhenfa
+	var icon_path := ""
+	if Iszhenfa:
+		icon_path = "res://Art/TwentyEightConstellations/" + str(SkillName) + ".png"
+	else:
+		icon_path = "res://Art/MagicWeapon/Skill_Icon/" + str(SkillName) + ".png"
+	var icon_texture = Global.get_cached_resource(icon_path)
+	skillicon.texture = icon_texture
+	pic_box.texture_progress = icon_texture
+
 func _physics_process(delta: float) -> void:
 	if SkillName != null and SkillName != "":
-		if Iszhenfa:
-			skillicon.texture = load("res://Art/TwentyEightConstellations/" + str(SkillName) + ".png")
-			pic_box.texture_progress = load("res://Art/TwentyEightConstellations/" + str(SkillName) + ".png")
-		else:
-			skillicon.texture = load("res://Art/MagicWeapon/Skill_Icon/" + str(SkillName) + ".png")
-			pic_box.texture_progress = load("res://Art/MagicWeapon/Skill_Icon/" + str(SkillName) + ".png")
+		update_skill_icon_if_needed()
 		if MaxTime > 0:
 			if last_time.is_stopped():
 				last_time.start(MaxTime)
