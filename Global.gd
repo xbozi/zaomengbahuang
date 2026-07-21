@@ -605,7 +605,8 @@ func addChangeClothesJm(parent,position,name_,Transmogrified_):
 	target.Transmogrified_ = Transmogrified_
 	return target
 func addMissEffect(parent,position):
-	var target = instance_scene(MissEffect,parent)
+	var target = PoolManager.get_instance("res://Scene/hittest/miss_effect.tscn")
+	parent.add_child(target)
 	target.position = position
 	return target
 func addDamageNumber(parent,value,Type,is_crit,tar):
@@ -616,7 +617,8 @@ func addDamageNumber(parent,value,Type,is_crit,tar):
 	target.need_number = value
 	return target
 func addDamageText(parent,position,value,Type,is_crit,tar):
-	var target = instance_scene(DamageText,parent)
+	var target = PoolManager.get_instance("res://Scene/hittest/DamageText.tscn")
+	parent.add_child(target)
 	target.target = tar
 	target.position = position
 	target.Type = Type
@@ -816,7 +818,8 @@ func add_BuffIcon(parent,text_):
 	return target
 
 func add_SpecialEffect(parent,position_,name_,scale_,direction,speed_):
-	var target = instance_scene(SpecialAffect,parent)
+	var target = PoolManager.get_instance("res://Scene/Base/special_affect.tscn")
+	parent.add_child(target)
 	target.z_index = 99
 	target.Effect_name = name_
 	target.scale_ = scale_
@@ -1001,7 +1004,8 @@ func add_monster_blood(parent,position_,value,text):
 	return target
 
 func add_mr_hurt(parent,position_):
-	var target = instance_scene(monster_be_hit,parent)
+	var target = PoolManager.get_instance("res://Scene/MonsterDamage/monster_be_hit.tscn")
+	parent.add_child(target)
 	target.position = position_
 	return target
 
