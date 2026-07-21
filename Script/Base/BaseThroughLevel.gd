@@ -1,6 +1,7 @@
 extends Node2D
 class_name BaseLevel
 const MOBILE_CONTROLS_PATH := "res://Scene/MobileControls/MobileControls.tscn"
+const LEVEL_STATUS_CHECK_INTERVAL := 0.15
 var is_two_scene
 
 #单独一个场景，到时间自动召唤即可，推关的话，
@@ -51,6 +52,9 @@ var Monster_position_y = {
 var MonsterArray: Array = []#怪物列表
 var can_create: bool
 var mr_num = 0
+var level_status_check_left := 0.0
+var cached_camera_stage := -1
+var cached_camera_can_pass := false
 
 func _ready() -> void:
 	if not self is Level20:
@@ -104,23 +108,7 @@ func add_mobile_controls() -> void:
 	add_child(mobile_controls)
 func _physics_process(_delta: float) -> void:
 	#print(current_stage)
-	change_mysee()
-	if current_stage >= 1:
-		if not is_two_scene:
-			if Monster_group["stage_2"].size() == 0 and Monster_group["stage_3"].size() == 0 and Monster_group["stage_4"].size() == 0:
-				if one_check_can_exit():
-					exit.visible = true
-					exit_2.disabled = false
-			else:
-				if check_can_exit():
-					exit.visible = true
-					exit_2.disabled = false
-		else:
-			if Monster_group["stage_2"].size() == 0 and Monster_group["stage_3"].size() == 0 and Monster_group["stage_4"].size() == 0:
-				if one_check_can_exit():
-					exit.visible = true
-					exit_2.disabled = false
-					#add_tg(level_stage)
+	update_level_status_if_needed(_delta)
 	if can_exit:
 		if Input.is_action_just_pressed("Exit"):
 			if self is Level19:
@@ -156,6 +144,42 @@ func _physics_process(_delta: float) -> void:
 		if my_camera != null:
 			my_camera.queue_free()
 	set_through()
+
+func update_level_status_if_needed(delta: float) -> void:
+	level_status_check_left -= delta
+	if level_status_check_left > 0.0:
+		return
+	level_status_check_left = LEVEL_STATUS_CHECK_INTERVAL
+	update_camera_bounds_if_needed()
+	update_exit_state()
+
+func update_exit_state() -> void:
+	if current_stage < 1:
+		return
+	if not is_two_scene:
+		if Monster_group["stage_2"].size() == 0 and Monster_group["stage_3"].size() == 0 and Monster_group["stage_4"].size() == 0:
+			if one_check_can_exit():
+				exit.visible = true
+				exit_2.disabled = false
+		else:
+			if check_can_exit():
+				exit.visible = true
+				exit_2.disabled = false
+	else:
+		if Monster_group["stage_2"].size() == 0 and Monster_group["stage_3"].size() == 0 and Monster_group["stage_4"].size() == 0:
+			if one_check_can_exit():
+				exit.visible = true
+				exit_2.disabled = false
+				#add_tg(level_stage)
+
+func update_camera_bounds_if_needed() -> void:
+	var next_camera_can_pass := check_can_pass()
+	if cached_camera_stage == current_stage and cached_camera_can_pass == next_camera_can_pass:
+		return
+	cached_camera_stage = current_stage
+	cached_camera_can_pass = next_camera_can_pass
+	change_mysee()
+
 func set_through():
 	pass
 func level_create_monster(stage):

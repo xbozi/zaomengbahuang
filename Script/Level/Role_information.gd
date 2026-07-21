@@ -4,6 +4,7 @@ const MOBILE_ROLE_MENU_TOGGLE_TOP_OFFSET := 88.0
 const MOBILE_ROLE_MENU_BUTTON_GAP := 8.0
 const MOBILE_ROLE_MENU_TOGGLE_SIZE := Vector2(68.0, 32.0)
 const ROLE_INFO_SKILL_REFRESH_INTERVAL := 0.25
+const ROLE_INFO_BUFF_REFRESH_INTERVAL := 0.2
 @onready var role_head: Sprite2D = $roleLayer/role_head
 
 @onready var role_level: Label = $roleLayer/role_hp_mp_exp/role_level
@@ -53,6 +54,7 @@ var role_menu_button_default_offsets: Dictionary = {}
 var mobile_role_menu_toggle: Button
 var mobile_role_menu_collapsed := false
 var role_info_skill_refresh_left := 0.0
+var role_info_buff_refresh_left := 0.0
 var cached_magic_weapon_name = null
 var cached_zhen_fa_name = null
 var cached_hp_ratio := -1.0
@@ -169,6 +171,14 @@ func update_skill_pic_if_needed(delta: float) -> void:
 	role_info_skill_refresh_left = ROLE_INFO_SKILL_REFRESH_INTERVAL
 	set_skill_pic()
 
+func update_buff_icons_if_needed(delta: float) -> void:
+	role_info_buff_refresh_left -= delta
+	if role_info_buff_refresh_left > 0.0:
+		return
+	role_info_buff_refresh_left = ROLE_INFO_BUFF_REFRESH_INTERVAL
+	for i in Global.AllBuffList:
+		SetBuffIconInfo(i)
+
 func update_role_info_ui() -> void:
 	var magic_weapon_name = PlayerData.player_data["实战法宝"]
 	var has_magic_weapon := magic_weapon_name != "" and PlayerData.player_data["法宝"].size() > 0
@@ -273,8 +283,7 @@ func _ready() -> void:
 		5:
 			role_head.texture = load("res://Art/HeroPicture/RoleProperiesBox/blm.png")
 func _physics_process(delta: float) -> void:
-	for i in Global.AllBuffList:
-		SetBuffIconInfo(i)
+	update_buff_icons_if_needed(delta)
 	if get_parent().Role_ != null:
 		Player = get_parent().Role_ as BaseHero
 	update_skill_pic_if_needed(delta)
