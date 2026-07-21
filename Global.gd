@@ -9,6 +9,7 @@ var buff_box
 var MgCdPic
 var zhen_fa
 var LHHJBossList = {}
+var resource_cache: Dictionary = {}
 var CloudSword_ = preload("res://Scene/MagicWeapon/CloudSword.tscn")
 var PurpleGoldBell_ = preload("res://Scene/MagicWeapon/PurpleGoldBell.tscn")
 var BasicArButton = preload("res://Scene/OtherScene/BacisArButton.tscn")
@@ -644,9 +645,21 @@ func Add_GameSet_(parent,position):
 	var target = instance_scene(GameSet_,parent)
 	target.position = position
 	return target
+func get_cached_resource(resource_path: String):
+	if not resource_cache.has(resource_path):
+		resource_cache[resource_path] = load(resource_path)
+	return resource_cache[resource_path]
+
+func get_cached_monster_scene(monster_id: int):
+	return get_cached_resource("res://Scene/Monster/Monster_" + str(monster_id) + ".tscn")
+
+func get_cached_audio_stream(audio_path: String):
+	return get_cached_resource(audio_path)
+
 func addBGM_(parent,target_):
 	var target = instance_scene(BGM_,parent)
 	target.target = target_
+	target.stream_resource = get_cached_audio_stream(target_)
 	return target
 func Add_Mosaic_(parent,position):
 	var target = instance_scene(Mosaic_,parent)
@@ -656,6 +669,7 @@ func Add_Mosaic_(parent,position):
 func addSound_(parent,target_):
 	var target = instance_scene(Sound_,parent)
 	target.target = target_
+	target.stream_resource = get_cached_audio_stream(target_)
 	return target
 func addMagicHelp(parent,position):
 	var target = instance_scene(MagicHelp,parent)
@@ -967,7 +981,7 @@ func add_back_pack(parent,position):
 	target.z_index = 10
 	return target
 func Create_Monster(M_id: int,parent,position_: Vector2):
-	var target = instance_scene(load("res://Scene/Monster/Monster_" + str(M_id) + ".tscn"),parent)
+	var target = instance_scene(get_cached_monster_scene(M_id),parent)
 	target.position = position_
 	return target
 func add_hit_text(parent,position_,value,lx,crit,miss):

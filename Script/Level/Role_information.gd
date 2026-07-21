@@ -3,6 +3,7 @@ const MOBILE_ROLE_MENU_TOP_OFFSET := 128.0
 const MOBILE_ROLE_MENU_TOGGLE_TOP_OFFSET := 88.0
 const MOBILE_ROLE_MENU_BUTTON_GAP := 8.0
 const MOBILE_ROLE_MENU_TOGGLE_SIZE := Vector2(68.0, 32.0)
+const ROLE_INFO_SKILL_REFRESH_INTERVAL := 0.25
 @onready var role_head: Sprite2D = $roleLayer/role_head
 
 @onready var role_level: Label = $roleLayer/role_hp_mp_exp/role_level
@@ -51,6 +52,21 @@ var role_menu_default_texture: Texture2D
 var role_menu_button_default_offsets: Dictionary = {}
 var mobile_role_menu_toggle: Button
 var mobile_role_menu_collapsed := false
+var role_info_skill_refresh_left := 0.0
+var cached_magic_weapon_name = null
+var cached_zhen_fa_name = null
+var cached_hp_ratio := -1.0
+var cached_mp_ratio := -1.0
+var cached_exp_ratio := -1.0
+var cached_ws_ratio := -1.0
+var cached_role_protect_ratio := -1.0
+var cached_role_level_text := ""
+var cached_hp_text := ""
+var cached_mp_text := ""
+var cached_exp_text := ""
+var cached_nature_recovery_hp := ""
+var cached_nature_recovery_mp := ""
+var cached_max_ws_visible = null
 
 func get_role_menu_buttons() -> Array:
 	return [role_menu_backpack, role_menu_set, role_menu_skill, role_menu_magic_weapon, role_menu_pet]
@@ -146,6 +162,97 @@ func get_role_menu_button_size(button: TextureButton) -> Vector2:
 		button_size.y = 40.0
 	return button_size
 
+func update_skill_pic_if_needed(delta: float) -> void:
+	role_info_skill_refresh_left -= delta
+	if role_info_skill_refresh_left > 0.0:
+		return
+	role_info_skill_refresh_left = ROLE_INFO_SKILL_REFRESH_INTERVAL
+	set_skill_pic()
+
+func update_role_info_ui() -> void:
+	var magic_weapon_name = PlayerData.player_data["实战法宝"]
+	var has_magic_weapon := magic_weapon_name != "" and PlayerData.player_data["法宝"].size() > 0
+	if cached_magic_weapon_name != magic_weapon_name:
+		cached_magic_weapon_name = magic_weapon_name
+		magic_weapon_skill_cd.SkillName = magic_weapon_name
+	if magic_weapon_skill_cd.visible != has_magic_weapon:
+		magic_weapon_skill_cd.visible = has_magic_weapon
+
+	var zhen_fa_name = PlayerData.player_data["已佩戴阵法"]
+	var has_zhen_fa := zhen_fa_name != ""
+	if cached_zhen_fa_name != zhen_fa_name:
+		cached_zhen_fa_name = zhen_fa_name
+		zhen_fa.SkillName = zhen_fa_name
+	zhen_fa.Iszhenfa = true
+	if zhen_fa.visible != has_zhen_fa:
+		zhen_fa.visible = has_zhen_fa
+
+	var next_nature_recovery_hp := ""
+	if Player != null and RoleProp.roleprop.Hp < RoleProp.roleprop.SHp and RoleProp.roleprop.R_hp > 0:
+		next_nature_recovery_hp = "+" + str(float(RoleProp.roleprop.R_hp)) + "/s * " + str(Player.CureValue)
+	if cached_nature_recovery_hp != next_nature_recovery_hp:
+		cached_nature_recovery_hp = next_nature_recovery_hp
+		nature_recovery_hp.text = next_nature_recovery_hp
+
+	var next_nature_recovery_mp := ""
+	if RoleProp.roleprop.Mp < RoleProp.roleprop.SMp and RoleProp.roleprop.R_mp > 0:
+		next_nature_recovery_mp = "+" + str(float(RoleProp.roleprop.R_mp)) + "/s"
+	if cached_nature_recovery_mp != next_nature_recovery_mp:
+		cached_nature_recovery_mp = next_nature_recovery_mp
+		nature_recovery_mp.text = next_nature_recovery_mp
+
+	var next_hp_ratio := float(RoleProp.roleprop.Hp) / RoleProp.roleprop.SHp
+	if cached_hp_ratio != next_hp_ratio:
+		cached_hp_ratio = next_hp_ratio
+		Hp_Change = next_hp_ratio
+		hp_bar.value = next_hp_ratio
+
+	var next_mp_ratio := float(RoleProp.roleprop.Mp) / RoleProp.roleprop.SMp
+	if cached_mp_ratio != next_mp_ratio:
+		cached_mp_ratio = next_mp_ratio
+		mp_bar.value = next_mp_ratio
+
+	var next_exp_ratio := float(RoleProp.baseroleprop.exp) / RoleProp.baseroleprop.max_exp
+	if cached_exp_ratio != next_exp_ratio:
+		cached_exp_ratio = next_exp_ratio
+		exp_bar.value = next_exp_ratio
+
+	var next_role_level_text := str(RoleProp.baseroleprop.Level)
+	if cached_role_level_text != next_role_level_text:
+		cached_role_level_text = next_role_level_text
+		role_level.text = next_role_level_text
+
+	var next_hp_text := str(int(RoleProp.roleprop.Hp)) + '/' + str(int(RoleProp.roleprop.SHp))
+	if cached_hp_text != next_hp_text:
+		cached_hp_text = next_hp_text
+		hp_text.text = next_hp_text
+
+	var next_mp_text := str(int(RoleProp.roleprop.Mp)) + '/' + str(int(RoleProp.roleprop.SMp))
+	if cached_mp_text != next_mp_text:
+		cached_mp_text = next_mp_text
+		mp_text.text = next_mp_text
+
+	var next_exp_text := str(RoleProp.baseroleprop.exp) + '/' + str(RoleProp.baseroleprop.max_exp)
+	if cached_exp_text != next_exp_text:
+		cached_exp_text = next_exp_text
+		exp_text.text = next_exp_text
+
+	var next_ws_ratio := float(RoleProp.ws_value) /  RoleProp.max_ws_value
+	if cached_ws_ratio != next_ws_ratio:
+		cached_ws_ratio = next_ws_ratio
+		ws_effect.value = next_ws_ratio
+
+	var next_max_ws_visible := ws_effect.value >= 1 and not RoleProp.is_ws_state
+	if cached_max_ws_visible != next_max_ws_visible:
+		cached_max_ws_visible = next_max_ws_visible
+		max_ws.visible = next_max_ws_visible
+
+	if Player != null:
+		var next_role_protect_ratio := float(Player.CurrentProtect) / float(Player.MaxProtect)
+		if cached_role_protect_ratio != next_role_protect_ratio:
+			cached_role_protect_ratio = next_role_protect_ratio
+			role_protect.value = next_role_protect_ratio
+
 func _ready() -> void:
 	capture_role_menu_defaults()
 	apply_role_menu_layout()
@@ -165,46 +272,13 @@ func _ready() -> void:
 			role_head.texture = load("res://Art/HeroPicture/RoleProperiesBox/shs.png")
 		5:
 			role_head.texture = load("res://Art/HeroPicture/RoleProperiesBox/blm.png")
-func _physics_process(_delta: float) -> void:
-	if PlayerData.player_data["实战法宝"] != "" and PlayerData.player_data["法宝"].size() > 0:
-		magic_weapon_skill_cd.visible = true
-		magic_weapon_skill_cd.SkillName = PlayerData.player_data["实战法宝"]
-	else:
-		magic_weapon_skill_cd.visible = false
+func _physics_process(delta: float) -> void:
 	for i in Global.AllBuffList:
 		SetBuffIconInfo(i)
-	if PlayerData.player_data["已佩戴阵法"] == "":
-		zhen_fa.visible = false
-		zhen_fa.Iszhenfa = true
-	else:
-		zhen_fa.Iszhenfa = true
-		zhen_fa.SkillName = PlayerData.player_data["已佩戴阵法"]
-		zhen_fa.visible = true
-	set_skill_pic()
 	if get_parent().Role_ != null:
 		Player = get_parent().Role_ as BaseHero
-	if RoleProp.roleprop.Hp < RoleProp.roleprop.SHp and RoleProp.roleprop.R_hp > 0:
-		nature_recovery_hp.text = "+" + str(float(RoleProp.roleprop.R_hp)) + "/s * " + str(Player.CureValue)
-	else:
-		nature_recovery_hp.text = ""
-	if RoleProp.roleprop.Mp < RoleProp.roleprop.SMp and RoleProp.roleprop.R_mp > 0:
-		nature_recovery_mp.text = "+" + str(float(RoleProp.roleprop.R_mp)) + "/s"
-	else:
-		nature_recovery_mp.text = ""
-	Hp_Change = float(RoleProp.roleprop.Hp) / RoleProp.roleprop.SHp
-	role_level.text = str(RoleProp.baseroleprop.Level)
-	hp_bar.value = float(RoleProp.roleprop.Hp) / RoleProp.roleprop.SHp
-	hp_text.text = str(int(RoleProp.roleprop.Hp)) + '/' + str(int(RoleProp.roleprop.SHp))
-	mp_bar.value = float(RoleProp.roleprop.Mp) / RoleProp.roleprop.SMp
-	mp_text.text = str(int(RoleProp.roleprop.Mp)) + '/' + str(int(RoleProp.roleprop.SMp))
-	exp_bar.value = float(RoleProp.baseroleprop.exp) / RoleProp.baseroleprop.max_exp
-	exp_text.text = str(RoleProp.baseroleprop.exp) + '/' + str(RoleProp.baseroleprop.max_exp)
-	ws_effect.value = float(RoleProp.ws_value) /  RoleProp.max_ws_value
-	if ws_effect.value >= 1 and not RoleProp.is_ws_state:
-		max_ws.visible = true
-	else:
-		max_ws.visible = false
-	role_protect.value = float(Player.CurrentProtect) / float(Player.MaxProtect)
+	update_skill_pic_if_needed(delta)
+	update_role_info_ui()
 func is_full_ws():
 	return max_ws.visible == true and not RoleProp.is_ws_state
 func set_skill_pic():
