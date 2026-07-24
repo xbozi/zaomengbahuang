@@ -7,6 +7,8 @@ extends Node2D
 @onready var most_lj_text: Label = $MostLj/MostLj_text
 var Last_Time
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	Global.removeAllBuff()
 	Global.addBGM_(self,"res://Music/level/13_Game_Victory.mp3")
 	get_tree().paused = false
@@ -45,6 +47,9 @@ func _ready() -> void:
 				MemoryClass.保存游戏(Global.cd_path)
 	grades_s_how.play("Show")
 	
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_legacy_fullscreen_fit(self)
+
 func _on_return_map_pressed() -> void:
 	RoleProp.ws_value = 0
 	match int(PlayerData.player_data["Map_num"]):

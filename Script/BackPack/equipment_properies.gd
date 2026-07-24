@@ -81,8 +81,8 @@ func _physics_process(_delta: float) -> void:
 		if self.position.x + color_rect.size.x >= 495:
 			self.position.x = 270 - color_rect.size.x
 	elif get_parent() == Global.Windows_:
-		if self.position.y + color_rect.size.y >= 590:
-			self.position.y = 590 - color_rect.size.y
+		if self.position.y + color_rect.size.y >= ScreenFit.TARGET_VIEWPORT_SIZE.y:
+			self.position.y = ScreenFit.TARGET_VIEWPORT_SIZE.y - color_rect.size.y
 		if self.position.x + color_rect.size.x >= 925:
 			self.position.x = 685 - color_rect.size.x
 	if nam == "empty":

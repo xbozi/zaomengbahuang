@@ -63,6 +63,8 @@ var Text_2 = "第二系列----《十殿阎罗篇》终了
 
 请多多支持原版造梦，此版本纯属娱乐！！"
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	if Global.GameOver == 1:
 		Over_text.text = Text_1
 		Global.addBGM_(self,"res://Music/level/10_bg4.mp3")
@@ -78,6 +80,9 @@ func _ready() -> void:
 	elif Global.GameOver == 2:
 		Global.addBGM_(self,"res://Music/level/2_bg4.mp3")
 		Over_Player.play("Over_1")
+
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_legacy_fullscreen_fit(self)
 
 func _on_tiaoguo_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scene/Level/victory.tscn")

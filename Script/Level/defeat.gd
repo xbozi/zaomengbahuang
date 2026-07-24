@@ -35,6 +35,8 @@ var textlist4 = [
 ]
 
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 	if not PlayerData.player_data["zyforever"] or not PlayerData.player_data["ieho"]:
 		text.text = str(textlist[randi_range(0,textlist.size() - 1)])
 		player.play("dh_1")
@@ -48,6 +50,9 @@ func _ready() -> void:
 	box_1.qh_level = 0
 	box_1.wx = []
 	box_1.EQ_prop = AE.AllEquipment_["xczg"]
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_legacy_fullscreen_fit(self)
+
 func _on_return_map_pressed() -> void:
 	RoleProp.ws_value = 0
 	Global.is_DeadLink = false

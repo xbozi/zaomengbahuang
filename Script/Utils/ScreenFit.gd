@@ -1,11 +1,18 @@
 extends Node
 
 const BASE_SIZE := Vector2(940, 590)
+const TARGET_VIEWPORT_SIZE := Vector2(1320, 594)
 const COVER_90_RATIO := 0.9
 const DEFAULT_SAFE_PADDING := 28.0
 
 func current_viewport_size() -> Vector2:
 	return get_viewport().get_visible_rect().size
+
+func target_limited_viewport_size() -> Vector2:
+	var size := current_viewport_size()
+	if size.x <= 0.0 or size.y <= 0.0:
+		return TARGET_VIEWPORT_SIZE
+	return Vector2(min(size.x, TARGET_VIEWPORT_SIZE.x), min(size.y, TARGET_VIEWPORT_SIZE.y))
 
 func base_center() -> Vector2:
 	return BASE_SIZE * 0.5
@@ -80,6 +87,20 @@ func apply_canvas_cover(root: Node2D, base_size: Vector2 = BASE_SIZE) -> void:
 	var scale_value := cover_scale(size, base_size)
 	root.scale = Vector2(scale_value, scale_value)
 	root.position = cover_offset(size, base_size)
+
+func apply_legacy_fullscreen_cover(root: Node2D) -> void:
+	apply_canvas_cover(root, BASE_SIZE)
+
+func apply_legacy_fullscreen_fit(root: Node2D) -> void:
+	apply_canvas_fit(root, BASE_SIZE)
+
+func apply_canvas_fit(root: Node2D, base_size: Vector2 = BASE_SIZE) -> void:
+	if root == null:
+		return
+	var size := current_viewport_size()
+	var scale_value := fit_scale(size, base_size)
+	root.scale = Vector2(scale_value, scale_value)
+	root.position = fit_offset(size, base_size)
 
 func apply_canvas_cover_90(root: Node2D, base_size: Vector2 = BASE_SIZE) -> void:
 	if root == null:

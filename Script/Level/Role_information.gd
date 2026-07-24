@@ -181,7 +181,7 @@ func update_buff_icons_if_needed(delta: float) -> void:
 
 func update_role_info_ui() -> void:
 	var magic_weapon_name = PlayerData.player_data["实战法宝"]
-	var has_magic_weapon := magic_weapon_name != "" and PlayerData.player_data["法宝"].size() > 0
+	var has_magic_weapon: bool = magic_weapon_name != "" and PlayerData.player_data["法宝"].size() > 0
 	if cached_magic_weapon_name != magic_weapon_name:
 		cached_magic_weapon_name = magic_weapon_name
 		magic_weapon_skill_cd.SkillName = magic_weapon_name
@@ -189,7 +189,7 @@ func update_role_info_ui() -> void:
 		magic_weapon_skill_cd.visible = has_magic_weapon
 
 	var zhen_fa_name = PlayerData.player_data["已佩戴阵法"]
-	var has_zhen_fa := zhen_fa_name != ""
+	var has_zhen_fa: bool = zhen_fa_name != ""
 	if cached_zhen_fa_name != zhen_fa_name:
 		cached_zhen_fa_name = zhen_fa_name
 		zhen_fa.SkillName = zhen_fa_name
@@ -211,48 +211,48 @@ func update_role_info_ui() -> void:
 		cached_nature_recovery_mp = next_nature_recovery_mp
 		nature_recovery_mp.text = next_nature_recovery_mp
 
-	var next_hp_ratio := float(RoleProp.roleprop.Hp) / RoleProp.roleprop.SHp
+	var next_hp_ratio: float = float(RoleProp.roleprop.Hp) / RoleProp.roleprop.SHp
 	if cached_hp_ratio != next_hp_ratio:
 		cached_hp_ratio = next_hp_ratio
 		Hp_Change = next_hp_ratio
 		hp_bar.value = next_hp_ratio
 
-	var next_mp_ratio := float(RoleProp.roleprop.Mp) / RoleProp.roleprop.SMp
+	var next_mp_ratio: float = float(RoleProp.roleprop.Mp) / RoleProp.roleprop.SMp
 	if cached_mp_ratio != next_mp_ratio:
 		cached_mp_ratio = next_mp_ratio
 		mp_bar.value = next_mp_ratio
 
-	var next_exp_ratio := float(RoleProp.baseroleprop.exp) / RoleProp.baseroleprop.max_exp
+	var next_exp_ratio: float = float(RoleProp.baseroleprop.exp) / RoleProp.baseroleprop.max_exp
 	if cached_exp_ratio != next_exp_ratio:
 		cached_exp_ratio = next_exp_ratio
 		exp_bar.value = next_exp_ratio
 
-	var next_role_level_text := str(RoleProp.baseroleprop.Level)
+	var next_role_level_text: String = str(RoleProp.baseroleprop.Level)
 	if cached_role_level_text != next_role_level_text:
 		cached_role_level_text = next_role_level_text
 		role_level.text = next_role_level_text
 
-	var next_hp_text := str(int(RoleProp.roleprop.Hp)) + '/' + str(int(RoleProp.roleprop.SHp))
+	var next_hp_text: String = str(int(RoleProp.roleprop.Hp)) + '/' + str(int(RoleProp.roleprop.SHp))
 	if cached_hp_text != next_hp_text:
 		cached_hp_text = next_hp_text
 		hp_text.text = next_hp_text
 
-	var next_mp_text := str(int(RoleProp.roleprop.Mp)) + '/' + str(int(RoleProp.roleprop.SMp))
+	var next_mp_text: String = str(int(RoleProp.roleprop.Mp)) + '/' + str(int(RoleProp.roleprop.SMp))
 	if cached_mp_text != next_mp_text:
 		cached_mp_text = next_mp_text
 		mp_text.text = next_mp_text
 
-	var next_exp_text := str(RoleProp.baseroleprop.exp) + '/' + str(RoleProp.baseroleprop.max_exp)
+	var next_exp_text: String = str(RoleProp.baseroleprop.exp) + '/' + str(RoleProp.baseroleprop.max_exp)
 	if cached_exp_text != next_exp_text:
 		cached_exp_text = next_exp_text
 		exp_text.text = next_exp_text
 
-	var next_ws_ratio := float(RoleProp.ws_value) /  RoleProp.max_ws_value
+	var next_ws_ratio: float = float(RoleProp.ws_value) /  RoleProp.max_ws_value
 	if cached_ws_ratio != next_ws_ratio:
 		cached_ws_ratio = next_ws_ratio
 		ws_effect.value = next_ws_ratio
 
-	var next_max_ws_visible := ws_effect.value >= 1 and not RoleProp.is_ws_state
+	var next_max_ws_visible: bool = ws_effect.value >= 1 and not RoleProp.is_ws_state
 	if cached_max_ws_visible != next_max_ws_visible:
 		cached_max_ws_visible = next_max_ws_visible
 		max_ws.visible = next_max_ws_visible

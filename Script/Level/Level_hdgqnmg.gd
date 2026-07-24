@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 			create_control.wait_time = 3
 			create_control.start()	
 	super._physics_process(delta)	
-	my_camera.max_right = 940
+	my_camera.max_right = ScreenFit.TARGET_VIEWPORT_SIZE.x
 	if current_stage >= 1:
 		if check_can_pass() and current_stage < 1:
 			role_information.gogo.visible = true

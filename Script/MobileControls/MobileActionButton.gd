@@ -32,7 +32,7 @@ func color_with_opacity(color: Color) -> Color:
 
 
 func _draw() -> void:
-	var fill_color := color_with_opacity(pressed_color if is_pressed() else normal_color)
+	var fill_color: Color = color_with_opacity(pressed_color if is_pressed() else normal_color)
 	draw_circle(Vector2.ZERO, radius, fill_color)
 	draw_arc(Vector2.ZERO, radius - 1.0, 0.0, TAU, 48, color_with_opacity(border_color), 2.0, true)
 

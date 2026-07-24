@@ -74,4 +74,4 @@ func _on_pellet_pressed() -> void:
 	pass # Replace with function body.
 
 func _apply_screen_fit() -> void:
-	ScreenFit.apply_canvas_cover_90(self)
+	ScreenFit.apply_legacy_fullscreen_fit(self)

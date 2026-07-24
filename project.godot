@@ -43,10 +43,10 @@ GetTime="*res://Scene/GetTime.tscn"
 
 [display]
 
-window/size/viewport_width=940
-window/size/viewport_height=590
+window/size/viewport_width=1320
+window/size/viewport_height=594
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 mouse_cursor/custom_image="res://Art/MainGame/sbgb.png"
 
 [editor]
@@ -204,3 +204,4 @@ compatibility/legacy_just_pressed_behavior=true
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.web="forward_plus"
 textures/vram_compression/import_etc2_astc=true
+rendering/environment/defaults/default_clear_color=Color(0, 0, 0, 1)

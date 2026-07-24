@@ -161,7 +161,7 @@ func fit_controls_in_rect(safe_rect: Rect2) -> void:
 	for button_name in BUTTON_LAYOUT:
 		var button := buttons.get_node_or_null(button_name) as TouchScreenButton
 		if button != null:
-			var radius := float(button.get("radius")) if button.get("radius") != null else 32.0
+			var radius: float = float(button.get("radius")) if button.get("radius") != null else 32.0
 			button.position = clamp_control_position(saved_layout.get(button_name, BUTTON_LAYOUT[button_name]), root.size, radius)
 
 
@@ -172,7 +172,7 @@ func fit_joystick(normalized_position: Vector2) -> void:
 	joystick.anchor_top = 0.0
 	joystick.anchor_right = 0.0
 	joystick.anchor_bottom = 0.0
-	var radius := float(joystick.get("joystick_radius")) if joystick.get("joystick_radius") != null else 72.0
+	var radius: float = float(joystick.get("joystick_radius")) if joystick.get("joystick_radius") != null else 72.0
 	var joystick_size := Vector2(radius * 2.0 + 96.0, radius * 2.0 + 96.0)
 	joystick.size = joystick_size
 	var center := clamp_control_position(normalized_position, root.size, get_joystick_edge_margin(radius))

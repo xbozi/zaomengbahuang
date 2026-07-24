@@ -31,11 +31,16 @@ var CaoZuo = [0,3,4,3,4,5]
 var CurrentChoose: int = 1
 var PlayerList = ["swk","tsz","zbj","swj","xbl"]
 func _ready() -> void:
+	get_viewport().size_changed.connect(_apply_screen_fit)
+	_apply_screen_fit()
 
 	for i in PlayerList:
 		Global.AddRoleButton(RoleList,i,self)
 	SetRole()
 	AddStar(1)
+func _apply_screen_fit() -> void:
+	ScreenFit.apply_legacy_fullscreen_fit(self)
+
 func SetRole():
 	role_name.text = RoleNameList[CurrentChoose - 1]
 	info.text = RoleInfo[CurrentChoose - 1]

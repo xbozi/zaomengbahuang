@@ -83,7 +83,7 @@ func _ready() -> void:
 		my_camera = Global.add_Camera(Role_,Vector2(0,0),1100)
 		my_camera.max_left = 0
 		my_camera.max_top = 0
-		my_camera.max_bottom = 590
+		my_camera.max_bottom = ScreenFit.TARGET_VIEWPORT_SIZE.y
 		await get_tree().create_timer(0.1,false).timeout
 		#my_camera.reset_smoothing()
 		my_camera.limit_smoothed = true
@@ -173,6 +173,8 @@ func update_exit_state() -> void:
 				#add_tg(level_stage)
 
 func update_camera_bounds_if_needed() -> void:
+	if current_stage < 1:
+		return
 	var next_camera_can_pass := check_can_pass()
 	if cached_camera_stage == current_stage and cached_camera_can_pass == next_camera_can_pass:
 		return
@@ -235,8 +237,11 @@ func check_monster_death():
 			else:
 
 				MonsterArray.erase(i)
-func check_can_create(stage):
-	return monster.get_children().size() < 6 and Monster_group["stage_" + str(stage)].size() > 0
+func check_can_create(stage) -> bool:
+	var stage_key: String = "stage_" + str(stage)
+	if stage < 1 or not Monster_group.has(stage_key):
+		return false
+	return monster.get_children().size() < 6 and Monster_group[stage_key].size() > 0
 func _on_create_control_timeout() -> void:
 	if Role_ != null:
 		if not is_two_scene:#正常的四模块地图
@@ -259,14 +264,17 @@ func _on_create_control_timeout() -> void:
 				current_stage = 4
 	if check_can_create(current_stage):
 		level_create_monster(current_stage)
-func check_can_pass():
-	return Monster_group["stage_" + str(current_stage)].size() == 0 and $Monster.get_child_count() == 0
+func check_can_pass() -> bool:
+	var stage_key: String = "stage_" + str(current_stage)
+	if current_stage < 1 or not Monster_group.has(stage_key):
+		return false
+	return Monster_group[stage_key].size() == 0 and $Monster.get_child_count() == 0
 
-func check_can_exit():
-	return Monster_group["stage_" + str(current_stage)].size() == 0 and current_stage == 4 and $Monster.get_child_count() == 0
+func check_can_exit() -> bool:
+	return current_stage == 4 and check_can_pass()
 
-func one_check_can_exit():
-	return Monster_group["stage_" + str(current_stage)].size() == 0 and $Monster.get_child_count() == 0
+func one_check_can_exit() -> bool:
+	return check_can_pass()
 
 func alwaysCanPass():
 	return true

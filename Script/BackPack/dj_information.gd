@@ -21,8 +21,8 @@ func _physics_process(_delta: float) -> void:
 		if self.position.y + color_rect.size.y >= 320:
 			self.position.y = 320 - color_rect.size.y
 	elif get_parent() == Global.Windows_:
-		if self.position.y + color_rect.size.y >= 590:
-			self.position.y = 590 - color_rect.size.y
+		if self.position.y + color_rect.size.y >= ScreenFit.TARGET_VIEWPORT_SIZE.y:
+			self.position.y = ScreenFit.TARGET_VIEWPORT_SIZE.y - color_rect.size.y
 	if is_set == false:
 		create_tween().tween_property(self,"modulate",Color(1,1,1,1),0.2)
 		set_color()

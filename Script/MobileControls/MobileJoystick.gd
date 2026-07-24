@@ -116,7 +116,7 @@ func color_with_opacity(color: Color) -> Color:
 
 
 func _draw() -> void:
-	var center := joystick_center if joystick_touch_index != -1 else size * 0.5
+	var center: Vector2 = joystick_center if joystick_touch_index != -1 else size * 0.5
 	draw_circle(center, joystick_radius, color_with_opacity(Color(0.10, 0.14, 0.20, 0.40)))
 	draw_arc(center, joystick_radius - 1.0, 0.0, TAU, 64, color_with_opacity(Color(0.90, 0.94, 1.0, 0.62)), 2.0, true)
 	draw_circle(center + knob_offset, knob_radius, color_with_opacity(Color(0.90, 0.94, 1.0, 0.70)))

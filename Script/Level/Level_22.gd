@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		AddStage()
 		Is_set = true
 	my_camera.max_top = -5426
-	my_camera.max_right = 940
+	my_camera.max_right = ScreenFit.TARGET_VIEWPORT_SIZE.x
 	if Role_.position.y <= -4900:
 		my_camera.max_bottom = -4835
 	role_information.gogo.visible = false

@@ -8,19 +8,31 @@ func _init() -> void:
 		return
 
 	var fit = script.new()
-	var scale_value = fit.cover_scale(Vector2(1600, 900))
-	assert_near(scale_value, 1.70213, 0.01, "cover scale fills widened viewport")
+	assert_near(fit.TARGET_VIEWPORT_SIZE.x, 1320.0, 0.01, "target viewport width")
+	assert_near(fit.TARGET_VIEWPORT_SIZE.y, 594.0, 0.01, "target viewport height")
 
-	var offset = fit.cover_offset(Vector2(1600, 900))
-	assert_near(offset.x, 0.0, 0.01, "cover offset keeps width filled")
-	assert_near(offset.y, -52.12766, 0.01, "cover offset centers cropped height")
+	var cover_scale_value = fit.cover_scale(Vector2(1320, 594))
+	assert_near(cover_scale_value, 1.40426, 0.01, "cover scale fills 20:9 viewport")
 
-	var cover_90_scale_value = fit.cover_90_scale(Vector2(1600, 900))
-	assert_near(cover_90_scale_value, 1.53191, 0.01, "cover 90 scale fills then shrinks scene")
+	var cover_offset = fit.cover_offset(Vector2(1320, 594))
+	assert_near(cover_offset.x, 0.0, 0.01, "cover offset keeps width filled")
+	assert_near(cover_offset.y, -117.25532, 0.01, "cover offset centers cropped height")
 
-	var cover_90_offset = fit.cover_90_offset(Vector2(1600, 900))
-	assert_near(cover_90_offset.x, 80.0, 0.01, "cover 90 offset centers shrunken width")
-	assert_near(cover_90_offset.y, -1.91489, 0.01, "cover 90 offset keeps cover behavior after shrinking")
+	var fit_scale_value = fit.fit_scale(Vector2(1320, 594))
+	assert_near(fit_scale_value, 1.00678, 0.01, "fit scale keeps legacy canvas fully visible")
+
+	var fit_offset = fit.fit_offset(Vector2(1320, 594))
+	assert_near(fit_offset.x, 186.81356, 0.01, "fit offset centers side margins")
+	assert_near(fit_offset.y, 0.0, 0.01, "fit offset does not crop top UI")
+	assert_fit_keeps_whole_canvas(fit, Vector2(1320, 594), "20:9 target")
+	assert_fit_keeps_whole_canvas(fit, Vector2(1600, 900), "16:9 emulator")
+
+	var cover_90_scale_value = fit.cover_90_scale(Vector2(1320, 594))
+	assert_near(cover_90_scale_value, 1.26383, 0.01, "cover 90 scale fills then shrinks scene")
+
+	var cover_90_offset = fit.cover_90_offset(Vector2(1320, 594))
+	assert_near(cover_90_offset.x, 66.0, 0.01, "cover 90 offset centers shrunken width")
+	assert_near(cover_90_offset.y, -75.82979, 0.01, "cover 90 offset keeps cover behavior after shrinking")
 
 	var center = fit.base_center()
 	assert_near(center.x, 470.0, 0.01, "base center x")
@@ -30,6 +42,14 @@ func _init() -> void:
 	assert_near(point.x, 470.0, 0.01, "base point x")
 	assert_near(point.y, 300.0, 0.01, "base point y")
 	quit(0)
+
+func assert_fit_keeps_whole_canvas(fit: Node, viewport_size: Vector2, label: String) -> void:
+	var scale_value = fit.fit_scale(viewport_size)
+	var offset = fit.fit_offset(viewport_size)
+	var covered_size = fit.BASE_SIZE * scale_value
+	if offset.x < -0.01 or offset.y < -0.01 or covered_size.x > viewport_size.x + 0.01 or covered_size.y > viewport_size.y + 0.01:
+		push_error("%s fit crops legacy canvas" % label)
+		quit(1)
 
 func assert_near(actual: float, expected: float, tolerance: float, label: String) -> void:
 	if abs(actual - expected) > tolerance:

@@ -30,7 +30,7 @@ func _ready() -> void:
 		my_camera = Global.add_Camera(Role_,Vector2(0,0),1100)
 		my_camera.max_left = 0
 		my_camera.max_top = 0
-		my_camera.max_bottom = 590
+		my_camera.max_bottom = ScreenFit.TARGET_VIEWPORT_SIZE.y
 		my_camera.max_right = 4600
 	if role_information == null:
 		role_information = Global.add_role_information(self,Vector2(0,0))
